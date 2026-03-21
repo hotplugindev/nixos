@@ -1,0 +1,13 @@
+show=drun
+prompt=
+width=750
+height=500
+location=center
+allow_images=true
+image_size=22
+term=foot
+insensitive=true
+hide_scroll=true
+gtk_dark=true
+no_actions=true
+sort_order=alphabetical

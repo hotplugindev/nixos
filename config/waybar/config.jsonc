@@ -1,0 +1,161 @@
+// -*- mode: jsonc -*-
+{
+  "layer": "top",
+  "position": "top",
+  //"height": 42,
+  "spacing": 4,
+
+  "modules-left": ["ext/workspaces", "wlr/taskbar", "dwl/window"],
+
+  "modules-center": [],
+
+  "modules-right": [
+    "custom/notification",
+    "tray",
+    "network",
+    "cpu",
+    "memory",
+    "temperature",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "clock",
+    "custom/power",
+  ],
+
+  "dwl/window": {
+    "format": " {title}",
+    "separate-outputs": true,
+    "max-length": 40,
+    "tooltip": false,
+  },
+
+  "ext/workspaces": {
+    "format": "{id}",
+    "ignore-hidden": true,
+    "on-click": "activate",
+    "on-click-right": "deactivate",
+    "on-scroll-up": "mmsg -d viewtoleft_have_client",
+    "on-scroll-down": "mmsg -d viewtoright_have_client",
+    "sort-by-id": true,
+  },
+
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 16,
+    "icon-theme": "Papirus-Dark",
+    "all-outputs": false,
+    "active-first": true,
+    "tooltip-format": "{title}",
+    "markup": true,
+    "on-click": "activate",
+    "on-click-right": "close",
+    "ignore-list": ["Rofi", "wofi"],
+  },
+
+  "network": {
+    "interval": 2,
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": "󰈀  {ifname}",
+    "format-linked": "󰌘  no ip",
+    "format-disconnected": "  offline",
+    "tooltip-format": "{ifname}  {ipaddr}/{cidr}\nGW: {gwaddr}",
+    "format-alt": "↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+  },
+
+  "tray": {
+    "icon-size": 18,
+    "spacing": 10,
+    "show-passive-items": true,
+  },
+
+  "clock": {
+    "format": "  {:%H:%M}",
+    "format-alt": "  {:%a %d %b}",
+    "tooltip-format": "{:%A, %d %B %Y}",
+  },
+
+  "cpu": {
+    "interval": 2,
+    "format": "  {usage}%",
+  },
+
+  "memory": {
+    "interval": 2,
+    "format": "󰍛  {}%",
+  },
+
+  "temperature": {
+    "critical-threshold": 90,
+    "format": "{icon}  {temperatureC}°C",
+    "tooltip": true,
+    "tooltip-format": "{temperatureF}°F",
+    "format-icons": ["", "", ""],
+  },
+
+  "backlight": {
+    "format": "{icon}  {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃠"],
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{icon}  {capacity}%",
+    "format-full": "  {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-plugged": "  {capacity}%",
+    "format-alt": "{time}  {icon}",
+    "tooltip-format": "{power}W • {time}",
+    "format-icons": ["", "", "", "", ""],
+  },
+
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "tooltip": false,
+    "format-muted": "󰖁  muted",
+    "on-click": "pamixer -t",
+    "on-scroll-up": "pamixer -i 2",
+    "on-scroll-down": "pamixer -d 2",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""],
+    },
+  },
+
+  "custom/power": {
+    "format": "󰐥",
+    "tooltip": false,
+    "on-click": "wlogout -C ~/.config/wlogout/style.css -l ~/.config/wlogout/layout -b 6 --protocol layer-shell",
+    "on-click-right": "sleep 0.1s && swaync-client -t -sw",
+  },
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='#fb4934'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='#fb4934'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='#fb4934'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='#fb4934'><sup></sup></span>",
+      "dnd-inhibited-none": "",
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "sleep 0.1s && swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true,
+  },
+}

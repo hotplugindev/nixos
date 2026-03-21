@@ -1,0 +1,321 @@
+@define-color color-bg                                  #1b1a17;
+@define-color color-bg-alt                              #221f1a;
+@define-color color-fg                                  #ebdbb2;
+
+@define-color color-button-bg                           #3a342e;
+@define-color color-button-fg                           #ebdbb2;
+@define-color color-button-hover-bg                     #4a433b;
+@define-color color-button-urgent-bg                    #cc3b2e;
+@define-color color-button-urgent-fg                    #ebdbb2;
+
+@define-color color-workspace-button-bg                 #2f2a25;
+@define-color color-workspace-button-fg                 #bdae93;
+@define-color color-workspace-button-hover-bg           #3b342d;
+@define-color color-workspace-button-hover-fg           #ebdbb2;
+@define-color color-workspace-button-focused-bg         #50463c;
+@define-color color-workspace-button-focused-fg         #ebdbb2;
+
+@define-color color-taskbar-button-minimized-bg         #2a2622;
+@define-color color-taskbar-button-minimized-fg         #928374;
+@define-color color-taskbar-button-active-bg            #4a433b;
+@define-color color-taskbar-button-active-fg            #ebdbb2;
+
+@define-color color-widget-bg                           #2c2722;
+@define-color color-widget-fg                           #ebdbb2;
+@define-color color-widget-hover-bg                     #3a342e;
+
+@define-color color-widget-audio-muted-bg               #26221e;
+@define-color color-widget-audio-muted-fg               #7c6f64;
+
+@define-color color-widget-battery-low-bg               #5a2420;
+@define-color color-widget-battery-low-fg               #fb4934;
+
+@define-color color-widget-temperature-critical-bg      #5a2420;
+@define-color color-widget-temperature-critical-fg      #fb4934;
+
+@define-color color-widget-network-disconnected-bg      #26221e;
+@define-color color-widget-network-disconnected-fg      #7c6f64;
+
+@define-color color-tray-bg                             #26221e;
+@define-color color-tray-needs-attention                #cc3b2e;
+
+@define-color color-tooltip-bg                          #211d18;
+@define-color color-tooltip-fg                          #ebdbb2;
+@define-color color-tooltip-border                      #3b342d;
+
+@define-color color-menu-bg                             #211d18;
+@define-color color-menu-border                         #3b342d;
+@define-color color-menuitem-fg                         #d5c4a1;
+@define-color color-menuitem-hover-bg                   #3b342d;
+@define-color color-menuitem-hover-fg                   #ebdbb2;
+
+* {
+    font-family: "JetBrainsMono Nerd Font Propo", monospace;
+    font-size: 17px;
+    font-weight: 700;
+    border: none;
+    border-radius: 999px;
+    min-height: 0;
+    transition-property: background-color, color, opacity;
+    transition-duration: 0.15s;
+}
+
+button label {
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: @color-fg;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+.modules-left,
+.modules-right {
+    margin: 10px 10px 0 10px;
+    padding: 5px;
+    background: @color-bg-alt;
+    border: 1px solid alpha(#ffffff, 0.05);
+    border-radius: 18px;
+}
+
+.modules-center {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+button {
+    border: none;
+    background: transparent;
+    /* use box-shadow instead of border so text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+}
+
+button:hover {
+    background: inherit;
+    box-shadow: none;
+}
+
+#workspaces,
+#window {
+    margin: 0;
+}
+
+#workspaces {
+    padding: 0;
+}
+
+#workspaces button {
+    padding: 0 11px;
+    min-width: 34px;
+    margin: 0 3px 0 0;
+    color: @color-workspace-button-fg;
+    background: @color-workspace-button-bg;
+}
+
+#workspaces button:hover {
+    color: @color-workspace-button-hover-fg;
+    background: @color-workspace-button-hover-bg;
+}
+
+#workspaces button.active {
+    color: @color-workspace-button-focused-fg;
+    background: @color-workspace-button-focused-bg;
+}
+
+#workspaces button.urgent {
+    color: @color-button-urgent-fg;
+    background: @color-button-urgent-bg;
+}
+
+#taskbar {
+    padding: 0;
+    margin: 0 6px;
+}
+
+#taskbar.empty {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+#taskbar button {
+    padding: 0 12px;
+    min-width: 12px;
+    margin: 0 3px;
+    color: @color-workspace-button-fg;
+    background: @color-workspace-button-bg;
+}
+
+#taskbar button:hover {
+    color: @color-workspace-button-hover-fg;
+    background: @color-workspace-button-hover-bg;
+}
+
+#taskbar button.active {
+    color: @color-taskbar-button-active-fg;
+    background: @color-taskbar-button-active-bg;
+}
+
+#taskbar button.minimized {
+    color: @color-taskbar-button-minimized-fg;
+    background: @color-taskbar-button-minimized-bg;
+}
+
+#taskbar button.urgent {
+    color: @color-button-urgent-fg;
+    background: @color-button-urgent-bg;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#tray,
+#custom-power,
+#window {
+    padding: 2px 14px;
+    margin: 0 3px;
+    color: @color-widget-fg;
+    background: @color-widget-bg;
+}
+
+#custom-notification {
+    padding: 4px 14px;
+    margin: 0 3px;
+    color: @color-widget-fg;
+    background: @color-widget-bg;
+}
+
+#window {
+    padding: 2px 14px;
+    margin: 0 3px;
+    min-width: 0;
+}
+
+#clock {
+    color: @color-widget-fg;
+    background: @color-widget-bg;
+}
+
+#battery {
+    color: @color-widget-fg;
+    background: @color-widget-bg;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @color-widget-fg;
+    background: @color-widget-bg;
+}
+
+@keyframes blink-battery-low {
+    to {
+        background: @color-widget-battery-low-bg;
+        color: @color-widget-battery-low-fg;
+    }
+}
+
+#battery.critical:not(.charging) {
+    color: @color-widget-battery-low-fg;
+    background: @color-widget-battery-low-bg;
+    animation-name: blink-battery-low;
+    animation-duration: 0.9s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+    min-width: 68px;
+}
+
+#pulseaudio:hover {
+    background: @color-widget-hover-bg;
+}
+
+#pulseaudio.muted {
+    color: @color-widget-audio-muted-fg;
+    background: @color-widget-audio-muted-bg;
+}
+
+#temperature.critical {
+    color: @color-widget-temperature-critical-fg;
+    background: @color-widget-temperature-critical-bg;
+}
+
+#network.disconnected {
+    color: @color-widget-network-disconnected-fg;
+    background: @color-widget-network-disconnected-bg;
+}
+
+#tray {
+    padding: 2px 12px;
+    background: @color-tray-bg;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: none;
+    opacity: 1;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: @color-tray-needs-attention;
+}
+
+#tray menu {
+    border-radius: 12px;
+}
+
+#custom-power {
+    margin-left: 6px;
+    font-family: "JetBrainsMono Nerd Font Propo", monospace;
+    font-size: 19px;
+    font-weight: 900;
+}
+
+tooltip {
+    background-color: @color-tooltip-bg;
+    border: 1px solid @color-tooltip-border;
+    border-radius: 14px;
+}
+
+tooltip decoration,
+tooltip decoration:backdrop {
+    box-shadow: none;
+}
+
+tooltip label {
+    color: @color-tooltip-fg;
+    padding: 4px 8px;
+}
+
+menu {
+    border: 1px solid @color-menu-border;
+    background: @color-menu-bg;
+    border-radius: 12px;
+    padding: 6px;
+}
+
+menuitem {
+    color: @color-menuitem-fg;
+    border-radius: 10px;
+    padding: 6px 10px;
+}
+
+menuitem:hover {
+    color: @color-menuitem-hover-fg;
+    background: @color-menuitem-hover-bg;
+}
