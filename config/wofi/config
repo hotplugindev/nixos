@@ -10,4 +10,4 @@ insensitive=true
 hide_scroll=true
 gtk_dark=true
 no_actions=true
-sort_order=alphabetical
+sort_order=default
