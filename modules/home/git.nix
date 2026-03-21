@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.git = {
     enable = true;
@@ -8,6 +8,7 @@
       
       init.defaultBranch = "main";
       pull.rebase = false;
+      credential.helper = "store";
     };
   };
 }
