@@ -42,6 +42,9 @@
       "video"
       "audio"
       "input"
+
+      #docker
+      "docker"
     ];
     shell = pkgs.zsh;
   };
@@ -76,6 +79,7 @@
     ];
   };
 
+  #libvirtd and virt-manager
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
@@ -87,6 +91,9 @@
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = [ "${username}" ];
   virtualisation.spiceUSBRedirection.enable = true;
+
+  # Docker
+  virtualisation.docker.enable = true;
 
   services.gvfs.enable = true;
   services.udisks2.enable = true;
