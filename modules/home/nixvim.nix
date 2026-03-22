@@ -2,7 +2,7 @@
 
 {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
   ];
 
   programs.nixvim = {
@@ -21,6 +21,7 @@
       lualine.enable = true;
       treesitter.enable = true;
       telescope.enable = true;
+      web-devicons.enable = true;
     };
 
     # colorscheme

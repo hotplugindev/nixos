@@ -1,5 +1,10 @@
 { pkgs, fullName, username, ... }:
 {
+
+  imports = [
+    ./system-update.nix
+  ];
+
   boot.loader.systemd-boot.configurationLimit = 3;
 
   nix.optimise.automatic = true;

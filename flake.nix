@@ -24,7 +24,7 @@
   outputs = inputs@{ nixpkgs, home-manager, mango, nixvim, ... }:
     let
       system = "x86_64-linux";
-      mkHost = { hostname, hostType, hostModule }:
+      mkHost = { hostname, hostType, hostModule, extraModules ? [ ] }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
@@ -36,7 +36,6 @@
           modules = [
             hostModule
             inputs.mango.nixosModules.mango
-            inputs.lanzaboote.nixosModules.lanzaboote
             inputs.home-manager.nixosModules.home-manager
             inputs.nixvim.nixosModules.nixvim
             {
@@ -53,7 +52,8 @@
                 users."hotplugin" = import ./home/hotplugin/default.nix;
               };
             }
-          ];
+          ]
+          ++ extraModules;
         };
     in {
       nixosConfigurations = {
@@ -61,6 +61,9 @@
           hostname = "pc";
           hostType = "desktop";
           hostModule = ./hosts/pc;
+          extraModules = [
+            inputs.lanzaboote.nixosModules.lanzaboote
+          ];
         };
         laptop = mkHost {
           hostname = "laptop";
