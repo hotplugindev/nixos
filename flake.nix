@@ -37,6 +37,29 @@
     }:
     let
       system = "x86_64-linux";
+      user = {
+        username = "hotplugin";
+        fullName = "Giona Berti";
+        email = "giona7berti@gmail.com";
+      };
+      sharedModules = [
+        inputs.mango.nixosModules.mango
+        inputs.home-manager.nixosModules.home-manager
+        inputs.nixvim.nixosModules.nixvim
+      ];
+      mkHomeManager = { hostname, hostType }:
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            backupFileExtension = "backup";
+            extraSpecialArgs = {
+              inherit inputs hostname hostType;
+              inherit (user) username fullName email;
+            };
+            users.${user.username} = import ./home/users/${user.username}/default.nix;
+          };
+        };
       mkHost =
         {
           hostname,
@@ -48,29 +71,14 @@
           inherit system;
           specialArgs = {
             inherit inputs hostname hostType;
-            username = "hotplugin";
-            fullName = "Giona Berti";
-            email = "giona7berti@gmail.com";
+            inherit (user) username fullName email;
           };
           modules = [
             hostModule
-            inputs.mango.nixosModules.mango
-            inputs.home-manager.nixosModules.home-manager
-            inputs.nixvim.nixosModules.nixvim
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-                extraSpecialArgs = {
-                  inherit inputs hostname hostType;
-                  username = "hotplugin";
-                  fullName = "Giona Berti";
-                  email = "giona7berti@gmail.com";
-                };
-                users."hotplugin" = import ./home/hotplugin/default.nix;
-              };
-            }
+          ]
+          ++ sharedModules
+          ++ [
+            (mkHomeManager { inherit hostname hostType; })
           ]
           ++ extraModules;
         };
