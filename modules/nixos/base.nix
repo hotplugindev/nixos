@@ -79,6 +79,7 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = [ "${username}" ];
+  virtualisation.spiceUSBRedirection.enable = true;
 
   services.gvfs.enable = true;
   services.udisks2.enable = true;
