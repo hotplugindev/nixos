@@ -4,5 +4,6 @@
     gimp2
     onlyoffice-desktopeditors
     obsidian
+    spotify
   ];
 }

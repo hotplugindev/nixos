@@ -3,7 +3,7 @@
   imports = [
     ./git.nix
     ./shell.nix
-    ./nixvim.nix
+    ./nixvim/base.nix
     ./desktop/base.nix
     ./programs/base.nix
   ];

@@ -1,11 +1,11 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, hostname, ... }:
 
 let
   system-update = pkgs.writeShellScriptBin "system-update" ''
     set -euo pipefail
 
     REPO="/etc/nixos"
-    HOST="pc"
+    HOST="${hostname}"
 
     cd "$REPO"
 
