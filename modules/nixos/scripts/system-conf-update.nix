@@ -23,7 +23,7 @@ let
 
       REPO="$HOME/nixos"
       HOST="$(hostname)"
-      HW_FILE="$REPO/hardware-configuration.nix"
+      HW_FILE="$REPO/hosts/$(hostname)/hardware-configuration.nix"
 
       if [ ! -d "$REPO" ]; then
         echo "Missing repo: $REPO" >&2
