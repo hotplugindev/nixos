@@ -19,9 +19,11 @@
       nvim-tree = {
         enable = true;
         openOnSetup = false;
-        hijackCursor = true;
-        updateFocusedFile.enable = true;
-        view.width = 32;
+        settings = {
+          update_focused_file.enable = true;
+          hijack_cursor = true;
+          view.width = 32;
+        };
       };
 
       which-key = {
