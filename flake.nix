@@ -37,11 +37,9 @@
     }:
     let
       system = "x86_64-linux";
-      user = {
-        username = "hotplugin";
-        fullName = "Giona Berti";
-        email = "giona7berti@gmail.com";
-      };
+      users = import ./home/users;
+      user = users.hotplugin;
+      hosts = import ./hosts;
       sharedModules = [
         inputs.mango.nixosModules.mango
         inputs.home-manager.nixosModules.home-manager
@@ -87,7 +85,7 @@
       nixosConfigurations = {
         pc = mkHost {
           hostname = "pc";
-          hostType = "desktop";
+          hostType = hosts.pc.hostType;
           hostModule = ./hosts/pc;
           extraModules = [
             inputs.lanzaboote.nixosModules.lanzaboote
@@ -95,7 +93,7 @@
         };
         laptop = mkHost {
           hostname = "laptop";
-          hostType = "laptop";
+          hostType = hosts.laptop.hostType;
           hostModule = ./hosts/laptop;
           extraModules = [
             nixos-hardware.nixosModules.framework-13th-gen-intel

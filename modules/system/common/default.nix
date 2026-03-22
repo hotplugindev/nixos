@@ -5,6 +5,8 @@
   ...
 }:
 {
+  # Common system configuration shared by all hosts.
+  # Put host-specific settings in modules/system/profiles/.
 
   imports = [
     ../scripts/base.nix

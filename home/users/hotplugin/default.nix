@@ -2,7 +2,7 @@
 {
   imports = [
     ../../../modules/home/default.nix
-  ] ++ (if hostType == "laptop" then [ ./hosts/laptop.nix ] else [ ./hosts/pc.nix ]);
+  ] ++ (if hostType == "laptop" then [ ./hosts/config.laptop.nix ] else [ ./hosts/config.desktop.nix ]);
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
