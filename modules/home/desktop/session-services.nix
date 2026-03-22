@@ -24,7 +24,7 @@
       Type = "oneshot";
       ExecStart = ''
         ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd \
-          WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+          WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_DATA_DIRS GTK_THEME
       '';
       RemainAfterExit = true;
     };
