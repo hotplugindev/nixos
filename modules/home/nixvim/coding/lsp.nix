@@ -45,7 +45,7 @@
           };
           gopls.enable = true;
           clangd.enable = true;
-          volar.enable = true;
+          vue_ls.enable = true;
           zls.enable = true;
           pyright.enable = true;
         };
