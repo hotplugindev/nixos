@@ -76,7 +76,13 @@
     ];
   };
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true; # Sometimes helps with permission issues during imports
+    };
+  };
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = [ "${username}" ];
   virtualisation.spiceUSBRedirection.enable = true;
