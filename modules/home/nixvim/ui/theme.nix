@@ -26,6 +26,7 @@
             { __unkeyed-1 = "<leader>t"; group = "toggle/terminal"; }
             { __unkeyed-1 = "<leader>c"; group = "code"; }
             { __unkeyed-1 = "<leader>w"; group = "windows"; }
+            { __unkeyed-1 = "<leader>a"; group = "ai"; }
           ];
         };
       };
