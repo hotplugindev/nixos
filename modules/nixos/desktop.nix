@@ -3,6 +3,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = lib.mkForce false;
 
+  services.printing.enable = false;
+  services.openssh.enable = true;
+
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/var/lib/sbctl";

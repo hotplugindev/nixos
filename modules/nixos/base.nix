@@ -44,9 +44,6 @@
     alsa.support32Bit = true;
   };
 
-  services.printing.enable = false;
-  services.openssh.enable = false;
-
   programs.mango.enable = true;
 
   services.displayManager.gdm.enable = true;
