@@ -4,8 +4,8 @@
 
   wayland.windowManager.mango = {
     enable = true;
-    settings = builtins.readFile ../../../config/mango/config.conf;
-    autostart_sh = builtins.readFile ../../../config/mango/autostart.sh;
+    settings = builtins.readFile ../../../../config/mango/config.conf;
+    autostart_sh = builtins.readFile ../../../../config/mango/autostart.sh;
   };
 
 systemd.user.services.polkit-gnome-authentication-agent-1 = {
@@ -43,9 +43,9 @@ systemd.user.services.polkit-gnome-authentication-agent-1 = {
     sox
   ] ++ lib.optionals (hostType == "laptop") [ wlr-randr ];
 
-  xdg.configFile."mango/config.conf".source = ../../../config/mango/config.conf;
-  xdg.configFile."mango/bind.conf".source = ../../../config/mango/bind.conf;
-  xdg.configFile."mango/env.conf".source = ../../../config/mango/env.conf;
-  xdg.configFile."mango/rule.conf".source = ../../../config/mango/rule.conf;
-  xdg.configFile."mango/tag.conf".source = ../../../config/mango/tag.conf;
+  xdg.configFile."mango/config.conf".source = ../../../../config/mango/config.conf;
+  xdg.configFile."mango/bind.conf".source = ../../../../config/mango/bind.conf;
+  xdg.configFile."mango/env.conf".source = ../../../../config/mango/env.conf;
+  xdg.configFile."mango/rule.conf".source = ../../../../config/mango/rule.conf;
+  xdg.configFile."mango/tag.conf".source = ../../../../config/mango/tag.conf;
 }
