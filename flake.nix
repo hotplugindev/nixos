@@ -13,7 +13,7 @@
     };
     mango = {
       url = "github:mangowm/mango";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
@@ -25,10 +25,25 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, mango, nixvim, ... }:
+  outputs =
+    inputs@{
+      nixpkgs,
+      nixpkgs-unstable,
+      nixos-hardware,
+      home-manager,
+      mango,
+      nixvim,
+      ...
+    }:
     let
       system = "x86_64-linux";
-      mkHost = { hostname, hostType, hostModule, extraModules ? [ ] }:
+      mkHost =
+        {
+          hostname,
+          hostType,
+          hostModule,
+          extraModules ? [ ],
+        }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
@@ -59,7 +74,8 @@
           ]
           ++ extraModules;
         };
-    in {
+    in
+    {
       nixosConfigurations = {
         pc = mkHost {
           hostname = "pc";
