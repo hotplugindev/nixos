@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +25,7 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, mango, nixvim, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, mango, nixvim, ... }:
     let
       system = "x86_64-linux";
       mkHost = { hostname, hostType, hostModule, extraModules ? [ ] }:
@@ -69,6 +73,9 @@
           hostname = "laptop";
           hostType = "laptop";
           hostModule = ./hosts/laptop;
+          extraModules = [
+            nixos-hardware.nixosModules.framework-13th-gen-intel
+          ];
         };
       };
     };
