@@ -52,7 +52,7 @@
     {
       mode = "n";
       key = "<leader>bn";
-      action = "<cmd>bnew<cr>";
+      action = "<cmd>enew<cr>";
       options.desc = "Create new buffer";
     }
     {
