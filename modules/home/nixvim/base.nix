@@ -2,15 +2,30 @@
 {
   imports = [
     inputs.nixvim.homeModules.nixvim
-    ./options.nix
-    ./keymaps.nix
-    ./ui.nix
-    ./treesitter.nix
-    ./telescope.nix
-    ./completion.nix
-    ./lsp.nix
-    ./editing.nix
-    ./git.nix
+
+    ./core/options.nix
+    ./core/keymaps.nix
+    ./core/autocmds.nix
+
+    ./ui/theme.nix
+    ./ui/statusline.nix
+    ./ui/bufferline.nix
+    ./ui/dashboard.nix
+    ./ui/notifications.nix
+
+    ./editor/treesitter.nix
+    ./editor/completion.nix
+    ./editor/editing.nix
+    ./editor/terminal.nix
+
+    ./navigation/explorer.nix
+    ./navigation/telescope.nix
+
+    ./coding/lsp.nix
+    ./coding/formatting.nix
+    ./coding/linting.nix
+
+    ./tools/git.nix
   ];
 
   programs.nixvim = {
