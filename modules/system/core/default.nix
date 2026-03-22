@@ -76,6 +76,15 @@
     enable32Bit = true; # needed for Steam / Wine
   };
 
+  #Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+  programs.gamemode.enable = true;
+
+  # XDG Portals
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
@@ -99,15 +108,6 @@
 
   # Docker
   virtualisation.docker.enable = true;
-
-  # Steam
-  programs.steam = {
-    enable = true;
-    # optional:
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-  };
-  programs.gamemode.enable = true;
 
   services.gvfs.enable = true;
   services.udisks2.enable = true;
