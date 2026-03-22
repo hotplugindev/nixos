@@ -63,6 +63,60 @@ let
     '';
   };
 
+  repo-sync = pkgs.writeShellApplication {
+    name = "repo-sync";
+    runtimeInputs = [
+      pkgs.git
+      pkgs.coreutils
+      pkgs.bash
+    ];
+    text = ''
+      set -euo pipefail
+
+      if [ "$(id -u)" -eq 0 ] || [ -n "''${SUDO_USER:-}" ]; then
+        echo "repo-sync must be run as your normal user, not with sudo." >&2
+        exit 1
+      fi
+
+      REPO="$HOME/nixos"
+      HW_FILE="$REPO/hardware-configuration.nix"
+      TMP_FILE="/tmp/hardware-configuration.nix.$USER"
+
+      if [ ! -d "$REPO" ]; then
+        echo "Missing repo: $REPO" >&2
+        exit 1
+      fi
+
+      cd "$REPO"
+
+      if [ ! -f "$HW_FILE" ]; then
+        echo "Missing hardware-configuration.nix — nothing to protect" >&2
+        git pull
+        exit 0
+      fi
+
+      echo "Backing up hardware config..."
+      cp "$HW_FILE" "$TMP_FILE"
+
+      echo "Allowing git to update hardware file..."
+      git update-index --no-assume-unchanged hardware-configuration.nix
+
+      echo "Resetting hardware file to repo state..."
+      git checkout -- hardware-configuration.nix || true
+
+      echo "Pulling latest changes..."
+      git pull
+
+      echo "Restoring local hardware config..."
+      cp "$TMP_FILE" "$HW_FILE"
+
+      echo "Re-applying assume-unchanged..."
+      git update-index --assume-unchanged hardware-configuration.nix
+
+      echo "Done ✅"
+    '';
+  };
+
   nixconf = pkgs.writeShellApplication {
     name = "nixconf";
     runtimeInputs = [ pkgs.bash ];
@@ -90,5 +144,6 @@ in
   environment.systemPackages = [
     system-update
     nixconf
+    repo-sync
   ];
 }
