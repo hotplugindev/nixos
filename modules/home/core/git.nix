@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ fullName, email, ... }:
 {
   programs.git = {
     enable = true;
     settings = {
-      user.name = "Giona Berti";
-      user.email = "giona7berti@gmail.com";
+      user.name = fullName;
+      user.email = email;
       
       init.defaultBranch = "main";
       pull.rebase = false;

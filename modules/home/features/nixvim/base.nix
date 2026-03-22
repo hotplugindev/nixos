@@ -4,7 +4,7 @@
     inputs.nixvim.homeModules.nixvim
 
     ./core/options.nix
-    ./core/keymaps.nix
+    ./keymaps/default.nix
     ./core/autocmds.nix
 
     ./ui/theme.nix
