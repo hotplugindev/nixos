@@ -22,9 +22,9 @@
       providers.wl-copy.enable = true;
     };
 
-    globals.mapleader = " ";
-    globals.maplocalleader = " ";
-
-    extraPackages = [ ];
+    globals = {
+      mapleader = " ";
+      maplocalleader = " ";
+    };
   };
 }
