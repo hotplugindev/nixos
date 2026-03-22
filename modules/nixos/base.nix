@@ -1,4 +1,9 @@
-{ pkgs, fullName, username, ... }:
+{
+  pkgs,
+  fullName,
+  username,
+  ...
+}:
 {
 
   imports = [
@@ -21,14 +26,23 @@
 
   networking.networkmanager.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.settings.auto-optimise-store = true;
   nixpkgs.config.allowUnfree = true;
 
   users.users.${username} = {
     isNormalUser = true;
     description = fullName;
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" "input" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+      "audio"
+      "input"
+    ];
     shell = pkgs.zsh;
   };
 
@@ -61,6 +75,10 @@
       xdg-desktop-portal-wlr
     ];
   };
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = [ "${username}" ];
 
   services.gvfs.enable = true;
   services.udisks2.enable = true;
