@@ -131,7 +131,7 @@
     {
       mode = "n";
       key = "<leader>bx";
-      action = "<cmd>bdelete<CR>";
+      action = "<cmd>bnext | bdelete #<CR>";
       options.desc = "Close buffer";
     }
     {
