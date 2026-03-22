@@ -12,6 +12,7 @@
     autoGenerateKeys.enable = true;
   };
 
+  services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.amdgpu.opencl.enable = true;
 
   environment.systemPackages = with pkgs; [
