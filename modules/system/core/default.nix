@@ -5,8 +5,9 @@
   ...
 }:
 {
-  # Common system configuration shared by all hosts.
-  # Put host-specific settings in modules/system/profiles/.
+  # Core system configuration shared by every host.
+  # Keep machine-specific boot/device/service overrides in modules/system/profiles/
+  # (for example: secure boot, power-management, and host-only hardware toggles).
 
   imports = [
     ../scripts/base.nix
