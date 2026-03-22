@@ -3,32 +3,45 @@ set -euo pipefail
 
 REPO="${HOME}/nixos"
 HOST="$(hostname)"
+HW_FILE="${REPO}/hardware-configuration.nix"
+
+if [ ! -d "${REPO}" ]; then
+  echo "Missing repo: ${REPO}" >&2
+  exit 1
+fi
 
 if [ ! -f "${REPO}/flake.nix" ]; then
   echo "flake.nix not found in ${REPO}" >&2
   exit 1
 fi
 
-if [ ! -f "${REPO}/.gitignore" ]; then
-  touch "${REPO}/.gitignore"
+if ! git -C "${REPO}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "${REPO} is not a git repository." >&2
+  exit 1
 fi
 
-if ! grep -qxF "hardware-configuration.nix" "${REPO}/.gitignore"; then
-  echo "hardware-configuration.nix" >> "${REPO}/.gitignore"
-fi
-
-if [ ! -f "${REPO}/hardware-configuration.nix" ]; then
+if [ ! -f "${HW_FILE}" ]; then
   if [ -f /etc/nixos/hardware-configuration.nix ]; then
-    sudo cp /etc/nixos/hardware-configuration.nix "${REPO}/hardware-configuration.nix"
-    sudo chown "$USER:$(id -gn)" "${REPO}/hardware-configuration.nix"
+    echo "Copying installer hardware config into repo..."
+    sudo cp /etc/nixos/hardware-configuration.nix "${HW_FILE}"
+    sudo chown "$USER:$(id -gn)" "${HW_FILE}"
   else
-    sudo sh -c 'nixos-generate-config --show-hardware-config > "$1"' sh "${REPO}/hardware-configuration.nix"
-    sudo chown "$USER:$(id -gn)" "${REPO}/hardware-configuration.nix"
+    echo "Generating hardware config into repo..."
+    sudo sh -c 'nixos-generate-config --show-hardware-config > "$1"' sh "${HW_FILE}"
+    sudo chown "$USER:$(id -gn)" "${HW_FILE}"
   fi
 fi
 
+# Make hardware-configuration.nix visible to flake, but locally ignore changes
+if ! git -C "${REPO}" ls-files --error-unmatch hardware-configuration.nix >/dev/null 2>&1; then
+  git -C "${REPO}" add --intent-to-add hardware-configuration.nix
+fi
+git -C "${REPO}" update-index --assume-unchanged hardware-configuration.nix
+
+# Point /etc/nixos at the repo
 CURRENT_TARGET="$(readlink -f /etc/nixos 2>/dev/null || true)"
 if [ "${CURRENT_TARGET}" != "${REPO}" ]; then
+  echo "Linking /etc/nixos -> ${REPO}"
   if [ -e /etc/nixos ] && [ ! -L /etc/nixos ]; then
     sudo mv /etc/nixos "/etc/nixos.backup.$(date +%Y%m%d-%H%M%S)"
   else
