@@ -51,6 +51,12 @@
     }
     {
       mode = "n";
+      key = "<leader>bn";
+      action = "<cmd>bnew<cr>";
+      options.desc = "Create new buffer";
+    }
+    {
+      mode = "n";
       key = "<leader>bd";
       action = "<cmd>bdelete<cr>";
       options.desc = "Delete buffer";

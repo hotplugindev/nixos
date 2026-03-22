@@ -1,6 +1,6 @@
 { ... }:
 {
   imports = [
-    ./system-update.nix
+    ./system-conf-update.nix
   ];
 }
