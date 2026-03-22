@@ -32,7 +32,7 @@
     }:
     let
       system = "x86_64-linux";
-      users = import ./home/users;
+      users = import ./users;
       user = users.hotplugin;
       hosts = import ./hosts { inherit inputs; };
       sharedModules = [
@@ -50,7 +50,7 @@
               inherit inputs hostname hostType;
               inherit (user) username fullName email;
             };
-            users.${user.username} = import ./home/users/${user.username}/default.nix;
+            users.${user.username} = import ./users/${user.username}/default.nix;
           };
         };
       mkHost =
