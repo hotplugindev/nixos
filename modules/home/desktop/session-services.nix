@@ -41,13 +41,20 @@
     Unit = {
       Description = "Waybar (Mango)";
       PartOf = [ "mango-session.target" ];
-      After = [ "mango-session.target" "dbus-env.service" ];
+      After = [
+        "mango-session.target"
+        "dbus-env.service"
+      ];
     };
 
     Service = {
       ExecStart = "${pkgs.waybar}/bin/waybar";
       Restart = "on-failure";
       RestartSec = 2;
+      Environment = [
+        "PATH=/run/current-system/sw/bin:/etc/profiles/per-user/%u/bin"
+        "XDG_DATA_DIRS=/run/current-system/sw/share:/etc/profiles/per-user/%u/share:/usr/local/share:/usr/share"
+      ];
     };
 
     Install = {
@@ -62,7 +69,10 @@
     Unit = {
       Description = "Nextcloud (Mango)";
       PartOf = [ "mango-session.target" ];
-      After = [ "mango-session.target" "dbus-env.service" ];
+      After = [
+        "mango-session.target"
+        "dbus-env.service"
+      ];
     };
 
     Service = {
@@ -83,7 +93,10 @@
     Unit = {
       Description = "Wallpaper (Mango)";
       PartOf = [ "mango-session.target" ];
-      After = [ "mango-session.target" "dbus-env.service" ];
+      After = [
+        "mango-session.target"
+        "dbus-env.service"
+      ];
     };
 
     Service = {
@@ -103,7 +116,10 @@
     Unit = {
       Description = "NetworkManager Applet (Mango)";
       PartOf = [ "mango-session.target" ];
-      After = [ "mango-session.target" "dbus-env.service" ];
+      After = [
+        "mango-session.target"
+        "dbus-env.service"
+      ];
     };
 
     Service = {
@@ -123,7 +139,10 @@
     Unit = {
       Description = "Clipboard history (text)";
       PartOf = [ "mango-session.target" ];
-      After = [ "mango-session.target" "dbus-env.service" ];
+      After = [
+        "mango-session.target"
+        "dbus-env.service"
+      ];
     };
 
     Service = {
@@ -144,7 +163,10 @@
     Unit = {
       Description = "Clipboard history (image)";
       PartOf = [ "mango-session.target" ];
-      After = [ "mango-session.target" "dbus-env.service" ];
+      After = [
+        "mango-session.target"
+        "dbus-env.service"
+      ];
     };
 
     Service = {
@@ -185,3 +207,4 @@
     };
   };
 }
+
