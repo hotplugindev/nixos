@@ -1,10 +1,5 @@
-{ pkgs, hostType, ... }:
+{ pkgs, ... }:
 {
-  imports = [
-
-  ]
-  ++ (if hostType == "laptop" then [ ./laptop.nix ] else [ ./pc.nix ]);
-
   home.packages = with pkgs; [
     gcc
     go

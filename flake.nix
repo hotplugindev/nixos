@@ -28,20 +28,13 @@
   outputs =
     inputs@{
       nixpkgs,
-      nixpkgs-unstable,
-      nixos-hardware,
-      home-manager,
-      mango,
-      nixvim,
       ...
     }:
     let
       system = "x86_64-linux";
-      user = {
-        username = "hotplugin";
-        fullName = "Giona Berti";
-        email = "giona7berti@gmail.com";
-      };
+      users = import ./users;
+      user = users.hotplugin;
+      hosts = import ./hosts { inherit inputs; };
       sharedModules = [
         inputs.mango.nixosModules.mango
         inputs.home-manager.nixosModules.home-manager
@@ -57,7 +50,7 @@
               inherit inputs hostname hostType;
               inherit (user) username fullName email;
             };
-            users.${user.username} = import ./home/users/${user.username}/default.nix;
+            users.${user.username} = import ./users/${user.username}/default.nix;
           };
         };
       mkHost =
@@ -87,19 +80,15 @@
       nixosConfigurations = {
         pc = mkHost {
           hostname = "pc";
-          hostType = "desktop";
-          hostModule = ./hosts/pc;
-          extraModules = [
-            inputs.lanzaboote.nixosModules.lanzaboote
-          ];
+          hostType = hosts.pc.hostType;
+          hostModule = hosts.pc.hostModule;
+          extraModules = hosts.pc.extraModules;
         };
         laptop = mkHost {
           hostname = "laptop";
-          hostType = "laptop";
-          hostModule = ./hosts/laptop;
-          extraModules = [
-            nixos-hardware.nixosModules.framework-13th-gen-intel
-          ];
+          hostType = hosts.laptop.hostType;
+          hostModule = hosts.laptop.hostModule;
+          extraModules = hosts.laptop.extraModules;
         };
       };
     };

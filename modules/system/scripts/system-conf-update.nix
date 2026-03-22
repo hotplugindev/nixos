@@ -24,6 +24,7 @@ let
       REPO="$HOME/nixos"
       HOST="$(hostname)"
       HW_FILE="$REPO/hosts/$(hostname)/hardware-configuration.nix"
+      HW_REL_PATH="hosts/$HOST/hardware-configuration.nix"
 
       if [ ! -d "$REPO" ]; then
         echo "Missing repo: $REPO" >&2
@@ -41,10 +42,10 @@ let
         exit 1
       fi
 
-      if ! git -C "$REPO" ls-files --error-unmatch hardware-configuration.nix >/dev/null 2>&1; then
-        git -C "$REPO" add --intent-to-add hardware-configuration.nix
+      if ! git -C "$REPO" ls-files --error-unmatch "$HW_REL_PATH" >/dev/null 2>&1; then
+        git -C "$REPO" add --intent-to-add "$HW_REL_PATH"
       fi
-      git -C "$REPO" update-index --assume-unchanged hardware-configuration.nix
+      git -C "$REPO" update-index --assume-unchanged "$HW_REL_PATH"
 
       CURRENT_TARGET="$(readlink -f /etc/nixos 2>/dev/null || true)"
       if [ "$CURRENT_TARGET" != "$REPO" ]; then
@@ -79,7 +80,9 @@ let
       fi
 
       REPO="$HOME/nixos"
-      HW_FILE="$REPO/hardware-configuration.nix"
+      HOST="$(hostname)"
+      HW_REL_PATH="hosts/$HOST/hardware-configuration.nix"
+      HW_FILE="$REPO/$HW_REL_PATH"
       TMP_FILE="/tmp/hardware-configuration.nix.$USER"
 
       if [ ! -d "$REPO" ]; then
@@ -90,7 +93,7 @@ let
       cd "$REPO"
 
       if [ ! -f "$HW_FILE" ]; then
-        echo "Missing hardware-configuration.nix — nothing to protect" >&2
+        echo "Missing $HW_REL_PATH — nothing to protect" >&2
         git pull
         exit 0
       fi
@@ -99,10 +102,10 @@ let
       cp "$HW_FILE" "$TMP_FILE"
 
       echo "Allowing git to update hardware file..."
-      git update-index --no-assume-unchanged hardware-configuration.nix
+      git update-index --no-assume-unchanged "$HW_REL_PATH"
 
       echo "Resetting hardware file to repo state..."
-      git checkout -- hardware-configuration.nix || true
+      git checkout -- "$HW_REL_PATH" || true
 
       echo "Pulling latest changes..."
       git pull
@@ -111,7 +114,7 @@ let
       cp "$TMP_FILE" "$HW_FILE"
 
       echo "Re-applying assume-unchanged..."
-      git update-index --assume-unchanged hardware-configuration.nix
+      git update-index --assume-unchanged "$HW_REL_PATH"
 
       echo "Done ✅"
     '';
