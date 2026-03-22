@@ -2,7 +2,7 @@
 {
 
   imports = [
-    ./system-update.nix
+    ./scripts/base.nix
   ];
 
   boot.loader.systemd-boot.configurationLimit = 3;

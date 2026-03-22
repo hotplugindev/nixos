@@ -1,0 +1,6 @@
+{ ... }:
+{
+  imports = [
+    ./system-update.nix
+  ];
+}

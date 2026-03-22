@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 let
-  system-updadate = pkgs.writeShellScriptBin "system-update" ''
+  system-update = pkgs.writeShellScriptBin "system-update" ''
     set -euo pipefail
 
     REPO="/etc/nixos"
