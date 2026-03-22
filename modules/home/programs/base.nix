@@ -6,6 +6,5 @@
     ./communication.nix
     ./multimedia.nix
     ./entertainment.nix
-    ./nixvim.nix
   ];
 }

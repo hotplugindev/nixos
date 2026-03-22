@@ -15,9 +15,13 @@
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, mango, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, mango, nixvim, ... }:
     let
       system = "x86_64-linux";
       mkHost = { hostname, hostType, hostModule }:
@@ -34,6 +38,7 @@
             inputs.mango.nixosModules.mango
             inputs.lanzaboote.nixosModules.lanzaboote
             inputs.home-manager.nixosModules.home-manager
+            inputs.nixvim.nixosModules.nixvim
             {
               home-manager = {
                 useGlobalPkgs = true;
