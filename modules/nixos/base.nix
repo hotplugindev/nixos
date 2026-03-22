@@ -81,6 +81,7 @@
     qemu = {
       package = pkgs.qemu_kvm;
       runAsRoot = true; # Sometimes helps with permission issues during imports
+      vhostUserPackages = with pkgs; [ virtiofsd ];
     };
   };
   programs.virt-manager.enable = true;
@@ -106,6 +107,7 @@
     wget
     btop
     killall
+    dnsmasq
   ];
 
   system.stateVersion = "25.11";
