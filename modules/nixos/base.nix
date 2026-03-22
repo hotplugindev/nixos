@@ -10,6 +10,8 @@
     ./scripts/base.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
   boot.loader.systemd-boot.configurationLimit = 3;
 
   nix.optimise.automatic = true;
