@@ -26,6 +26,7 @@
     ./coding/linting.nix
 
     ./tools/git.nix
+    ./tools/avante.nix
   ];
 
   programs.nixvim = {
