@@ -57,7 +57,7 @@
               inherit inputs hostname hostType;
               inherit (user) username fullName email;
             };
-            users.${user.username} = import ./home/users/${user.username}/default.nix;
+            users.${user.username} = import ./home-manager/users/${user.username}/default.nix;
           };
         };
       mkHost =
