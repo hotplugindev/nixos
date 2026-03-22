@@ -4,10 +4,36 @@
     extraPackages = with pkgs; [
       lua-language-server
       nixd
-      vscode-langservers-extracted
-      typescript-language-server
       bash-language-server
       marksman
+
+      #C
+      gcc
+      clang-tools
+
+      #go
+      go
+      gopls
+
+      #node
+      nodejs
+      vue-language-server
+      vscode-langservers-extracted
+      typescript-language-server
+
+      #zig
+      zig
+      zls
+
+      #rust
+      cargo
+      rustc
+      rust-analyzer
+
+      # Python
+      python3
+      pyright
+
       stylua
       nixfmt-rfc-style
       prettierd
@@ -31,6 +57,16 @@
           jsonls.enable = true;
           bashls.enable = true;
           marksman.enable = true;
+          rust_analyzer = {
+            enable = true;
+            installCargo = false;
+            installRustc = false;
+          };
+          gopls.enable = true;
+          clangd.enable = true;
+          volar.enable = true;
+          zls.enable = true;
+          pyright.enable = true;
         };
 
         keymaps = {
