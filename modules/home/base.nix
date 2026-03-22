@@ -6,6 +6,7 @@
     ./nixvim/base.nix
     ./desktop/base.nix
     ./programs/base.nix
+    ./dev/base.nix
   ];
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;

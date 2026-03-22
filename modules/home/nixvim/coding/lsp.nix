@@ -6,34 +6,15 @@
       nixd
       bash-language-server
       marksman
-
-      #C
-      gcc
       clang-tools
-
-      #go
-      go
       gopls
-
-      #node
-      nodejs
       vue-language-server
       vscode-langservers-extracted
       typescript-language-server
-
-      #zig
-      zig
       zls
-
-      #rust
-      cargo
       rustc
       rust-analyzer
-
-      # Python
-      python3
       pyright
-
       stylua
       nixfmt-rfc-style
       prettierd
