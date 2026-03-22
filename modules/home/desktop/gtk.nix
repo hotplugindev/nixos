@@ -15,6 +15,12 @@
     };
   };
 
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      icon-theme = "Papirus-Dark";
+    };
+  };
+
   home.packages = with pkgs; [
     papirus-icon-theme
     adwaita-icon-theme
