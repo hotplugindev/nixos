@@ -7,7 +7,7 @@
 {
 
   imports = [
-    ./scripts/base.nix
+    ../scripts/base.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
