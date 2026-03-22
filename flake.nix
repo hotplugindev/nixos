@@ -28,18 +28,13 @@
   outputs =
     inputs@{
       nixpkgs,
-      nixpkgs-unstable,
-      nixos-hardware,
-      home-manager,
-      mango,
-      nixvim,
       ...
     }:
     let
       system = "x86_64-linux";
       users = import ./home/users;
       user = users.hotplugin;
-      hosts = import ./hosts;
+      hosts = import ./hosts { inherit inputs; };
       sharedModules = [
         inputs.mango.nixosModules.mango
         inputs.home-manager.nixosModules.home-manager
@@ -86,18 +81,14 @@
         pc = mkHost {
           hostname = "pc";
           hostType = hosts.pc.hostType;
-          hostModule = ./hosts/pc;
-          extraModules = [
-            inputs.lanzaboote.nixosModules.lanzaboote
-          ];
+          hostModule = hosts.pc.hostModule;
+          extraModules = hosts.pc.extraModules;
         };
         laptop = mkHost {
           hostname = "laptop";
           hostType = hosts.laptop.hostType;
-          hostModule = ./hosts/laptop;
-          extraModules = [
-            nixos-hardware.nixosModules.framework-13th-gen-intel
-          ];
+          hostModule = hosts.laptop.hostModule;
+          extraModules = hosts.laptop.extraModules;
         };
       };
     };
