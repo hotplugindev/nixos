@@ -2,7 +2,6 @@
 set -euo pipefail
 
 REPO="${HOME}/nixos"
-HOST="$(hostname)"
 HW_FILE="${REPO}/hardware-configuration.nix"
 
 if [ ! -d "${REPO}" ]; then
@@ -20,6 +19,33 @@ if ! git -C "${REPO}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   exit 1
 fi
 
+HOST="${1:-}"
+
+if [ -z "${HOST}" ]; then
+  echo "Select target system:"
+  echo "1) pc"
+  echo "2) laptop"
+  read -rp "Enter choice [1-2]: " choice
+
+  case "${choice}" in
+    1) HOST="pc" ;;
+    2) HOST="laptop" ;;
+    *)
+      echo "Invalid choice" >&2
+      exit 1
+      ;;
+  esac
+fi
+
+case "${HOST}" in
+  pc|laptop) ;;
+  *)
+    echo "Invalid host: ${HOST}" >&2
+    echo "Use: ./bootstrap.sh pc  or  ./bootstrap.sh laptop" >&2
+    exit 1
+    ;;
+esac
+
 if [ ! -f "${HW_FILE}" ]; then
   if [ -f /etc/nixos/hardware-configuration.nix ]; then
     echo "Copying installer hardware config into repo..."
@@ -32,13 +58,11 @@ if [ ! -f "${HW_FILE}" ]; then
   fi
 fi
 
-# Make hardware-configuration.nix visible to flake, but locally ignore changes
 if ! git -C "${REPO}" ls-files --error-unmatch hardware-configuration.nix >/dev/null 2>&1; then
   git -C "${REPO}" add --intent-to-add hardware-configuration.nix
 fi
 git -C "${REPO}" update-index --assume-unchanged hardware-configuration.nix
 
-# Point /etc/nixos at the repo
 CURRENT_TARGET="$(readlink -f /etc/nixos 2>/dev/null || true)"
 if [ "${CURRENT_TARGET}" != "${REPO}" ]; then
   echo "Linking /etc/nixos -> ${REPO}"
