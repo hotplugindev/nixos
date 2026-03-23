@@ -2,6 +2,12 @@
   description = "Giona Berti's NixOS + Home Manager + Mango setup";
 
   inputs = {
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    import-tree.url = "github:vic/import-tree";
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -30,72 +36,5 @@
     };
   };
 
-  outputs =
-    inputs@{
-      nixpkgs,
-      ...
-    }:
-    let
-      system = "x86_64-linux";
-      users = import ./users;
-      user = users.hotplugin;
-      hosts = import ./hosts { inherit inputs; };
-      sharedModules = [
-        inputs.mango.nixosModules.mango
-        inputs.stylix.nixosModules.stylix
-        inputs.home-manager.nixosModules.home-manager
-        inputs.nixvim.nixosModules.nixvim
-      ];
-      mkHomeManager = { hostname, hostType }:
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "backup";
-            extraSpecialArgs = {
-              inherit inputs hostname hostType;
-              inherit (user) username fullName email;
-            };
-            users.${user.username} = import ./users/${user.username}/default.nix;
-          };
-        };
-      mkHost =
-        {
-          hostname,
-          hostType,
-          hostModule,
-          extraModules ? [ ],
-        }:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs hostname hostType;
-            inherit (user) username fullName email;
-          };
-          modules = [
-            hostModule
-          ]
-          ++ sharedModules
-          ++ [
-            (mkHomeManager { inherit hostname hostType; })
-          ]
-          ++ extraModules;
-        };
-    in
-    {
-      nixosConfigurations = {
-        pc = mkHost {
-          hostname = "pc";
-          hostType = hosts.pc.hostType;
-          hostModule = hosts.pc.hostModule;
-          extraModules = hosts.pc.extraModules;
-        };
-        laptop = mkHost {
-          hostname = "laptop";
-          hostType = hosts.laptop.hostType;
-          hostModule = hosts.laptop.hostModule;
-          extraModules = hosts.laptop.extraModules;
-        };
-      };
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./dendritic);
 }

@@ -2,9 +2,16 @@
   inputs,
   pkgs,
   lib,
-  hostType,
+  config,
   ...
 }:
+let
+  hostType =
+    if (config.networking.hostName or "pc") == "laptop" then
+      "laptop"
+    else
+      "desktop";
+in
 {
   imports = [ inputs.mango.hmModules.mango ];
 

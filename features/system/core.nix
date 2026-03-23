@@ -1,16 +1,17 @@
 {
   pkgs,
-  fullName,
-  username,
   ...
 }:
+let
+  me = (import ../../users).hotplugin;
+in
 {
   # Core system configuration shared by every host.
-  # Keep machine-specific boot/device/service overrides in nixos/modules/hosts,
-  # nixos/modules/roles, and nixos/modules/hardware.
+  # Keep machine-specific boot/device/service overrides in features/system/hosts,
+  # features/system/roles, and features/system/hardware.
 
   imports = [
-    ../scripts/base.nix
+    ./automation/default.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -38,9 +39,9 @@
   nix.settings.auto-optimise-store = true;
   nixpkgs.config.allowUnfree = true;
 
-  users.users.${username} = {
+  users.users.${me.username} = {
     isNormalUser = true;
-    description = fullName;
+    description = me.fullName;
     extraGroups = [
       "wheel"
       "networkmanager"
@@ -103,7 +104,7 @@
     };
   };
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [ "${username}" ];
+  users.groups.libvirtd.members = [ me.username ];
   virtualisation.spiceUSBRedirection.enable = true;
 
   # Docker
