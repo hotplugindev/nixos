@@ -8,7 +8,6 @@
     ./wlogout.nix
     ./swaync.nix
     ./gtk.nix
-
-    ./session-services.nix
+    ./services/default.nix
   ];
 }
