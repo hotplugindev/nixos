@@ -23,6 +23,11 @@
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:danth/stylix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs =
@@ -37,6 +42,7 @@
       hosts = import ./hosts { inherit inputs; };
       sharedModules = [
         inputs.mango.nixosModules.mango
+        inputs.stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.home-manager
         inputs.nixvim.nixosModules.nixvim
       ];

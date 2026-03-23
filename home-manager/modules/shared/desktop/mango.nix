@@ -10,8 +10,8 @@
 
   wayland.windowManager.mango = {
     enable = true;
-    settings = builtins.readFile ../../config/mango/config.conf;
-    autostart_sh = builtins.readFile ../../config/mango/autostart.sh;
+    settings = builtins.readFile ../../../../assets/home/mango/config.conf;
+    autostart_sh = builtins.readFile ../../../../assets/home/mango/autostart.sh;
   };
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
@@ -52,16 +52,16 @@
     ]
     ++ lib.optionals (hostType == "laptop") [ wlr-randr ];
 
-  xdg.configFile."mango/config.conf".source = ../../config/mango/config.conf;
-  xdg.configFile."mango/bind.conf".source = ../../config/mango/bind.conf;
-  xdg.configFile."mango/env.conf".source = ../../config/mango/env.conf;
-  xdg.configFile."mango/rule.conf".source = ../../config/mango/rule.conf;
-  xdg.configFile."mango/tag.conf".source = ../../config/mango/tag.conf;
+  xdg.configFile."mango/config.conf".source = ../../../../assets/home/mango/config.conf;
+  xdg.configFile."mango/bind.conf".source = ../../../../assets/home/mango/bind.conf;
+  xdg.configFile."mango/env.conf".source = ../../../../assets/home/mango/env.conf;
+  xdg.configFile."mango/rule.conf".source = ../../../../assets/home/mango/rule.conf;
+  xdg.configFile."mango/tag.conf".source = ../../../../assets/home/mango/tag.conf;
   xdg.configFile."mango/monitor.conf".source =
     if hostType == "laptop" then
-      ../../config/mango/monitor-laptop.conf
+      ../../../../assets/home/mango/monitor-laptop.conf
     else
-      ../../config/mango/monitor-pc.conf;
+      ../../../../assets/home/mango/monitor-pc.conf;
 
-  xdg.configFile."wallpaper".source = ../../config/wallpaper;
+  xdg.configFile."wallpaper".source = ../../../../assets/home/wallpaper;
 }

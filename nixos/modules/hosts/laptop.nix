@@ -1,0 +1,6 @@
+{ ... }:
+{
+  imports = [
+    ../roles/laptop.nix
+  ];
+}

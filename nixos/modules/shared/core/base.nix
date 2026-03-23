@@ -6,8 +6,8 @@
 }:
 {
   # Core system configuration shared by every host.
-  # Keep machine-specific boot/device/service overrides in modules/system/profiles/
-  # (for example: secure boot, power-management, and host-only hardware toggles).
+  # Keep machine-specific boot/device/service overrides in nixos/modules/hosts,
+  # nixos/modules/roles, and nixos/modules/hardware.
 
   imports = [
     ../scripts/base.nix

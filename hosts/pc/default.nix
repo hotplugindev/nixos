@@ -2,8 +2,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/system/core/default.nix
-    ../../modules/system/profiles/desktop.nix
+    ../../nixos/modules/shared/core/base.nix
+    ../../nixos/modules/hosts/pc.nix
   ];
 
   networking.hostName = "pc";
