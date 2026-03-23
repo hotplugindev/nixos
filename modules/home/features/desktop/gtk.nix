@@ -1,23 +1,23 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   gtk = {
     enable = true;
 
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = lib.mkDefault "Papirus-Dark";
+      package = lib.mkDefault pkgs.papirus-icon-theme;
     };
 
     theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
+      name = lib.mkDefault "Adwaita-dark";
+      package = lib.mkDefault pkgs.gnome-themes-extra;
     };
   };
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      icon-theme = "Papirus-Dark";
+      icon-theme = lib.mkDefault "Papirus-Dark";
     };
   };
 
