@@ -12,6 +12,7 @@
       "video"
       "audio"
       "input"
+      "dialout"
     ];
   }) allUsers;
 }
