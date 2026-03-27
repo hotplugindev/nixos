@@ -5,6 +5,7 @@
 
   gb.home.programs.gaming.steampack.enable = true;
   gb.home.programs.gaming.bottles.enable = true;
+  gb.home.programs.gaming.boxflat.enable = true;
 
   gb.home.desktop.mango.mangowc.monitors = [
     "name:HDMI-A-1,width:1920,height:1080,refresh:60,x:0,y:0,scale:1"
