@@ -22,43 +22,48 @@ let
       fi
 
       REPO="$HOME/nixos"
-      HOST="$(hostname)"
-      HW_REL_PATH="hosts/$HOST/hardware-configuration.nix"
-      HW_FILE="$REPO/$HW_REL_PATH"
-      TMP_FILE="/tmp/hardware-configuration.nix.$USER"
 
       if [ ! -d "$REPO" ]; then
         echo "Missing repo: $REPO" >&2
         exit 1
       fi
 
-      cd "$REPO"
-
-      if [ ! -f "$HW_FILE" ]; then
-        echo "Missing $HW_REL_PATH — nothing to protect" >&2
-        git pull
-        exit 0
+      if ! git -C "$REPO" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "$REPO is not a git repository" >&2
+        exit 1
       fi
 
-      echo "Backing up hardware config..."
-      cp "$HW_FILE" "$TMP_FILE"
+      if ! git -C "$REPO" remote get-url origin >/dev/null 2>&1; then
+        echo "Git remote 'origin' is not configured for $REPO" >&2
+        exit 1
+      fi
 
-      echo "Allowing git to update hardware file..."
-      git update-index --no-assume-unchanged "$HW_REL_PATH"
+      if ! git -C "$REPO" diff --quiet || ! git -C "$REPO" diff --cached --quiet; then
+        echo "Working tree is not clean. Commit or stash your changes before running repo-sync." >&2
+        exit 1
+      fi
 
-      echo "Resetting hardware file to repo state..."
-      git checkout -- "$HW_REL_PATH" || true
+      echo "Pulling latest changes from origin..."
+      if ! git -C "$REPO" pull --no-rebase --no-edit; then
+        echo "git pull failed." >&2
+        if git -C "$REPO" rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1; then
+          echo "Merge conflict detected, aborting merge." >&2
+          git -C "$REPO" merge --abort || true
+        fi
+        exit 1
+      fi
 
-      echo "Pulling latest changes..."
-      git pull
+      if [ -z "$(git -C "$REPO" rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null || true)" ]; then
+        echo "No upstream branch configured for the current branch; cannot determine push status." >&2
+        exit 1
+      fi
 
-      echo "Restoring local hardware config..."
-      cp "$TMP_FILE" "$HW_FILE"
-
-      echo "Re-applying assume-unchanged..."
-      git update-index --assume-unchanged "$HW_REL_PATH"
-
-      echo "Done ✅"
+      if [ -n "$(git -C "$REPO" log '@{u}..HEAD' --oneline 2>/dev/null || true)" ]; then
+        echo "Unpushed commits detected. Pushing..."
+        git -C "$REPO" push
+      else
+        echo "No unpushed commits."
+      fi
     '';
   };
 in
