@@ -54,7 +54,7 @@ let
       fi
 
       if [ -z "$(git -C "$REPO" rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null || true)" ]; then
-        echo "No upstream branch configured for the current branch; cannot determine push status." >&2
+        echo "No upstream branch configured for current branch." >&2
         exit 1
       fi
 
@@ -62,7 +62,7 @@ let
         echo "Unpushed commits detected. Pushing..."
         git -C "$REPO" push
       else
-        echo "No unpushed commits."
+        echo "Repo already in sync."
       fi
     '';
   };

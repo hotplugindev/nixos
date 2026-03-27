@@ -25,7 +25,6 @@ let
       REPO="$HOME/nixos"
       HOST="$(hostname)"
       HW_FILE="$REPO/hosts/$HOST/hardware-configuration.nix"
-      HW_REL_PATH="hosts/$HOST/hardware-configuration.nix"
 
       if [ ! -d "$REPO" ]; then
         echo "Missing repo: $REPO" >&2
@@ -59,11 +58,6 @@ let
         echo "Git remote 'origin' is not configured for $REPO" >&2
         exit 1
       fi
-
-      if ! git -C "$REPO" ls-files --error-unmatch "$HW_REL_PATH" >/dev/null 2>&1; then
-        git -C "$REPO" add --intent-to-add "$HW_REL_PATH"
-      fi
-      git -C "$REPO" update-index --assume-unchanged "$HW_REL_PATH"
 
       has_internet() {
         git -C "$REPO" ls-remote --exit-code origin HEAD >/dev/null 2>&1
@@ -105,29 +99,23 @@ let
 
       committed=0
       if ! git -C "$REPO" diff --cached --quiet; then
-        git -C "$REPO" commit -m "nixos: switch $HOST $(date '+%Y-%m-%d %H:%M:%S')"
+        git -C "$REPO" commit -m "nixos($HOST): switch $(date '+%Y-%m-%d %H:%M:%S')"
         committed=1
       fi
 
       if [ "$had_internet" -eq 1 ] && [ "$pulled_latest" -eq 1 ]; then
-        if [ "$committed" -eq 1 ]; then
-          echo "Pushing committed changes to origin..."
-        else
-          echo "No new commit created, checking for unpushed commits..."
-        fi
-
         if [ -n "$(git -C "$REPO" rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null || true)" ]; then
           if [ -n "$(git -C "$REPO" log '@{u}..HEAD' --oneline 2>/dev/null || true)" ]; then
+            echo "Pushing changes to origin..."
             git -C "$REPO" push
           else
             echo "Nothing to push."
           fi
         else
-          echo "No upstream branch configured for the current branch; skipping push."
+          echo "No upstream branch configured; skipping push."
         fi
       elif [ "$committed" -eq 1 ]; then
-        echo "Changes were committed locally without internet."
-        echo "Run repo-sync later to pull/push when connectivity is available."
+        echo "Committed locally (offline). Run repo-sync later to push."
       fi
     '';
   };
