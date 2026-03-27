@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  pkgs-unstable,
   ...
 }:
 let
@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf codex.enable {
     home.packages = [
-      pkgs.codex
+      pkgs-unstable.codex
     ];
   };
 }
