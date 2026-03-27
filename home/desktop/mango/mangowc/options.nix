@@ -30,6 +30,7 @@
         gappoh = 10;
         gappov = 10;
         borderpx = 2;
+        enable_hotarea = false;
       };
       description = "Declarative MangoWC `key=value` settings.";
     };
