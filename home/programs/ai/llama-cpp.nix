@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf llama-cpp.enable {
     home.packages = [
-      pkgs-unstable.llama-cpp
+      pkgs-unstable.llama-cpp-vulkan
     ];
   };
 }
