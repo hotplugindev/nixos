@@ -15,7 +15,6 @@
 
   services.printing.enable = false;
   services.openssh.enable = true;
-
   networking = {
     interfaces = {
       enp42s0 = {
@@ -24,6 +23,10 @@
     };
     firewall = {
       allowedUDPPorts = [ 9 ];
+      allowedTCPPorts = [
+        22
+        8080
+      ];
     };
   };
 }
