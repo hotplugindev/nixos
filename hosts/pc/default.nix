@@ -30,7 +30,7 @@
     };
   };
 
-  fileSystems."/home/2nd" = {
+  fileSystems."/mnt/fun" = {
     device = "/dev/disk/by-uuid/f810e5a8-83ac-44f2-94d3-38d9be18a29c";
     fsType = "auto";
     options = [
@@ -40,7 +40,7 @@
       "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
     ];
   };
-  fileSystems."/mnt/3nd" = {
+  fileSystems."/mnt/work" = {
     device = "/dev/disk/by-uuid/1b587ad2-a133-44c9-9236-41099c41bece";
     fsType = "auto";
     options = [
@@ -51,7 +51,7 @@
     ];
   };
   systemd.tmpfiles.rules = [
-    "d /mnt/2nd 0755 ${username} users -"
-    "d /mnt/3nd 0755 ${username} users -"
+    "d /mnt/fun 0755 ${username} users -"
+    "d /mnt/work 0755 ${username} users -"
   ];
 }
