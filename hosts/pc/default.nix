@@ -30,7 +30,7 @@
     };
   };
 
-  fileSystems."/mnt/2nd" = {
+  fileSystems."/mnt/3nd" = {
     device = "/dev/disk/by-uuid/1b587ad2-a133-44c9-9236-41099c41bece";
     fsType = "auto";
     options = [
@@ -40,7 +40,7 @@
       "user" # Allows your user to interact with the mount
     ];
   };
-  fileSystems."/mnt/3nd" = {
+  fileSystems."/mnt/2nd" = {
     device = "/dev/disk/by-uuid/f810e5a8-83ac-44f2-94d3-38d9be18a29c";
     fsType = "auto";
     options = [
