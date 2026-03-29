@@ -30,7 +30,7 @@
     };
   };
 
-  fileSystems."/home/${username}/Games" = {
+  fileSystems."/home/2nd" = {
     device = "/dev/disk/by-uuid/f810e5a8-83ac-44f2-94d3-38d9be18a29c";
     fsType = "auto";
     options = [
@@ -55,7 +55,7 @@
     ];
   };
   systemd.tmpfiles.rules = [
-    "d /home/${username}/Games 0755 ${username} users -"
+    "d /mnt/2nd 0755 ${username} users -"
     "d /mnt/3nd 0755 ${username} users -"
   ];
 }
