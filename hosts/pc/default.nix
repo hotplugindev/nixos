@@ -37,6 +37,8 @@
       "nofail" # Boots even if drive is missing
       "x-systemd.device-timeout=5s"
       "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
+      "rw"
+      "exec"
       "user" # Allows your user to interact with the mount
     ];
   };
@@ -47,6 +49,8 @@
       "nofail" # Boots even if drive is missing
       "x-systemd.device-timeout=5s"
       "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
+      "rw"
+      "exec"
       "user" # Allows your user to interact with the mount
     ];
   };
