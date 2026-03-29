@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   amdgpu = config.gb.system.graphics.gpu.amd;
 in
@@ -9,5 +14,8 @@ in
   config = {
     services.xserver.videoDrivers = lib.mkIf amdgpu.enable [ "amdgpu" ];
     hardware.amdgpu.opencl.enable = lib.mkIf amdgpu.enable true;
+    environment.systemPackages = [
+      pkgs.radeontop
+    ];
   };
 }
