@@ -39,7 +39,6 @@
       "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
       "rw"
       "exec"
-      "user" # Allows your user to interact with the mount
     ];
   };
   fileSystems."/mnt/3nd" = {
@@ -51,7 +50,6 @@
       "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
       "rw"
       "exec"
-      "user" # Allows your user to interact with the mount
     ];
   };
   systemd.tmpfiles.rules = [
