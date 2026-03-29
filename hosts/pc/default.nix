@@ -30,6 +30,18 @@
     };
   };
 
+  fileSystems."/home/${username}/Games" = {
+    device = "/dev/disk/by-uuid/f810e5a8-83ac-44f2-94d3-38d9be18a29c";
+    fsType = "auto";
+    options = [
+      "nofail" # Boots even if drive is missing
+      "x-systemd.device-timeout=5s"
+      "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
+      "rw"
+      "exec"
+      "user" # Allows your user to interact with the mount
+    ];
+  };
   fileSystems."/mnt/3nd" = {
     device = "/dev/disk/by-uuid/1b587ad2-a133-44c9-9236-41099c41bece";
     fsType = "auto";
@@ -42,20 +54,8 @@
       "user" # Allows your user to interact with the mount
     ];
   };
-  fileSystems."/mnt/2nd" = {
-    device = "/dev/disk/by-uuid/f810e5a8-83ac-44f2-94d3-38d9be18a29c";
-    fsType = "auto";
-    options = [
-      "nofail" # Boots even if drive is missing
-      "x-systemd.device-timeout=5s"
-      "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
-      "rw"
-      "exec"
-      "user" # Allows your user to interact with the mount
-    ];
-  };
   systemd.tmpfiles.rules = [
-    "d /mnt/2nd 0755 ${username} users -"
+    "d /home/${username}/Games 0755 ${username} users -"
     "d /mnt/3nd 0755 ${username} users -"
   ];
 }
