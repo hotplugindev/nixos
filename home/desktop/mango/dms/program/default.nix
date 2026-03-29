@@ -22,7 +22,8 @@ in
       settings = {
         currentThemeName = "dynamic";
         currentThemeCategory = "dynamic";
-        matugenScheme = "scheme-content";
+        matugenScheme = "scheme-neutral";
+        #matugenScheme = "scheme-content";
 
         controlCenterWidgets = [
           {

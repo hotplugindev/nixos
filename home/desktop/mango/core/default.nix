@@ -5,7 +5,7 @@
 
     wallpaper.default = lib.mkOption {
       type = lib.types.path;
-      default = ../assets/default.png;
+      default = ../assets/kitty.png;
       description = "Default wallpaper used for DMS wallpaper provisioning.";
     };
   };
