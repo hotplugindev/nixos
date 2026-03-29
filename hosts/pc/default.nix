@@ -5,6 +5,20 @@
     ../../modules/default.nix
   ];
 
+  systemd.mounts = [
+    {
+      where = "/mnt/2nd";
+      enable = false;
+    }
+  ];
+
+  systemd.automounts = [
+    {
+      where = "/mnt/2nd";
+      enable = false;
+    }
+  ];
+
   networking.hostName = "pc";
 
   gb.system.boot.systemdboot.secure = true;
