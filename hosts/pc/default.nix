@@ -50,4 +50,8 @@
       "user" # Allows your user to interact with the mount
     ];
   };
+  systemd.tmpfiles.rules = [
+    "d /mnt/2nd 0755 hotplugin users -"
+    "d /mnt/3nd 0755 hotplugin users -"
+  ];
 }
