@@ -37,7 +37,7 @@
       "nofail" # Boots even if drive is missing
       "x-systemd.device-timeout=5s"
       "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
-      #"user" # Allows your user to interact with the mount
+      "user" # Allows your user to interact with the mount
     ];
   };
   fileSystems."/mnt/2nd" = {
@@ -47,7 +47,7 @@
       "nofail" # Boots even if drive is missing
       "x-systemd.device-timeout=5s"
       "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
-      #"user" # Allows your user to interact with the mount
+      "user" # Allows your user to interact with the mount
     ];
   };
 }
