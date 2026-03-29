@@ -1,4 +1,4 @@
-{ ... }:
+{ username, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -51,7 +51,7 @@
     ];
   };
   systemd.tmpfiles.rules = [
-    "d /mnt/2nd 0755 hotplugin users -"
-    "d /mnt/3nd 0755 hotplugin users -"
+    "d /mnt/2nd 0755 ${username} users -"
+    "d /mnt/3nd 0755 ${username} users -"
   ];
 }
