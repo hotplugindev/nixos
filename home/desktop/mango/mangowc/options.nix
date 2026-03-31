@@ -120,7 +120,7 @@
         "gesturebind=none,right,3,viewtoleft_have_client"
         "gesturebind=none,up,3,toggleoverview"
         "gesturebind=none,down,3,toggleoverview"
-        "switchbind=fold,spawn,swaylock -f -c 000000"
+        "switchbind=fold,spawn,dms ipc call lock lock"
         "switchbind=unfold,spawn,wlr-dpms on"
         "bind=SUPER,1,view,1,0"
         "bind=SUPER,2,view,2,0"
@@ -202,7 +202,9 @@
 
     rules = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [
+        "enable_hotarea = false"
+      ];
       description = "Additional raw rules lines.";
     };
 
