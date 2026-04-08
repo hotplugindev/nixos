@@ -4,6 +4,7 @@
   ];
 
   gb.home.programs.gaming.steampack.enable = true;
+  gb.home.programs.gaming.ckan.enable = true;
 
   gb.home.desktop.terminals.foot.fontSize = "8";
 
