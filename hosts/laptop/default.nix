@@ -9,6 +9,8 @@
 
   gb.programs.steam.enable = true;
 
+  gb.system.scripts.turbo-toggle.enable = true;
+
   services.printing.enable = false;
   services.openssh.enable = false;
 
