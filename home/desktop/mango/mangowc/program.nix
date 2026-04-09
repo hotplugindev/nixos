@@ -20,18 +20,16 @@ let
   monitorLines = map (line: "monitorrule=${line}") cfg.monitors;
   ruleLines = map (line: "${line}") cfg.rules;
 
-  includeLines = lib.concatMapStringsSep "\n" (file: "source=./dms/${file}") cfg.dmsIncludes.files;
+  includeLines = lib.concatMapStringsSep "\n" (file: "source-optional=~/.config/mango/dms/${file}") cfg.dmsIncludes.files;
 
-  mangoConfigText = lib.concatStringsSep "\n" [
+  mangoExtraConfigText = lib.concatStringsSep "\n" [
     cfg.settings.base
     (lib.concatStringsSep "\n" envLines)
-    (lib.concatStringsSep "\n" settingsLines)
     (lib.concatStringsSep "\n" monitorLines)
     (lib.concatStringsSep "\n" ruleLines)
     (lib.concatStringsSep "\n" bindLines)
     (lib.optionalString cfg.dmsIncludes.enable includeLines)
     cfg.settings.extra
-    "exec-once=~/.config/mango/autostart.sh"
   ];
 
   autostartScript = lib.concatStringsSep "\n" [
@@ -48,7 +46,11 @@ in
   config = lib.mkIf (mango.enable && mango.mangowc.enable) {
     wayland.windowManager.mango = {
       enable = true;
-      settings = mangoConfigText;
+      settings = cfg.settings.values;
+      extraConfig = lib.concatStringsSep "\n" [
+        mangoExtraConfigText
+        (lib.concatStringsSep "\n" settingsLines)
+      ];
       autostart_sh = autostartScript;
     };
   };
