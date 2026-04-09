@@ -1,17 +1,24 @@
 {
+  inputs,
   lib,
   config,
+  pkgs,
   ...
 }:
 let
   mango = config.gb.home.desktop.mango;
   startupTarget = mango.mangowc.startupTarget;
-  dmsPackage = config.programs.dank-material-shell.package;
-  quickshellPackage = config.programs.dank-material-shell.quickshell.package;
-  runtimePath = lib.makeBinPath [
-    dmsPackage
-    quickshellPackage
-  ];
+  dmsCfg = config.programs.dank-material-shell;
+  dmsPackage =
+    let
+      legacyPackage = lib.attrByPath [ "package" ] null dmsCfg;
+    in
+    if legacyPackage != null then legacyPackage else inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.dms-shell;
+  quickshellPackage = lib.attrByPath [ "quickshell" "package" ] null dmsCfg;
+  runtimePath = lib.makeBinPath (
+    [ dmsPackage ]
+    ++ lib.optional (quickshellPackage != null) quickshellPackage
+  );
 in
 {
   options.gb.home.desktop.mango.services.dms.enable =
