@@ -109,7 +109,6 @@
         "mousebind=SUPER+CTRL,btn_right,killclient"
         "mousebind=SUPER+CTRL,btn_middle,togglefullscreen"
         "mousebind=ALT,btn_middle,set_proportion,0.5"
-        "mousebind=NONE,btn_middle,togglemaximizescreen"
         "axisbind=SUPER,UP,viewtoleft_have_client"
         "axisbind=SUPER,DOWN,viewtoright_have_client"
         "axisbind=ALT,UP,focusdir,left"
