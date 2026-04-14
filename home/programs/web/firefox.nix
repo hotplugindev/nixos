@@ -41,29 +41,42 @@ in
         };
       };
 
-      profiles.default.settings = {
-        "identity.fxaccounts.enabled" = true;
-        "privacy.trackingprotection.enabled" = true;
-        "privacy.trackingprotection.socialtracking.enabled" = true;
-        "network.cookie.cookieBehavior" = 5;
-        "privacy.partition.network_state" = true;
-        "privacy.fingerprintingProtection" = true;
-        "privacy.resistFingerprinting" = false;
-        "dom.security.https_only_mode" = true;
-        "network.dns.disablePrefetch" = true;
-        "network.predictor.enabled" = false;
-        "network.prefetch-next" = false;
-        "browser.search.suggest.enabled" = false;
-        "browser.urlbar.suggest.searches" = false;
-        "toolkit.telemetry.enabled" = false;
-        "datareporting.healthreport.uploadEnabled" = false;
-        "geo.enabled" = false;
-        "extensions.pocket.enabled" = false;
-        "browser.safebrowsing.malware.enabled" = true;
-        "browser.safebrowsing.phishing.enabled" = true;
-        "sidebar.revamp" = true;
-        "sidebar.verticalTabs" = true;
-        "sidebar.position_start" = true; # false = right, true = left
+      profiles.default = {
+        settings = {
+          "identity.fxaccounts.enabled" = true;
+          "privacy.trackingprotection.enabled" = true;
+          "privacy.trackingprotection.socialtracking.enabled" = true;
+          "network.cookie.cookieBehavior" = 5;
+          "privacy.partition.network_state" = true;
+          "privacy.fingerprintingProtection" = true;
+          "privacy.resistFingerprinting" = false;
+          "dom.security.https_only_mode" = true;
+          "network.dns.disablePrefetch" = true;
+          "network.predictor.enabled" = false;
+          "network.prefetch-next" = false;
+          "browser.search.suggest.enabled" = false;
+          "browser.urlbar.suggest.searches" = false;
+          "toolkit.telemetry.enabled" = false;
+          "datareporting.healthreport.uploadEnabled" = false;
+          "geo.enabled" = false;
+          "extensions.pocket.enabled" = false;
+          "browser.safebrowsing.malware.enabled" = true;
+          "browser.safebrowsing.phishing.enabled" = true;
+          "sidebar.revamp" = true;
+          "sidebar.verticalTabs" = true;
+          "sidebar.position_start" = true; # false = right, true = left
+        };
+        search = {
+          force = true;
+
+          default = "ddg";
+
+          order = [
+            "ddg"
+            "Brave"
+            "google"
+          ];
+        };
       };
     };
   };
