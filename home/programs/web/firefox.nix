@@ -69,11 +69,11 @@ in
         search = {
           force = true;
 
-          default = "Brave";
+          default = "ddg";
 
           order = [
-            "Brave"
             "ddg"
+            "Brave"
             "google"
           ];
         };
