@@ -63,7 +63,7 @@ in
         "browser.safebrowsing.phishing.enabled" = true;
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
-        "sidebar.position_start" = false; # false = right, true = left
+        "sidebar.position_start" = true; # false = right, true = left
       };
     };
   };
