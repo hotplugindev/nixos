@@ -28,6 +28,16 @@ in
             installation_mode = "force_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
           };
+
+          "{74145f27-f039-47ce-a470-a662b129930a}" = {
+            installation_mode = "force_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/clearurls/latest.xpi";
+          };
+
+          "gdpr@cavi.au.dk" = {
+            installation_mode = "force_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/consent-o-matic/latest.xpi";
+          };
         };
       };
 
@@ -51,6 +61,9 @@ in
         "extensions.pocket.enabled" = false;
         "browser.safebrowsing.malware.enabled" = true;
         "browser.safebrowsing.phishing.enabled" = true;
+        "sidebar.revamp" = true;
+        "sidebar.verticalTabs" = true;
+        "sidebar.position_start" = false; # false = right, true = left
       };
     };
   };
