@@ -25,5 +25,6 @@
   gb.home.dev.languages.python.libraries = ps: [
     ps.pytest
     ps.tkinter
+    ps.requests
   ];
 }
