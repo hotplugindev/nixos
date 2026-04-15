@@ -15,6 +15,7 @@ in
   config = lib.mkIf bitwarden.enable {
     home.packages = [
       pkgs.bitwarden-desktop
+      pkgs.totp-cli
     ];
   };
 }
