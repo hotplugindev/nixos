@@ -23,6 +23,7 @@ in
   config = lib.mkIf python.enable {
     home.packages = [
       (pkgs.python3.withPackages python.libraries)
+      pkgs.uv
     ];
   };
 }
