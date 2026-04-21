@@ -26,6 +26,7 @@ in
           zls
           rustc
           rust-analyzer
+          rustfmt
           pyright
           csharp-ls
           stylua
