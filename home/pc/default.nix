@@ -10,7 +10,7 @@
 
   gb.home.dev.languages.php.enable = true;
 
-  gb.home.dev.editors.android-studio.enable = lib.mkDefault false;
+  gb.home.dev.editors.android-studio.enable = true;
 
   gb.home.desktop.mango.mangowc.monitors = [
     "name:DP-2,width:1920,height:1080,refresh:240,x:1920,y:0,scale:1"
