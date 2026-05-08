@@ -7,6 +7,7 @@
   gb.home.programs.gaming.bottles.enable = true;
   gb.home.programs.gaming.boxflat.enable = true;
   gb.home.programs.gaming.ckan.enable = true;
+  gb.home.programs.gaming.vdrift.enable = true;
 
   gb.home.dev.languages.php.enable = true;
 
