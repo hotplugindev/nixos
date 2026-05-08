@@ -5,11 +5,11 @@
   ...
 }:
 let
-  zed = config.gb.home.programs.editors.zed;
+  zed = config.gb.home.dev.editors.zed;
 in
 {
   options = {
-    gb.home.programs.editors.zed.enable = lib.mkEnableOption "Enable Vscode";
+    gb.home.dev.editors.zed.enable = lib.mkEnableOption "Enable Vscode";
   };
 
   config = lib.mkIf zed.enable {

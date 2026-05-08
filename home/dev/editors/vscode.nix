@@ -5,11 +5,11 @@
   ...
 }:
 let
-  vscode = config.gb.home.programs.editors.vscode;
+  vscode = config.gb.home.dev.editors.vscode;
 in
 {
   options = {
-    gb.home.programs.editors.vscode.enable = lib.mkEnableOption "Enable Vscode";
+    gb.home.dev.editors.vscode.enable = lib.mkEnableOption "Enable Vscode";
   };
 
   config = lib.mkIf vscode.enable {
