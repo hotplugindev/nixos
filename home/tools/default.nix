@@ -1,7 +1,8 @@
 { ... }:
 {
   imports = [
-    filemanagment/default.nix
+    ./packagemanagement/default.nix
+    ./filemanagment/default.nix
   ];
 
 }
