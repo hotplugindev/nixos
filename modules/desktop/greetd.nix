@@ -11,11 +11,11 @@ in
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -c Mango";
+          command = "${pkgs.cage}/bin/cage -s -- ${pkgs.gtkgreet}/bin/gtkgreet -c Mango";
           user = "greeter";
         };
       };
     };
-    environment.systemPackages = [ pkgs.greetd.gtkgreet pkgs.cage ];
+    environment.systemPackages = [ pkgs.gtkgreet pkgs.cage ];
   };
 }
