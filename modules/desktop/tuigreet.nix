@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  username,
   ...
 }:
 
@@ -12,7 +11,6 @@ in
 {
   options = {
     gb.desktop.tuigreet.enable = lib.mkEnableOption "Enable tuigreet";
-    gb.desktop.tuigreet.autologin = lib.mkEnableOption "Enable auto login";
   };
 
   config = lib.mkIf tuigreetCfg.enable {
@@ -20,11 +18,6 @@ in
       enable = true;
 
       settings = {
-        initial_session = lib.mkIf tuigreetCfg.autologin {
-          user = username;
-          command = "${pkgs.mangowc}/bin/mango";
-        };
-
         default_session = {
           user = "greeter";
           command = ''
