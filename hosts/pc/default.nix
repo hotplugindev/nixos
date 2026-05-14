@@ -12,16 +12,10 @@
   gb.system.graphics.gpu.amd.enable = true;
 
   gb.programs.steam.enable = true;
+  gb.programs.sunshine.enable = true;
 
   services.printing.enable = false;
   services.openssh.enable = true;
-
-  services.sunshine = {
-    enable = true;
-    autoStart = false;
-    capSysAdmin = true;
-    openFirewall = true;
-  };
 
   users.users.${username}.extraGroups = [ "uinput" ];
 

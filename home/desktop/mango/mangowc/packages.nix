@@ -20,6 +20,10 @@ in
       pamixer
       playerctl
       nautilus
+      evince
+      loupe
+      file-roller
+      networkmanagerapplet
       swaylock
       qt6Packages.qt6ct
       polkit_gnome
