@@ -1,11 +1,16 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  username,
+  ...
+}:
 
 let
   regreetCfg = config.gb.desktop.regreet;
 in
 {
-  options.gb.desktop.regreet.enable =
-    lib.mkEnableOption "Enable regreet";
+  options.gb.desktop.regreet.enable = lib.mkEnableOption "Enable regreet";
 
   config = lib.mkIf regreetCfg.enable {
     programs.regreet.enable = true;
@@ -13,8 +18,12 @@ in
     services.greetd = {
       enable = true;
       settings.default_session = {
-        user = "greeter";
-        command = "${pkgs.mangowc}/bin/mango -s '${config.programs.regreet.package}/bin/regreet'";
+        #user = "greeter";
+        #command = "${pkgs.mangowc}/bin/mango -s '${config.programs.regreet.package}/bin/regreet'";
+        initial_session = {
+          command = "${pkgs.mangowc}/bin/mango";
+          user = "${username}";
+        };
       };
     };
   };
