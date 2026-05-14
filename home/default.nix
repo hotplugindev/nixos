@@ -3,6 +3,7 @@
   imports = [
     ./desktop/default.nix
     ./programs/default.nix
+    ./tools/default.nix
 
     ./dev/default.nix
 
