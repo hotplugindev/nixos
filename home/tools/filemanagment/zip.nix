@@ -15,6 +15,7 @@ in
   config = lib.mkIf zip.enable {
     home.packages = [
       pkgs.zip
+      pkgs.unzip
     ];
   };
 }
