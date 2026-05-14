@@ -20,7 +20,7 @@
     enable = true;
     autoStart = false;
     capSysAdmin = true;
-    openFirewall = false;
+    openFirewall = true;
   };
 
   users.users.${username}.extraGroups = [ "uinput" ];
@@ -34,21 +34,10 @@
     firewall = {
       allowedUDPPorts = [
         9
-        #sunshine udp ports
-        47984
-        47989
-        47990
-        48010
       ];
       allowedTCPPorts = [
         22
         8080
-        #sunshine tcp ports
-        47998
-        47999
-        48000
-        48002
-        48010
       ];
     };
   };
