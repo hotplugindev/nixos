@@ -1,14 +1,14 @@
 { lib, ... }:
 {
   imports = [
-    ./greetd.nix
+    ./regreet.nix
     ./mango.nix
     ./audio.nix
     ./xdg.nix
     ./dconf.nix
     ./gnome-keyring.nix
   ];
-  gb.desktop.greetd.enable = lib.mkDefault true;
+  gb.desktop.regreet.enable = lib.mkDefault true;
   gb.desktop.mango.enable = lib.mkDefault true;
   gb.desktop.audio.enable = lib.mkDefault true;
   gb.desktop.xdg.enable = lib.mkDefault true;
