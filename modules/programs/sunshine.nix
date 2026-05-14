@@ -9,9 +9,10 @@ in
   config = lib.mkIf sunshine.enable {
     services.sunshine = {
       enable = true;
-      autoStart = false;
+      autoStart = true;
       capSysAdmin = true;
       openFirewall = true;
     };
   };
 }
+
