@@ -15,6 +15,14 @@
 
   services.printing.enable = false;
   services.openssh.enable = true;
+
+  services.sunshine = {
+    enable = true;
+    autoStart = false;
+    capSysAdmin = true;
+    openFirewall = false;
+  };
+
   networking = {
     interfaces = {
       enp42s0 = {
@@ -22,10 +30,23 @@
       };
     };
     firewall = {
-      allowedUDPPorts = [ 9 ];
+      allowedUDPPorts = [
+        9
+        #sunshine udp ports
+        47984
+        47989
+        47990
+        48010
+      ];
       allowedTCPPorts = [
         22
         8080
+        #sunshine tcp ports
+        47998
+        47999
+        48000
+        48002
+        48010
       ];
     };
   };
