@@ -11,6 +11,7 @@
   gb.home.programs.ai.codex.enable = true;
 
   gb.home.programs.remote.tigervnc.enable = true;
+  gb.home.programs.remote.moonshine.enable = true;
 
   gb.home.desktop.mango.mangowc.settings.values = {
     trackpad_natural_scrolling = 1;
