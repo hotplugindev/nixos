@@ -24,7 +24,7 @@ in
       settings = {
         initial_session = lib.mkIf regreetCfg.autologin {
           user = username;
-          command = "${pkgs.mangowc}/bin/mango";
+          command = "sleep 2 && ${pkgs.mangowc}/bin/mango";
         };
 
         default_session = {
