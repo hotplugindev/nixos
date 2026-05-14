@@ -7,6 +7,7 @@
     ./nextcloud.nix
     ./bitwarden.nix
     ./shotcut.nix
+    ./davinci-resolve.nix
   ];
 
   gb.home.programs.productivity.obsidian.enable = lib.mkDefault true;
@@ -16,5 +17,6 @@
   gb.home.programs.productivity.nextcloud.enable = lib.mkDefault true;
   gb.home.programs.productivity.bitwarden.enable = lib.mkDefault true;
 
+  gb.home.programs.productivity.davinci-resolve.enable = lib.mkDefault false;
   gb.home.programs.productivity.shotcut.enable = lib.mkDefault false;
 }
