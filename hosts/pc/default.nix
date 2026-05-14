@@ -23,6 +23,8 @@
     openFirewall = false;
   };
 
+  users.users.${username}.extraGroups = [ "uinput" ];
+
   networking = {
     interfaces = {
       enp42s0 = {
