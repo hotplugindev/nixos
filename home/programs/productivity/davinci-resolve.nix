@@ -16,10 +16,5 @@ in
     home.packages = [
       pkgs.davinci-resolve
     ];
-
-    home.sessionVariables = {
-      RUSTICL_ENABLE = "radeonsi";
-      OCL_ICD_VENDORS = "${pkgs.mesa.opencl}/etc/OpenCL/vendors";
-    };
   };
 }
