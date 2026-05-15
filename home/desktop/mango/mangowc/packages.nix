@@ -11,26 +11,30 @@ let
 in
 {
   config = lib.mkIf (mango.enable && mango.mangowc.enable && cfg.packages.enable) {
-    gb.home.desktop.mango.mangowc.packages.base = lib.mkDefault (with pkgs; [
-      foot
-      wofi
-      grim
-      slurp
-      brightnessctl
-      pamixer
-      playerctl
-      nautilus
-      evince
-      loupe
-      file-roller
-      networkmanagerapplet
-      swaylock
-      qt6Packages.qt6ct
-      polkit_gnome
-      wl-clipboard
-      cliphist
-      wlr-randr
-    ]);
+    gb.home.desktop.mango.mangowc.packages.base = lib.mkDefault (
+      with pkgs;
+      [
+        foot
+        wofi
+        grim
+        slurp
+        brightnessctl
+        pamixer
+        playerctl
+        nautilus
+        evince
+        loupe
+        file-roller
+        networkmanagerapplet
+        swaylock
+        qt6Packages.qt6ct
+        polkit_gnome
+        wl-clipboard
+        cliphist
+        upower
+        wlr-randr
+      ]
+    );
 
     home.packages = cfg.packages.base ++ lib.optionals (hostType == "laptop") cfg.packages.laptopExtra;
   };
