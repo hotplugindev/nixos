@@ -31,7 +31,6 @@ in
         polkit_gnome
         wl-clipboard
         cliphist
-        upower
         wlr-randr
       ]
     );
