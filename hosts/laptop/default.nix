@@ -14,6 +14,8 @@
   services.printing.enable = false;
   services.openssh.enable = false;
 
+  gb.system.virtualization.waydroid.enable = true;
+
   services.power-profiles-daemon.enable = true;
   services.libinput = {
     enable = true;
