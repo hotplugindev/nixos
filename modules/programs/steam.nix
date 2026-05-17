@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   steam = config.gb.programs.steam;
 in
@@ -13,5 +18,14 @@ in
       dedicatedServer.openFirewall = true;
     };
     programs.gamemode.enable = lib.mkIf steam.enable true;
+
+    environment.systemPackages = with pkgs; [
+      fontconfig
+      freetype
+      fontconfig
+      corefonts
+      liberation_ttf
+      dejavu_fonts
+    ];
   };
 }

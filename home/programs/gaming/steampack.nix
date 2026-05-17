@@ -19,11 +19,6 @@ in
       gamescope
       protonup-qt
       protontricks
-      freetype
-      fontconfig
-      corefonts
-      liberation_ttf
-      dejavu_fonts
     ];
   };
 }
