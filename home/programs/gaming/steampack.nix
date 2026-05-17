@@ -21,6 +21,9 @@ in
       protontricks
       freetype
       fontconfig
+      corefonts
+      liberation_ttf
+      dejavu_fonts
     ];
   };
 }
