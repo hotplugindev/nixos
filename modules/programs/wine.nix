@@ -17,6 +17,11 @@ in
       wineWowPackages.stagingFull
       winetricks
 
+      gnutls
+      krb5
+      samba
+      glibcLocales
+
       # Fonts commonly needed by Windows apps
       fontconfig
       freetype
