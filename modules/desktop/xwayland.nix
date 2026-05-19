@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   xwayland = config.gb.desktop.xwayland;
 in
@@ -8,5 +13,9 @@ in
   };
   config = lib.mkIf xwayland.enable {
     programs.xwayland.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      xwayland-satellite
+    ];
   };
 }
