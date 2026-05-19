@@ -203,6 +203,9 @@
       type = lib.types.listOf lib.types.str;
       default = [
         "enable_hotarea = false"
+        "windowrule=isfloating:1,appid:.*wine.*"
+        "windowrule=isfloating:1,appid:.*\.exe.*"
+        "windowrule=isfloating:1,appid:capcut"
       ];
       description = "Additional raw rules lines.";
     };
