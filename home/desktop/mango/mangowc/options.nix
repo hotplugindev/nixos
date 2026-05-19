@@ -19,7 +19,7 @@
       default = {
         xwayland_persistence = 1;
         focus_on_activate = 1;
-        sloppyfocus = 0;
+        sloppyfocus = 1;
         warpcursor = 1;
         drag_tile_to_tile = 1;
         single_scratchpad = 1;
@@ -203,9 +203,8 @@
       type = lib.types.listOf lib.types.str;
       default = [
         "enable_hotarea = false"
-        "windowrule=isfloating:1,appid:.*wine.*"
-        "windowrule=isfloating:1,appid:.*\.exe.*"
-        "windowrule=isfloating:1,appid:capcut"
+        "windowrule=isfloating:1,no_force_center:1,title:^$"
+        "windowrule=isfloating:1,no_force_center:1,title:Wine"
       ];
       description = "Additional raw rules lines.";
     };
