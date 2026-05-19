@@ -203,8 +203,6 @@
       type = lib.types.listOf lib.types.str;
       default = [
         "enable_hotarea = false"
-        "windowrule=isfloating:1,no_force_center:1,title:^$"
-        "windowrule=isfloating:1,no_force_center:1,title:Wine"
       ];
       description = "Additional raw rules lines.";
     };
