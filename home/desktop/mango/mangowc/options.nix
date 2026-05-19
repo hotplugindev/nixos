@@ -19,7 +19,7 @@
       default = {
         xwayland_persistence = 1;
         focus_on_activate = 1;
-        sloppyfocus = 1;
+        sloppyfocus = 0;
         warpcursor = 1;
         drag_tile_to_tile = 1;
         single_scratchpad = 1;
