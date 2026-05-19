@@ -13,6 +13,7 @@
 
   gb.programs.steam.enable = true;
   gb.programs.sunshine.enable = true;
+  gb.programs.wine.enable = true;
   gb.desktop.tuigreet.autologin = true;
 
   services.printing.enable = false;
