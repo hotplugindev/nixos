@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  pkgs,
+  pkgs-unstable,
   ...
 }:
 let
@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf bottles.enable {
     home.packages = [
-      pkgs.bottles
+      pkgs-unstable.bottles
     ];
   };
 }
