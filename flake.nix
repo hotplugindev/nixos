@@ -1,9 +1,5 @@
 {
-  description = "Giona Berti's NixOS + Home Manager + Mango setup";
-
-  # nixConfig = {
-  #   warn-dirty = false;
-  # };
+  description = "Giona Berti's NixOS + Home Manager setup";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -37,103 +33,71 @@
     };
   };
 
-  outputs =
-    inputs@{
-      nixpkgs,
-      ...
-    }:
+  outputs = inputs@{ nixpkgs, ... }:
     let
-      system = "x86_64-linux";
       lib = nixpkgs.lib;
-
-      sharedModules = [
-        inputs.mango.nixosModules.mango
-        inputs.home-manager.nixosModules.home-manager
-        inputs.nixvim.nixosModules.nixvim
-        inputs.lanzaboote.nixosModules.lanzaboote
-      ];
-
-      allUsers = import ./users;
-
-      mainUserAttrs = lib.filterAttrs (n: v: v.isMain or false) allUsers;
+      users = import ./users;
+      mainUserAttrs = lib.filterAttrs (_: v: v.isMain or false) users;
       mainUser = builtins.head (lib.attrValues mainUserAttrs);
 
-      mkHomeManager =
-        { hostname, hostType }:
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "backup";
+      pkgsUnstableFor = system: import inputs.nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
 
-            extraSpecialArgs = {
-              inherit inputs hostname hostType;
-              pkgs-unstable = import inputs.nixpkgs-unstable {
-                inherit system;
-                config.allowUnfree = true;
-              };
-            };
-            users = lib.mapAttrs (
-              name: user:
-              { ... }:
+      hosts = import ./hosts { inherit inputs; };
+
+      mkHomeManager = hostName: host: {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          backupFileExtension = "backup";
+          extraSpecialArgs = {
+            inherit inputs host hostName users;
+            pkgs-unstable = pkgsUnstableFor host.system;
+            username = mainUser.username;
+            fullName = mainUser.fullName;
+            email = mainUser.email;
+          };
+          users = lib.mapAttrs (
+            _name: user: { ... }:
               {
-                imports = [ user.homeConfig ];
+                imports = [
+                  ./modules/aggregate/home.nix
+                  user.homeModule
+                  (./hosts + "/${hostName}/home.nix")
+                ];
 
                 _module.args = {
                   inherit (user) username fullName email;
                 };
               }
-            ) allUsers;
-          };
+          ) users;
         };
+      };
 
-      hosts = import ./hosts { inherit inputs; };
-      mkHost =
-        {
-          hostname,
-          hostType,
-          hostModule,
-          extraModules ? [ ],
-        }:
-        lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit
-              inputs
-              hostname
-              hostType
-              allUsers
-              ;
-            username = mainUser.username;
-            fullName = mainUser.fullName;
-            email = mainUser.email;
-            pkgs-unstable = import inputs.nixpkgs-unstable {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          };
-          modules = [
-            hostModule
-            (mkHomeManager { inherit hostname hostType; })
-          ]
-          ++ sharedModules
-          ++ extraModules;
+      mkHost = hostName: host: lib.nixosSystem {
+        system = host.system;
+        specialArgs = {
+          inherit inputs host hostName users;
+          username = mainUser.username;
+          fullName = mainUser.fullName;
+          email = mainUser.email;
+          pkgs-unstable = pkgsUnstableFor host.system;
         };
+        modules = [
+          ./modules/aggregate/nixos.nix
+          (./hosts + "/${hostName}")
+          inputs.home-manager.nixosModules.home-manager
+          (mkHomeManager hostName host)
+        ]
+        ++ (host.extraModules or [ ]);
+      };
     in
     {
       nixosConfigurations = {
-        pc = mkHost {
-          hostname = "pc";
-          hostType = hosts.pc.hostType;
-          hostModule = hosts.pc.hostModule;
-          extraModules = hosts.pc.extraModules;
-        };
-        laptop = mkHost {
-          hostname = "laptop";
-          hostType = hosts.laptop.hostType;
-          hostModule = hosts.laptop.hostModule;
-          extraModules = hosts.laptop.extraModules;
-        };
+        pc = mkHost "pc" (hosts.pc // { name = "pc"; });
+        laptop = mkHost "laptop" (hosts.laptop // { name = "laptop"; });
       };
     };
 }
