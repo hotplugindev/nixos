@@ -1,5 +1,5 @@
 {
   imports = [
-    ../../old/hosts/pc/hardware-configuration.nix
+    ./hardware-configuration.nix
   ];
 }

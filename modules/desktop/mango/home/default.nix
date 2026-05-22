@@ -26,7 +26,7 @@ in
     assertions = [
       {
         assertion = !mango.legacy.enable;
-        message = "`gb.home.desktop.mango.legacy.enable` is archived. Old setup is under `old/home/desktop/mango/old`.";
+        message = "`gb.home.desktop.mango.legacy.enable` is archived. Legacy setup is retained in the repository archive tree.";
       }
     ];
 
