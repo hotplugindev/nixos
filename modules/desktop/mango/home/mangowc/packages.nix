@@ -15,8 +15,6 @@ in
       [
         foot
         wofi
-        grim
-        slurp
         brightnessctl
         pamixer
         playerctl
@@ -34,6 +32,7 @@ in
       ]
     );
 
-    home.packages = cfg.packages.base ++ lib.optionals (config.gb.host.class == "laptop") cfg.packages.laptopExtra;
+    home.packages =
+      cfg.packages.base ++ lib.optionals (config.gb.host.class == "laptop") cfg.packages.laptopExtra;
   };
 }
