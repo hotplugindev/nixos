@@ -23,7 +23,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf base.enable {
     home.packages = base.pkgslist;
   };
 }
