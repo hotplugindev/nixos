@@ -1,0 +1,11 @@
+old/home/programs/web/firefox.nix:11:  options.gb.home.programs.web.firefox.enable = lib.mkEnableOption "Enable firefox web browser";
+old/home/desktop/mango/default.nix:17:  options.gb.home.desktop.mango = {
+old/home/desktop/mango/mangowc/options.nix:3:  options.gb.home.desktop.mango.mangowc = {
+old/home/desktop/mango/services/session-target.nix:7:  options.gb.home.desktop.mango.services.sessionTarget.enable =
+old/home/desktop/mango/services/dbus-env.nix:12:  options.gb.home.desktop.mango.services.dbusEnv.enable =
+old/home/desktop/mango/services/nextcloud.nix:12:  options.gb.home.desktop.mango.services.nextcloud.enable =
+old/home/desktop/mango/services/dms.nix:24:  options.gb.home.desktop.mango.services.dms.enable =
+old/home/desktop/mango/services/auth-agent.nix:11:  options.gb.home.desktop.mango.services.authAgent.enable =
+old/home/desktop/mango/services/cliphist.nix:12:  options.gb.home.desktop.mango.services.cliphist.enable =
+old/home/desktop/mango/core/default.nix:3:  options.gb.home.desktop.mango.core = {
+old/home/desktop/mango/dms/wallpaper.nix:12:  options.gb.home.desktop.mango.dms.wallpaper = {

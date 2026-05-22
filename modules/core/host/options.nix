@@ -1,6 +1,6 @@
 { lib, host ? {}, hostName ? null, ... }:
 let
-  hostMeta = host or { };
+  hostMeta = host;
   hardwareMeta = hostMeta.hardware or { };
   defaultStr = value: if value == null then "" else value;
   defaultList = value: if value == null then [ ] else value;

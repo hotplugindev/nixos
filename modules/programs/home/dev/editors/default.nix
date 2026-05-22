@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [
     ./vscode.nix
@@ -7,9 +7,4 @@
     ./antigravity.nix
   ];
 
-  gb.home.dev.editors.vscode.enable = lib.mkDefault false;
-  gb.home.dev.editors.zed.enable = lib.mkDefault false;
-
-  gb.home.dev.editors.android-studio.enable = lib.mkDefault false;
-  gb.home.dev.editors.antigravity.enable = lib.mkDefault false;
 }

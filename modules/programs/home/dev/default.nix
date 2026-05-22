@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [
     ./nixvim/default.nix
@@ -7,5 +7,4 @@
     ./editors/default.nix
   ];
 
-  gb.home.dev.nixvim.enable = lib.mkDefault false;
 }

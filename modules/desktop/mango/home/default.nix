@@ -30,10 +30,8 @@ in
       }
     ];
 
-    gb.home.desktop.mango.enable = lib.mkDefault false;
     gb.home.desktop.mango.services.enable = lib.mkDefault mango.enable;
     gb.home.desktop.mango.mangowc.enable = lib.mkDefault mango.enable;
     gb.home.desktop.mango.dms.enable = lib.mkDefault mango.enable;
-    gb.home.desktop.mango.legacy.enable = lib.mkDefault false;
   };
 }
