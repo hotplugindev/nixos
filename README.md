@@ -22,7 +22,7 @@ The main user is:
 
 | Username | Full name | Email |
 | --- | --- | --- |
-| `hotplugin` | Giona Berti | giona@gberti.com |
+| `hotplugin` | Giona Berti | mail@gberti.com |
 
 ---
 
