@@ -7,5 +7,5 @@
     ./editors/default.nix
   ];
 
-  gb.home.dev.nixvim.enable = lib.mkDefault true;
+  gb.home.dev.nixvim.enable = lib.mkDefault false;
 }
