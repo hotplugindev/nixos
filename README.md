@@ -1,5 +1,12 @@
 # NixOS Configuration
 
+<p align="center">
+  <img src="img/img.png" alt="Mango desktop screenshot" width="49%">
+  <img src="img/img2.png" alt="Mango desktop screenshot" width="49%">
+  <img src="img/img3.png" alt="Mango desktop screenshot" width="49%">
+  <img src="img/img4.png" alt="Mango desktop screenshot" width="49%">
+</p>
+
 This repository contains a multi-host NixOS and Home Manager configuration using a strict request/capability architecture.
 
 The goal is not just to split files into folders. The goal is to make ownership obvious:
