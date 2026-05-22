@@ -1,0 +1,65 @@
+{ username, ... }:
+{
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/default.nix
+  ];
+
+  networking.hostName = "pc";
+
+  gb.system.boot.systemdboot.secure = true;
+
+  gb.system.graphics.gpu.amd.enable = true;
+
+  gb.programs.steam.enable = true;
+  gb.programs.sunshine.enable = true;
+  gb.programs.wine.enable = true;
+  gb.desktop.tuigreet.autologin = true;
+
+  services.printing.enable = false;
+  services.openssh.enable = true;
+
+  users.users.${username}.extraGroups = [ "uinput" ];
+
+  networking = {
+    interfaces = {
+      enp42s0 = {
+        wakeOnLan.enable = true;
+      };
+    };
+    firewall = {
+      allowedUDPPorts = [
+        9
+      ];
+      allowedTCPPorts = [
+        22
+        8080
+      ];
+    };
+  };
+
+  fileSystems."/mnt/fun" = {
+    device = "/dev/disk/by-uuid/f810e5a8-83ac-44f2-94d3-38d9be18a29c";
+    fsType = "auto";
+    options = [
+      "defaults"
+      "nofail" # Boots even if drive is missing
+      "x-systemd.device-timeout=5s"
+      "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
+    ];
+  };
+  fileSystems."/mnt/work" = {
+    device = "/dev/disk/by-uuid/1b587ad2-a133-44c9-9236-41099c41bece";
+    fsType = "auto";
+    options = [
+      "defaults"
+      "nofail" # Boots even if drive is missing
+      "x-systemd.device-timeout=5s"
+      "x-gvfs-show" # <--- This makes it appear in the File Browser sidebar
+    ];
+  };
+  systemd.tmpfiles.rules = [
+    "d /mnt/fun 0755 ${username} users -"
+    "d /mnt/work 0755 ${username} users -"
+  ];
+}
