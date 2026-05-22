@@ -32,7 +32,6 @@ in
   };
 
   config = {
-    gb.home.dev.nixvim.enable = lib.mkDefault false;
     gb.home.dev.nixvim.defaultEditor = lib.mkDefault true;
   }
   // lib.mkIf nixvim.enable {
