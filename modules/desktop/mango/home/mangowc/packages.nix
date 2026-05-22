@@ -14,7 +14,6 @@ in
       with pkgs;
       [
         foot
-        wofi
         brightnessctl
         pamixer
         playerctl
@@ -27,7 +26,6 @@ in
         qt6Packages.qt6ct
         polkit_gnome
         wl-clipboard
-        cliphist
         wlr-randr
       ]
     );
