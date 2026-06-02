@@ -20,15 +20,15 @@ The goal is not just to split files into folders. The goal is to make ownership 
 
 The current hosts are:
 
-| Host | Class | Desktop | Roles |
-| --- | --- | --- | --- |
-| `pc` | desktop | Mango | workstation, desktop, gaming, development |
-| `laptop` | laptop | Mango | workstation, desktop, gaming, development |
+| Host     | Class   | Desktop | Roles                                     |
+| -------- | ------- | ------- | ----------------------------------------- |
+| `pc`     | desktop | Mango   | workstation, desktop, gaming, development |
+| `laptop` | laptop  | Mango   | workstation, desktop, gaming, development |
 
 The main user is:
 
-| Username | Full name | Email |
-| --- | --- | --- |
+| Username    | Full name   | Email           |
+| ----------- | ----------- | --------------- |
 | `hotplugin` | Giona Berti | mail@gberti.com |
 
 ---
@@ -107,7 +107,6 @@ Important inputs include:
 - `dms`
 - `lanzaboote`
 - `nixvim`
-- `stylix`
 
 The flake builds:
 
@@ -474,10 +473,7 @@ Example evaluated request list:
 
 ```json
 {
-  "git": [
-    "profile.home.development",
-    "programs.home.ai.codex"
-  ]
+  "git": ["profile.home.development", "programs.home.ai.codex"]
 }
 ```
 
@@ -500,22 +496,22 @@ A capability owns one real domain.
 
 Examples:
 
-| Capability | Owns |
-| --- | --- |
-| `modules/capabilities/home/git/default.nix` | `programs.git` |
-| `modules/capabilities/home/shell/default.nix` | `programs.zsh` |
-| `modules/capabilities/home/terminal/foot.nix` | Foot terminal configuration |
-| `modules/capabilities/home/theme/default.nix` | Home theme integration |
-| `modules/capabilities/home/xdg/default.nix` | Home XDG integration |
-| `modules/capabilities/system/audio/pipewire.nix` | `services.pipewire` and `security.rtkit` |
-| `modules/capabilities/system/fonts/core.nix` | core system fonts |
-| `modules/capabilities/system/fonts/windows.nix` | Windows/Wine fonts |
-| `modules/capabilities/system/networking/networkmanager.nix` | NetworkManager |
-| `modules/capabilities/system/networking/openssh.nix` | OpenSSH |
-| `modules/capabilities/system/compat/wine-libraries.nix` | Wine runtime libraries |
-| `modules/capabilities/system/locale/glibc.nix` | glibc locale support |
-| `modules/capabilities/system/virtualisation/libvirt.nix` | libvirt |
-| `modules/capabilities/system/virtualisation/docker.nix` | Docker |
+| Capability                                                  | Owns                                     |
+| ----------------------------------------------------------- | ---------------------------------------- |
+| `modules/capabilities/home/git/default.nix`                 | `programs.git`                           |
+| `modules/capabilities/home/shell/default.nix`               | `programs.zsh`                           |
+| `modules/capabilities/home/terminal/foot.nix`               | Foot terminal configuration              |
+| `modules/capabilities/home/theme/default.nix`               | Home theme integration                   |
+| `modules/capabilities/home/xdg/default.nix`                 | Home XDG integration                     |
+| `modules/capabilities/system/audio/pipewire.nix`            | `services.pipewire` and `security.rtkit` |
+| `modules/capabilities/system/fonts/core.nix`                | core system fonts                        |
+| `modules/capabilities/system/fonts/windows.nix`             | Windows/Wine fonts                       |
+| `modules/capabilities/system/networking/networkmanager.nix` | NetworkManager                           |
+| `modules/capabilities/system/networking/openssh.nix`        | OpenSSH                                  |
+| `modules/capabilities/system/compat/wine-libraries.nix`     | Wine runtime libraries                   |
+| `modules/capabilities/system/locale/glibc.nix`              | glibc locale support                     |
+| `modules/capabilities/system/virtualisation/libvirt.nix`    | libvirt                                  |
+| `modules/capabilities/system/virtualisation/docker.nix`     | Docker                                   |
 
 A capability usually activates when it is explicitly enabled or when its request list is non-empty.
 
@@ -1047,14 +1043,14 @@ grep -R "services.openssh" -n . --exclude-dir=.git --exclude-dir=old
 
 Expected ownership:
 
-| Setting | Expected owner |
-| --- | --- |
-| `programs.git` | `modules/capabilities/home/git/default.nix` |
-| `programs.zsh` | `modules/capabilities/home/shell/default.nix` |
-| `fonts.packages` | `modules/capabilities/system/fonts/*` |
-| `services.pipewire` | `modules/capabilities/system/audio/pipewire.nix` |
-| `programs.steam` | `modules/programs/system/steam.nix` |
-| `services.openssh` | `modules/capabilities/system/networking/openssh.nix` |
+| Setting             | Expected owner                                       |
+| ------------------- | ---------------------------------------------------- |
+| `programs.git`      | `modules/capabilities/home/git/default.nix`          |
+| `programs.zsh`      | `modules/capabilities/home/shell/default.nix`        |
+| `fonts.packages`    | `modules/capabilities/system/fonts/*`                |
+| `services.pipewire` | `modules/capabilities/system/audio/pipewire.nix`     |
+| `programs.steam`    | `modules/programs/system/steam.nix`                  |
+| `services.openssh`  | `modules/capabilities/system/networking/openssh.nix` |
 
 If one of these appears in random program, profile, or host files, the architecture is being violated.
 

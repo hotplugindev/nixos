@@ -7,7 +7,7 @@ in
 
   config = lib.mkIf wine.enable {
     environment.systemPackages = [
-      pkgs.wineWowPackages.stagingFull
+      pkgs.wineWow64Packages.stagingFull
       pkgs.winetricks
     ];
 

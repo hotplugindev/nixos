@@ -60,6 +60,7 @@ in
   config = lib.mkIf requested {
     gtk = {
       enable = true;
+      gtk4.theme = config.gtk.theme;
       theme = {
         name = gtkTheme.name;
         package = gtkTheme.package;
