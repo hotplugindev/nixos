@@ -30,7 +30,7 @@ in
           pyright
           csharp-ls
           stylua
-          nixfmt-rfc-style
+          nixfmt
           prettierd
           shfmt
           ripgrep

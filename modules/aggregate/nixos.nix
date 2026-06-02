@@ -55,6 +55,6 @@
   config = {
     networking.hostName = config.gb.host.name;
     nixpkgs.hostPlatform = lib.mkDefault config.gb.host.system;
-    system.stateVersion = "25.11";
+    system.stateVersion = "26.05";
   };
 }
