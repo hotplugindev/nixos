@@ -10,6 +10,11 @@
   gb.home.programs.remote.tigervnc.enable = true;
   gb.home.programs.remote.moonlight-qt.enable = true;
 
+  gb.home.dev.languages.flutter.enable = true;
+
+  gb.home.dev.editors.android-studio.enable = true;
+  gb.home.dev.editors.antigravity.enable = true;
+
   gb.home.desktop.mango.mangowc.settings.values = {
     trackpad_natural_scrolling = 1;
     tap_to_click = 1;
