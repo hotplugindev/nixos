@@ -15,6 +15,7 @@ in
   config = lib.mkIf node.enable {
     home.packages = [
       pkgs.nodejs
+      pkgs.pnpm
     ];
   };
 }
