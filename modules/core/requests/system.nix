@@ -1,15 +1,19 @@
 { lib, ... }:
 let
-  listOption = description: lib.mkOption {
-    type = lib.types.listOf lib.types.str;
-    default = [ ];
-    inherit description;
-  };
+  listOption =
+    description:
+    lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      inherit description;
+    };
 in
 {
   options.gb.requires.system = {
     audio.pipewire = listOption "Request PipeWire audio";
     boot.lanzaboote = listOption "Request Lanzaboote";
+    kernel.linuxLatest = listOption "Request the linuxLatest Kernel";
+    kernel.linuxZen = listOption "Request the linuxZen Kernel";
     compat.nixLd = listOption "Request nix-ld";
     compat.wineLibraries = listOption "Request Wine runtime libraries";
     fonts.core = listOption "Request core fonts";
