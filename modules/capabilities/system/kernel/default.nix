@@ -11,7 +11,7 @@ let
   ];
 in
 {
-  config = lib.mkIf anyRequested {
+  config = lib.mkIf (!anyRequested) {
     boot.kernelPackages = pkgs.linuxPackages;
   };
 }
