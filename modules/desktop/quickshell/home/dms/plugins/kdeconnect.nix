@@ -12,7 +12,7 @@ in
 
     programs.dank-material-shell = {
       plugins.dankKDEConnect.enable = true;
-      settings.controlCenterWidgets = [
+      settings.controlCenterWidgets = lib.mkAfter [
         {
           id = "plugin_dankKDEConnect";
           enabled = true;
