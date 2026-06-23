@@ -42,6 +42,7 @@
     ../capabilities/system/locale/glibc.nix
     ../capabilities/system/networking/networkmanager.nix
     ../capabilities/system/networking/openssh.nix
+    ../capabilities/system/networking/kdeconnect.nix
     ../capabilities/system/security/polkit.nix
     ../capabilities/system/security/gnupg.nix
     ../capabilities/system/storage/gvfs.nix

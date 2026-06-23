@@ -6,6 +6,7 @@ in
 {
   config = lib.mkIf enabled {
     gb.requires.system.networking.networkmanager = [ requester ];
+    gb.requires.system.networking.kdeconnect = [ requester ];
     gb.requires.system.audio.pipewire = [ requester ];
     gb.requires.system.fonts.core = [ requester ];
     gb.requires.system.fonts.emoji = [ requester ];

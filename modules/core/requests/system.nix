@@ -26,6 +26,7 @@ in
     locale.glibc = listOption "Request glibc locales";
     networking.networkmanager = listOption "Request NetworkManager";
     networking.openssh = listOption "Request OpenSSH";
+    networking.kdeconnect = listOption "Request KDE Connect";
     security.polkit = listOption "Request Polkit";
     storage.gvfs = listOption "Request GVFS";
     virtualisation.libvirt = listOption "Request libvirt";
