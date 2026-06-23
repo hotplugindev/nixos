@@ -11,5 +11,13 @@ in
     };
 
     programs.dank-material-shell.plugins.dankKDEConnect.enable = true;
+
+    programs.dank-material-shell.settings.controlCenterWidgets = [
+      {
+        id = "kdeconnect";
+        enabled = true;
+        width = 50;
+      }
+     ];
   };
 }
