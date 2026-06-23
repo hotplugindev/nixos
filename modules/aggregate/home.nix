@@ -28,7 +28,6 @@
     ../capabilities/home/desktop/dbus-env.nix
     ../capabilities/home/desktop/cliphist.nix
     ../capabilities/home/desktop/nextcloud.nix
-    ../capabilities/home/desktop/dms-plugins/kdeconnect.nix
 
     ../programs/home/default.nix
     ../programs/home/dev/default.nix
