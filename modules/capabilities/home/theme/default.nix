@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   requested = config.gb.requires.home.theme != [ ];
   theme = config.gb.home.theme;

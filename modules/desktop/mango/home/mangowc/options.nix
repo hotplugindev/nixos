@@ -16,23 +16,8 @@
           lib.types.str
         ]
       );
-      default = {
-        xwayland_persistence = 1;
-        focus_on_activate = 1;
-        sloppyfocus = 1;
-        warpcursor = 1;
-        drag_tile_to_tile = 1;
-        single_scratchpad = 1;
-        cursor_size = 24;
-        cursor_theme = "Adwaita";
-        gappih = 5;
-        gappiv = 5;
-        gappoh = 10;
-        gappov = 10;
-        borderpx = 2;
-        enable_hotarea = false;
-      };
-      description = "Declarative MangoWC `key=value` settings.";
+      default = { };
+      description = "Declarative MangoWC `key=value` settings overrides.";
     };
 
     env = lib.mkOption {
@@ -45,6 +30,12 @@
         QT_QPA_PLATFORM = "Wayland;xcb";
       };
       description = "Environment entries rendered as `env=KEY,VALUE`.";
+    };
+
+    bindLinesExtra = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "Extra raw binds appended to MangoWC configuration.";
     };
 
     bindLines = lib.mkOption {

@@ -31,14 +31,38 @@ in
             delay = 300;
             icons.group = "+";
             spec = [
-              { __unkeyed-1 = "<leader>f"; group = "find"; }
-              { __unkeyed-1 = "<leader>g"; group = "git"; }
-              { __unkeyed-1 = "<leader>l"; group = "lsp"; }
-              { __unkeyed-1 = "<leader>b"; group = "buffers"; }
-              { __unkeyed-1 = "<leader>t"; group = "toggle/terminal"; }
-              { __unkeyed-1 = "<leader>c"; group = "code"; }
-              { __unkeyed-1 = "<leader>w"; group = "windows"; }
-              { __unkeyed-1 = "<leader>a"; group = "ai"; }
+              {
+                __unkeyed-1 = "<leader>f";
+                group = "find";
+              }
+              {
+                __unkeyed-1 = "<leader>g";
+                group = "git";
+              }
+              {
+                __unkeyed-1 = "<leader>l";
+                group = "lsp";
+              }
+              {
+                __unkeyed-1 = "<leader>b";
+                group = "buffers";
+              }
+              {
+                __unkeyed-1 = "<leader>t";
+                group = "toggle/terminal";
+              }
+              {
+                __unkeyed-1 = "<leader>c";
+                group = "code";
+              }
+              {
+                __unkeyed-1 = "<leader>w";
+                group = "windows";
+              }
+              {
+                __unkeyed-1 = "<leader>a";
+                group = "ai";
+              }
             ];
           };
         };

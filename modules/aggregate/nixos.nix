@@ -52,6 +52,12 @@
     ../capabilities/system/shell/zsh.nix
     ../capabilities/system/hardware/bluetooth.nix
 
+    ../capabilities/system/desktop/greetd.nix
+    ../capabilities/system/desktop/xdg-portal.nix
+    ../capabilities/system/desktop/xwayland.nix
+    ../capabilities/system/desktop/gnome-keyring.nix
+    ../capabilities/system/desktop/dconf.nix
+
     ../programs/system/steam.nix
     ../programs/system/wine.nix
     ../programs/system/sunshine.nix

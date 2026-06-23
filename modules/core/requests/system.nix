@@ -35,5 +35,12 @@ in
     security.gnupg = listOption "Request GnuPG";
     hardware.bluetooth = listOption "Request Bluetooth";
     virtualisation.docker = listOption "Request Docker";
+
+    desktop.mango = listOption "Request Mango desktop stack";
+    desktop.greetd = listOption "Request greetd login manager";
+    desktop.xdgPortal = listOption "Request XDG portal support";
+    desktop.xwayland = listOption "Request XWayland support";
+    desktop.gnomeKeyring = listOption "Request GNOME Keyring";
+    desktop.dconf = listOption "Request dconf";
   };
 }

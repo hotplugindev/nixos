@@ -5,14 +5,11 @@
   ...
 }:
 let
-  mango = config.gb.home.desktop.mango;
-  startupTarget = mango.mangowc.startupTarget;
+  requests = config.gb.requires.home.desktop.dbusEnv;
+  startupTarget = config.gb.home.desktop.mango.mangowc.startupTarget;
 in
 {
-  options.gb.home.desktop.mango.services.dbusEnv.enable =
-    lib.mkEnableOption "Enable dbus environment import service";
-
-  config = lib.mkIf (mango.enable && mango.services.enable && mango.services.dbusEnv.enable) {
+  config = lib.mkIf (requests != [ ]) {
     systemd.user.services.dbus-env = {
       Unit = {
         Description = "Import Wayland env into systemd user session";

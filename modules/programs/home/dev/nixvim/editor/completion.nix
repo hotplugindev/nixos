@@ -13,115 +13,115 @@ in
 
   config = lib.mkIf completion.enable {
     programs.nixvim.plugins = {
-    luasnip.enable = true;
-    friendly-snippets.enable = true;
-    lspkind.enable = true;
+      luasnip.enable = true;
+      friendly-snippets.enable = true;
+      lspkind.enable = true;
 
-    cmp = {
-      enable = true;
-      autoEnableSources = true;
+      cmp = {
+        enable = true;
+        autoEnableSources = true;
 
-      settings = {
-        completion = {
-          completeopt = "menu,menuone,noselect";
-        };
-
-        snippet = {
-          expand = {
-            __raw = ''
-              function(args)
-                require('luasnip').lsp_expand(args.body)
-              end
-            '';
-          };
-        };
-
-        window = {
+        settings = {
           completion = {
-            border = "rounded";
+            completeopt = "menu,menuone,noselect";
           };
-          documentation = {
-            border = "rounded";
-          };
-        };
 
-        sources = [
-          { name = "nvim_lsp"; }
-          { name = "luasnip"; }
-          { name = "path"; }
-          { name = "buffer"; }
-        ];
-
-        mapping = {
-          "<C-p>" = {
-            __raw = "cmp.mapping.select_prev_item()";
-          };
-          "<C-n>" = {
-            __raw = "cmp.mapping.select_next_item()";
-          };
-          "<C-Space>" = {
-            __raw = "cmp.mapping.complete()";
-          };
-          "<C-e>" = {
-            __raw = "cmp.mapping.abort()";
-          };
-          "<CR>" = {
-            __raw = "cmp.mapping.confirm({ select = true })";
-          };
-          "<Tab>" = {
-            __raw = ''
-              cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  cmp.select_next_item()
-                elseif require("luasnip").expand_or_jumpable() then
-                  require("luasnip").expand_or_jump()
-                else
-                  fallback()
+          snippet = {
+            expand = {
+              __raw = ''
+                function(args)
+                  require('luasnip').lsp_expand(args.body)
                 end
-              end, { "i", "s" })
-            '';
+              '';
+            };
           };
-          "<S-Tab>" = {
-            __raw = ''
-              cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  cmp.select_prev_item()
-                elseif require("luasnip").jumpable(-1) then
-                  require("luasnip").jump(-1)
-                else
-                  fallback()
-                end
-              end, { "i", "s" })
-            '';
-          };
-        };
-      };
 
-      cmdline = {
-        "/" = {
-          mapping = {
-            __raw = "cmp.mapping.preset.cmdline()";
+          window = {
+            completion = {
+              border = "rounded";
+            };
+            documentation = {
+              border = "rounded";
+            };
           };
+
           sources = [
+            { name = "nvim_lsp"; }
+            { name = "luasnip"; }
+            { name = "path"; }
             { name = "buffer"; }
           ];
+
+          mapping = {
+            "<C-p>" = {
+              __raw = "cmp.mapping.select_prev_item()";
+            };
+            "<C-n>" = {
+              __raw = "cmp.mapping.select_next_item()";
+            };
+            "<C-Space>" = {
+              __raw = "cmp.mapping.complete()";
+            };
+            "<C-e>" = {
+              __raw = "cmp.mapping.abort()";
+            };
+            "<CR>" = {
+              __raw = "cmp.mapping.confirm({ select = true })";
+            };
+            "<Tab>" = {
+              __raw = ''
+                cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  elseif require("luasnip").expand_or_jumpable() then
+                    require("luasnip").expand_or_jump()
+                  else
+                    fallback()
+                  end
+                end, { "i", "s" })
+              '';
+            };
+            "<S-Tab>" = {
+              __raw = ''
+                cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_prev_item()
+                  elseif require("luasnip").jumpable(-1) then
+                    require("luasnip").jump(-1)
+                  else
+                    fallback()
+                  end
+                end, { "i", "s" })
+              '';
+            };
+          };
         };
 
-        ":" = {
-          mapping = {
-            __raw = "cmp.mapping.preset.cmdline()";
+        cmdline = {
+          "/" = {
+            mapping = {
+              __raw = "cmp.mapping.preset.cmdline()";
+            };
+            sources = [
+              { name = "buffer"; }
+            ];
           };
-          sources = [
-            { name = "path"; }
-            { name = "cmdline"; }
-          ];
+
+          ":" = {
+            mapping = {
+              __raw = "cmp.mapping.preset.cmdline()";
+            };
+            sources = [
+              { name = "path"; }
+              { name = "cmdline"; }
+            ];
+          };
         };
       };
-    };
 
-    cmp-buffer.enable = true;
-    cmp-path.enable = true;
-    cmp-nvim-lsp.enable = true;
+      cmp-buffer.enable = true;
+      cmp-path.enable = true;
+      cmp-nvim-lsp.enable = true;
       cmp-cmdline.enable = true;
     };
   };

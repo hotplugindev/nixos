@@ -26,12 +26,22 @@ in
         }
         {
           event = [ "FileType" ];
-          pattern = [ "nix" "lua" "json" "yaml" "toml" "markdown" ];
+          pattern = [
+            "nix"
+            "lua"
+            "json"
+            "yaml"
+            "toml"
+            "markdown"
+          ];
           command = "setlocal expandtab shiftwidth=2 tabstop=2";
         }
         {
           event = [ "FileType" ];
-          pattern = [ "gitcommit" "markdown" ];
+          pattern = [
+            "gitcommit"
+            "markdown"
+          ];
           command = "setlocal wrap spell";
         }
       ];

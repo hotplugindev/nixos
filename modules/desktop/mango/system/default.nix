@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 let
   mango = config.gb.desktop.mango;
   shellCmd = if config.gb.host.shell != "none" then config.gb.host.shell else "zsh";
@@ -14,41 +14,16 @@ in
     programs.mango.enable = true;
 
     security.pam.services.swaylock.fprintAuth = false;
-    programs.dconf.enable = true;
-    services.gnome.gnome-keyring.enable = true;
 
-    programs.xwayland.enable = true;
+    gb.requires.system.desktop.greetd = [ "desktop.mango" ];
+    gb.requires.system.desktop.xdgPortal = [ "desktop.mango" ];
+    gb.requires.system.desktop.xwayland = [ "desktop.mango" ];
+    gb.requires.system.desktop.gnomeKeyring = [ "desktop.mango" ];
+    gb.requires.system.desktop.dconf = [ "desktop.mango" ];
 
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-wlr
-      ];
-    };
-
-    security.pam.services.greetd.enableGnomeKeyring = true;
-
-    services.greetd = {
-      enable = true;
-      settings = {
-        initial_session = lib.mkIf mango.autologin {
-          user = config.gb.user.username;
-          command = mangoCommand;
-        };
-        default_session = {
-          user = "greeter";
-          command = ''
-            ${pkgs.tuigreet}/bin/tuigreet \
-              --time \
-              --remember \
-              --remember-user-session \
-              --user-menu \
-              --asterisks \
-              --cmd "${mangoCommand}"
-          '';
-        };
-      };
+    gb.capabilities.system.desktop.greetd = {
+      autologin = lib.mkDefault mango.autologin;
+      sessionCommand = lib.mkDefault mangoCommand;
     };
   };
 }

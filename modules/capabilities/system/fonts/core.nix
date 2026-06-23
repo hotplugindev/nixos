@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   requested = config.gb.requires.system.fonts.core != [ ];
   packages = config.gb.system.fonts.core.packages;

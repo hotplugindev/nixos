@@ -38,7 +38,8 @@ in
     (lib.mkIf (mango.enable && dms.enable && dms.wallpaper.enable) {
       gb.home.desktop.mango.dms.program.settings.wallpaperFillMode = lib.mkDefault dms.wallpaper.fillMode;
       gb.home.desktop.mango.dms.program.session.wallpaperPath = lib.mkDefault wallpaperPath;
-      gb.home.desktop.mango.dms.program.session.wallpaperTransition = lib.mkDefault dms.wallpaper.transition;
+      gb.home.desktop.mango.dms.program.session.wallpaperTransition =
+        lib.mkDefault dms.wallpaper.transition;
 
       xdg.configFile."DankMaterialShell/wallpapers/default" = lib.mkIf (dms.wallpaper.source != null) {
         source = dms.wallpaper.source;

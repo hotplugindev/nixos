@@ -11,7 +11,6 @@ in
     ./core/default.nix
     ./mangowc/default.nix
     ./services/default.nix
-    ../../quickshell/home/default.nix
   ];
 
   options.gb.home.desktop.mango = {

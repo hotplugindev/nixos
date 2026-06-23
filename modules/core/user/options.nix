@@ -1,4 +1,10 @@
-{ lib, username ? "", fullName ? "", email ? "", ... }:
+{
+  lib,
+  username ? "",
+  fullName ? "",
+  email ? "",
+  ...
+}:
 {
   options.gb.user = {
     username = lib.mkOption {
