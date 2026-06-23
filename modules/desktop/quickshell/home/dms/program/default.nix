@@ -25,58 +25,71 @@ in
         matugenScheme = lib.mkDefault "scheme-neutral";
         #matugenScheme = "scheme-content";
 
-        controlCenterWidgets = lib.mkDefault [
-          {
-            id = "volumeSlider";
-            enabled = true;
-            width = 50;
-          }
-          {
-            id = "brightnessSlider";
-            enabled = true;
-            width = 50;
-          }
-          {
-            id = "wifi";
-            enabled = true;
-            width = 50;
-          }
-          {
-            id = "bluetooth";
-            enabled = true;
-            width = 50;
-          }
-          {
-            id = "audioOutput";
-            enabled = true;
-            width = 50;
-          }
-          {
-            id = "audioInput";
-            enabled = true;
-            width = 50;
-          }
-          {
-            id = "nightMode";
-            enabled = true;
-            width = 50;
-          }
-          {
-            id = "darkMode";
-            enabled = true;
-            width = 50;
-          }
-          {
-            id = "builtin_vpn";
-            enabled = true;
-            width = 50;
-          }
-          {
-            id = "colorPicker";
-            enabled = true;
-            width = 50;
-          }
-        ];
+        controlCenterWidgets = lib.mkDefault (
+          [
+            {
+              id = "volumeSlider";
+              enabled = true;
+              width = 50;
+            }
+            {
+              id = "brightnessSlider";
+              enabled = true;
+              width = 50;
+            }
+            {
+              id = "wifi";
+              enabled = true;
+              width = 50;
+            }
+            {
+              id = "bluetooth";
+              enabled = true;
+              width = 50;
+            }
+            {
+              id = "audioOutput";
+              enabled = true;
+              width = 50;
+            }
+            {
+              id = "audioInput";
+              enabled = true;
+              width = 50;
+            }
+            {
+              id = "nightMode";
+              enabled = true;
+              width = 50;
+            }
+            {
+              id = "darkMode";
+              enabled = true;
+              width = 50;
+            }
+            {
+              id = "builtin_vpn";
+              enabled = true;
+              width = 50;
+            }
+            {
+              id = "colorPicker";
+              enabled = true;
+              width = 50;
+            }
+          ]
+          ++
+            lib.optional
+              (
+                config.programs.dank-material-shell.plugins ? dankKDEConnect
+                && config.programs.dank-material-shell.plugins.dankKDEConnect.enable
+              )
+              {
+                id = "kdeconnect";
+                enabled = true;
+                width = 50;
+              }
+        );
       };
       session = {
         weatherLocation = lib.mkDefault "Brixen - Bressanone, 39042";
