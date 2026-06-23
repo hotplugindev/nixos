@@ -4,8 +4,8 @@
     ./packagemanagement/default.nix
     ./filemanagment/default.nix
 
-    ./gparted.nix
+    ./gnome-disks.nix
   ];
 
-  gb.home.tools.gparted.enable = lib.mkDefault true;
+  gb.home.tools.gnomeDisks.enable = lib.mkDefault true;
 }
