@@ -23,6 +23,5 @@ in
     desktop.dbusEnv = listOption "Request dbus env import service";
     desktop.cliphist = listOption "Request clipboard history";
     desktop.nextcloud = listOption "Request Nextcloud session service";
-    desktop.dmsPlugins.kdeconnect = listOption "Request DMS KDE Connect plugin";
   };
 }
