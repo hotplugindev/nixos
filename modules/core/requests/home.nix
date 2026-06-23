@@ -15,6 +15,7 @@ in
     terminal = listOption "Request terminal configuration";
     theme = listOption "Request theme configuration";
     xdg = listOption "Request xdg configuration";
+    networking.kdeconnect = listOption "Request KDE Connect";
 
     desktop.mango = listOption "Request Mango home desktop";
     desktop.dms = listOption "Request DankMaterialShell";
