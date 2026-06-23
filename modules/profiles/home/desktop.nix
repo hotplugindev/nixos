@@ -20,6 +20,5 @@ in
     gb.requires.home.desktop.dbusEnv = lib.mkIf mangoEnabled [ requester ];
     gb.requires.home.desktop.cliphist = lib.mkIf mangoEnabled [ requester ];
     gb.requires.home.desktop.nextcloud = lib.mkIf mangoEnabled [ requester ];
-    gb.requires.home.desktop.dmsPlugins.kdeconnect = lib.mkIf mangoEnabled [ requester ];
   };
 }
