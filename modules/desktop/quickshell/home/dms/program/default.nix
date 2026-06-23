@@ -20,12 +20,12 @@ in
       enableClipboardPaste = lib.mkDefault true;
 
       settings = {
-        currentThemeName = "dynamic";
-        currentThemeCategory = "dynamic";
-        matugenScheme = "scheme-neutral";
+        currentThemeName = lib.mkDefault "dynamic";
+        currentThemeCategory = lib.mkDefault "dynamic";
+        matugenScheme = lib.mkDefault "scheme-neutral";
         #matugenScheme = "scheme-content";
 
-        controlCenterWidgets = [
+        controlCenterWidgets = lib.mkDefault [
           {
             id = "volumeSlider";
             enabled = true;
@@ -80,7 +80,7 @@ in
       };
       session = {
         weatherLocation = lib.mkDefault "Brixen - Bressanone, 39042";
-        weatherCoordinates = "46.7164130,11.6577920";
+        weatherCoordinates = lib.mkDefault "46.7164130,11.6577920";
       };
     };
   };

@@ -1,4 +1,9 @@
-{ lib, host ? {}, hostName ? null, ... }:
+{
+  lib,
+  host ? { },
+  hostName ? null,
+  ...
+}:
 let
   hostMeta = host;
   hardwareMeta = hostMeta.hardware or { };
@@ -36,33 +41,67 @@ in
       description = "Host system";
     };
     class = lib.mkOption {
-      type = lib.types.enum [ "desktop" "laptop" "server" "vm" ];
+      type = lib.types.enum [
+        "desktop"
+        "laptop"
+        "server"
+        "vm"
+      ];
       default = classValue;
       description = "Host class";
     };
     roles = lib.mkOption {
-      type = lib.types.listOf (lib.types.enum [ "workstation" "desktop" "gaming" "development" "server" "minimal" ]);
+      type = lib.types.listOf (
+        lib.types.enum [
+          "workstation"
+          "desktop"
+          "gaming"
+          "development"
+          "server"
+          "minimal"
+        ]
+      );
       default = rolesValue;
       description = "Host roles";
     };
     desktop = lib.mkOption {
-      type = lib.types.enum [ "mango" "hyprland" "gnome" "none" ];
+      type = lib.types.enum [
+        "mango"
+        "hyprland"
+        "gnome"
+        "none"
+      ];
       default = desktopValue;
       description = "Desktop stack";
     };
     shell = lib.mkOption {
-      type = lib.types.enum [ "zsh" "bash" "fish" "none" ];
+      type = lib.types.enum [
+        "zsh"
+        "bash"
+        "fish"
+        "none"
+      ];
       default = shellValue;
       description = "User shell";
     };
     hardware = {
       cpu = lib.mkOption {
-        type = lib.types.enum [ "amd" "intel" "generic" ];
+        type = lib.types.enum [
+          "amd"
+          "intel"
+          "generic"
+        ];
         default = cpuValue;
         description = "CPU vendor";
       };
       gpu = lib.mkOption {
-        type = lib.types.enum [ "amd" "intel" "nvidia" "virtio" "none" ];
+        type = lib.types.enum [
+          "amd"
+          "intel"
+          "nvidia"
+          "virtio"
+          "none"
+        ];
         default = gpuValue;
         description = "GPU vendor";
       };

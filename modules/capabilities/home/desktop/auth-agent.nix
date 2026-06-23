@@ -5,13 +5,10 @@
   ...
 }:
 let
-  mango = config.gb.home.desktop.mango;
+  requests = config.gb.requires.home.desktop.authAgent;
 in
 {
-  options.gb.home.desktop.mango.services.authAgent.enable =
-    lib.mkEnableOption "Enable polkit auth agent service";
-
-  config = lib.mkIf (mango.enable && mango.services.enable && mango.services.authAgent.enable) {
+  config = lib.mkIf (requests != [ ]) {
     systemd.user.services.polkit-gnome-authentication-agent-1 = {
       Unit = {
         Description = "polkit-gnome-authentication-agent-1";

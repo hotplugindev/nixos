@@ -1,6 +1,13 @@
-{ lib, config, ... }:
+{
+  inputs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [
+    inputs.dms-plugin-registry.homeModules.default
+
     ../core/host/options.nix
     ../core/user/options.nix
     ../core/requests/home.nix
@@ -16,11 +23,19 @@
     ../capabilities/home/theme/default.nix
     ../capabilities/home/xdg/default.nix
 
+    ../capabilities/home/desktop/session-target.nix
+    ../capabilities/home/desktop/auth-agent.nix
+    ../capabilities/home/desktop/dbus-env.nix
+    ../capabilities/home/desktop/cliphist.nix
+    ../capabilities/home/desktop/nextcloud.nix
+    ../capabilities/home/desktop/dms-plugins/kdeconnect.nix
+
     ../programs/home/default.nix
     ../programs/home/dev/default.nix
     ../programs/home/tools/default.nix
 
     ../desktop/mango/home/default.nix
+    ../desktop/quickshell/home/default.nix
   ];
 
   config = {

@@ -1,7 +1,7 @@
 { lib, config, ... }:
 let
   mango = config.gb.home.desktop.mango;
-  dmsEnabled = mango.services.enable && mango.dms.enable;
+  dmsEnabled = mango.enable && mango.dms.enable;
 in
 {
   imports = [

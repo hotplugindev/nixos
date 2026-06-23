@@ -3,7 +3,12 @@
   pc = {
     system = "x86_64-linux";
     class = "desktop";
-    roles = [ "workstation" "desktop" "gaming" "development" ];
+    roles = [
+      "workstation"
+      "desktop"
+      "gaming"
+      "development"
+    ];
     desktop = "mango";
     shell = "zsh";
     hardware = {
@@ -20,7 +25,12 @@
   laptop = {
     system = "x86_64-linux";
     class = "laptop";
-    roles = [ "workstation" "desktop" "gaming" "development" ];
+    roles = [
+      "workstation"
+      "desktop"
+      "gaming"
+      "development"
+    ];
     desktop = "mango";
     shell = "zsh";
     hardware = {
