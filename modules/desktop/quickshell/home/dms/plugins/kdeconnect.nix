@@ -14,7 +14,7 @@ in
       plugins.dankKDEConnect.enable = true;
       settings.controlCenterWidgets = [
         {
-          id = "kdeconnect";
+          id = "plugin_dankKDEConnect";
           enabled = true;
           width = 50;
         }
