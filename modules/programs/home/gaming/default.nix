@@ -5,6 +5,7 @@
     ./bottles.nix
     ./boxflat.nix
     ./ckan.nix
+    ./prismlauncher.nix
   ];
 
 }
