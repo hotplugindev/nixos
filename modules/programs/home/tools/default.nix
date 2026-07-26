@@ -2,7 +2,7 @@
 {
   imports = [
     ./packagemanagement/default.nix
-    ./filemanagment/default.nix
+    ./filemanagement/default.nix
 
     ./gnome-disks.nix
   ];
