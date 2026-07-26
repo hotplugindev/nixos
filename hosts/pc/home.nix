@@ -5,8 +5,6 @@
   gb.home.programs.gaming.ckan.enable = true;
   gb.home.programs.gaming.prismlauncher.enable = true;
 
-  gb.home.tools.audiomanagement.noisetorch.enable = true;
-
   gb.home.dev.languages.php.enable = true;
   gb.home.dev.languages.flutter.enable = true;
 

@@ -8,6 +8,7 @@
   gb.programs.system.steam.enable = true;
   gb.programs.system.sunshine.enable = true;
   gb.programs.system.wine.enable = true;
+  gb.programs.system.noisetorch.enable = true;
 
   gb.desktop.mango.autologin = true;
 
