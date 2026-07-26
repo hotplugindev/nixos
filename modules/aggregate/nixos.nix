@@ -62,6 +62,7 @@
     ../programs/system/steam.nix
     ../programs/system/wine.nix
     ../programs/system/sunshine.nix
+    ../programs/system/noisetorch.nix
     ../programs/system/scripts/default.nix
 
     ../desktop/mango/system/default.nix
