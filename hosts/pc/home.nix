@@ -7,6 +7,7 @@
 
   gb.home.dev.languages.php.enable = true;
   gb.home.dev.languages.flutter.enable = true;
+  gb.home.dev.languages.go.enable = true;
 
   gb.home.dev.editors.android-studio.enable = true;
   gb.home.dev.editors.antigravity.enable = true;
