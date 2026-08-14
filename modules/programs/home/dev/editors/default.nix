@@ -5,6 +5,7 @@
     ./zed.nix
     ./android-studio.nix
     ./antigravity.nix
+    ./arduino-ide.nix
   ];
 
 }
