@@ -14,6 +14,7 @@
 
   gb.home.dev.editors.android-studio.enable = true;
   gb.home.dev.editors.antigravity.enable = true;
+  gb.home.dev.editors.arduino-ide.enable = true;
 
   gb.home.desktop.mango.mangowc.settings.values = {
     trackpad_natural_scrolling = 1;
