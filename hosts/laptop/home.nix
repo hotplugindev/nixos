@@ -11,6 +11,7 @@
   gb.home.programs.remote.moonlight-qt.enable = true;
 
   gb.home.dev.languages.flutter.enable = true;
+  gb.home.dev.languages.dotnet.enable = true;
 
   gb.home.dev.editors.android-studio.enable = true;
   gb.home.dev.editors.antigravity.enable = true;
