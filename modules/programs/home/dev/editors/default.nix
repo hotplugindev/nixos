@@ -6,6 +6,7 @@
     ./android-studio.nix
     ./antigravity.nix
     ./arduino-ide.nix
+    ./jetbrains-rider.nix
   ];
 
 }
