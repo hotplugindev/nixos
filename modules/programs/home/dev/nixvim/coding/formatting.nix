@@ -34,7 +34,6 @@ in
           css = [ "prettierd" ];
           markdown = [ "prettierd" ];
           yaml = [ "prettierd" ];
-          cs = [ "csharpier" ];
         };
       };
     };
