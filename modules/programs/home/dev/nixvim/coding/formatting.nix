@@ -15,14 +15,6 @@ in
   config = lib.mkIf formatting.enable {
     programs.nixvim.plugins.conform-nvim = {
       enable = true;
-      extraPackages = lib.mkOption {
-        type = lib.types.listOf lib.types.package;
-        default = with pkgs; [
-          prettierd
-          csharpier
-        ];
-        description = "Extra packages for nixvim Formatting workflows";
-      };
       settings = {
         format_on_save = {
           timeout_ms = 1000;
