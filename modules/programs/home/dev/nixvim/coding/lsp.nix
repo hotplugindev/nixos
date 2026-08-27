@@ -30,7 +30,6 @@ in
           pyright
           csharp-ls
           prettierd
-          csharpier
           stylua
           nixfmt
           shfmt
