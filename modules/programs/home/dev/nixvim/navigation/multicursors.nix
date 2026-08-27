@@ -14,7 +14,6 @@ in
   config = lib.mkIf multicursors.enable {
     programs.nixvim.plugins.multicursors = {
       enable = true;
-      autoLoad = false;
 
       settings = {
         DEBUG_MODE = false;

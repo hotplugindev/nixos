@@ -9,6 +9,7 @@
     ./lsp.nix
     ./terminal.nix
     ./avante.nix
+    ./multicursors.nix
   ];
 
   gb.home.dev.nixvim.keymaps.general.enable = lib.mkDefault true;
@@ -19,4 +20,5 @@
   gb.home.dev.nixvim.keymaps.lsp.enable = lib.mkDefault true;
   gb.home.dev.nixvim.keymaps.terminal.enable = lib.mkDefault true;
   gb.home.dev.nixvim.keymaps.avante.enable = lib.mkDefault false;
+  gb.home.dev.nixvim.keymaps.multicursors.enable = lib.mkDefault false;
 }
