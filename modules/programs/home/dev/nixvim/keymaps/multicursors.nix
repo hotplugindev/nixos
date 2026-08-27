@@ -15,24 +15,13 @@ in
   config = lib.mkIf multicursors.enable {
     programs.nixvim.keymaps = [
       {
-        mode = "n";
-        key = "<C-d>";
-        action.__raw = "function() require('multicursors').new_under_cursor() end";
-        options.desc = "Multicursor: select next occurrence";
-      }
-
-      {
-        mode = "v";
-        key = "<C-d>";
-        action.__raw = "function() require('multicursors').new_pattern_visual() end";
-        options.desc = "Multicursor: select visual selection";
-      }
-
-      {
-        mode = "n";
-        key = "<Esc>";
-        action.__raw = "function() require('multicursors').exit() end";
-        options.desc = "Multicursor: exit";
+        mode = [
+          "n"
+          "v"
+        ];
+        key = "<leader>m";
+        action = "<cmd>MCstart<CR>";
+        options.desc = "Start multicursor";
       }
     ];
   };
