@@ -13,7 +13,7 @@ in
     gb.home.dev.languages.dotnet.enable = lib.mkEnableOption "Enable .NET development tools";
     gb.home.dev.languages.dotnet.sdks = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      default = [ pkgs.dotnetCorePackages.sdk_9_0 ];
+      default = [ pkgs.dotnetCorePackages.sdk_10_0 ];
       description = "List of .NET SDKs to install";
     };
   };
