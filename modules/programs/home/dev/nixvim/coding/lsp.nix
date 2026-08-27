@@ -31,7 +31,6 @@ in
           csharp-ls
           stylua
           nixfmt
-          prettierd
           shfmt
           ripgrep
           fd
