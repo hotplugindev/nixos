@@ -15,7 +15,6 @@ in
   config = lib.mkIf c.enable {
     home.packages = [
       pkgs.gcc
-      pkgs.libgcc
       pkgs.cmake
     ];
   };
