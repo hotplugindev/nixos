@@ -6,6 +6,7 @@
   gb.home.terminal.foot.fontSize = "8";
 
   gb.home.programs.ai.qwen-code.enable = true;
+  gb.home.programs.ai.aider-chat.enable = true;
 
   gb.home.programs.remote.tigervnc.enable = true;
   gb.home.programs.remote.moonlight-qt.enable = true;
