@@ -5,6 +5,8 @@
   gb.home.programs.gaming.ckan.enable = true;
   gb.home.programs.gaming.prismlauncher.enable = true;
 
+  gb.home.programs.ai.opencode.enable = true;
+
   gb.home.dev.languages.flutter.enable = true;
   gb.home.dev.languages.dotnet.enable = true;
   gb.home.dev.languages.go.enable = true;
