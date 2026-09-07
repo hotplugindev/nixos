@@ -81,7 +81,7 @@ in
                       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
                     end
                   '';
-                  cwd = "$${workspaceFolder}";
+                  cwd.__raw = "vim.fn.getcwd()";
                   stopOnEntry = false;
                 }
               ];
@@ -95,7 +95,7 @@ in
                       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
                     end
                   '';
-                  cwd = "$${workspaceFolder}";
+                  cwd.__raw = "vim.fn.getcwd()";
                   stopOnEntry = false;
                 }
               ];
@@ -109,7 +109,7 @@ in
                       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
                     end
                   '';
-                  cwd = "$${workspaceFolder}";
+                  cwd.__raw = "vim.fn.getcwd()";
                   stopOnEntry = false;
                 }
               ];
@@ -120,7 +120,8 @@ in
                   name = "Launch (Python)";
                   type = "debugpy";
                   request = "launch";
-                  program = "$${file}";
+                  program.__raw = "vim.fn.expand('%:p')";
+                  cwd.__raw = "vim.fn.getcwd()";
                   console = "integratedTerminal";
                 }
               ];
@@ -131,14 +132,16 @@ in
                   name = "Launch (Go)";
                   type = "delve";
                   request = "launch";
-                  program = "$${file}";
+                  program.__raw = "vim.fn.expand('%:p')";
+                  cwd.__raw = "vim.fn.getcwd()";
                 }
                 {
                   name = "Debug Test (Go)";
                   type = "delve";
                   request = "launch";
                   mode = "test";
-                  program = "$${file}";
+                  program.__raw = "vim.fn.expand('%:p')";
+                  cwd.__raw = "vim.fn.getcwd()";
                 }
               ];
             }
@@ -148,8 +151,8 @@ in
                   name = "Launch (Node)";
                   type = "js-debug";
                   request = "launch";
-                  program = "$${file}";
-                  cwd = "$${workspaceFolder}";
+                  program.__raw = "vim.fn.expand('%:p')";
+                  cwd.__raw = "vim.fn.getcwd()";
                   runtimeExecutable = "node";
                 }
               ];
@@ -158,8 +161,8 @@ in
                   name = "Launch (TS)";
                   type = "js-debug";
                   request = "launch";
-                  program = "$${file}";
-                  cwd = "$${workspaceFolder}";
+                  program.__raw = "vim.fn.expand('%:p')";
+                  cwd.__raw = "vim.fn.getcwd()";
                   runtimeExecutable = "node";
                 }
               ];
@@ -175,7 +178,7 @@ in
                       return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
                     end
                   '';
-                  cwd = "$${workspaceFolder}";
+                  cwd.__raw = "vim.fn.getcwd()";
                 }
               ];
             }
@@ -185,8 +188,8 @@ in
                   name = "Launch (Dart)";
                   type = "dart";
                   request = "launch";
-                  program = "$${file}";
-                  cwd = "$${workspaceFolder}";
+                  program.__raw = "vim.fn.expand('%:p')";
+                  cwd.__raw = "vim.fn.getcwd()";
                 }
               ];
             }
@@ -196,8 +199,8 @@ in
                   name = "Launch (PHP)";
                   type = "php";
                   request = "launch";
-                  program = "$${file}";
-                  cwd = "$${workspaceFolder}";
+                  program.__raw = "vim.fn.expand('%:p')";
+                  cwd.__raw = "vim.fn.getcwd()";
                   port = 9003;
                 }
               ];
