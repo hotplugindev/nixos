@@ -87,24 +87,7 @@ in
               };
             };
 
-          keymaps = {
-            diagnostic = {
-              "[d" = "goto_prev";
-              "]d" = "goto_next";
-              "<leader>ld" = "open_float";
-              "<leader>lq" = "setloclist";
-            };
-            lspBuf = {
-              "gd" = "definition";
-              "gr" = "references";
-              "gI" = "implementation";
-              "gt" = "type_definition";
-              "K" = "hover";
-              "<leader>la" = "code_action";
-              "<leader>lr" = "rename";
-              "<leader>lf" = "format";
-            };
-          };
+
         };
 
         lazydev.enable = true;

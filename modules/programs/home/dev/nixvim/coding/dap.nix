@@ -8,6 +8,7 @@ let
   dap = config.gb.home.dev.nixvim.coding.dap;
   langs = config.gb.home.dev.languages;
   hasCodelldb = langs.c.enable || langs.rust.enable;
+  codelldbPkg = pkgs.vscode-extensions.vadimcn.vscode-lldb;
 in
 {
   options = {
@@ -19,10 +20,13 @@ in
   config = lib.mkIf dap.enable {
     programs.nixvim = {
       extraPackages =
-        lib.optionals hasCodelldb [ pkgs.lldb ]
+        lib.optionals hasCodelldb [ codelldbPkg ]
         ++ lib.optionals langs.python.enable [ pkgs.python3Packages.debugpy ]
         ++ lib.optionals langs.go.enable [ pkgs.delve ]
-        ++ lib.optionals langs.node.enable [ pkgs.nodejs ]
+        ++ lib.optionals langs.node.enable [
+          pkgs.nodejs
+          pkgs.vscode-js-debug
+        ]
         ++ lib.optionals langs.dotnet.enable [ pkgs.netcoredbg ]
         ++ lib.optionals langs.flutter.enable [ pkgs.dart ]
         ++ lib.optionals langs.php.enable [ pkgs.php ];
@@ -34,7 +38,7 @@ in
           adapters.executables =
             lib.optionalAttrs hasCodelldb {
               codelldb = {
-                command = "${pkgs.lldb}/bin/codelldb";
+                command = "${codelldbPkg}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
               };
             }
             // lib.optionalAttrs langs.python.enable {
@@ -45,14 +49,18 @@ in
             // lib.optionalAttrs langs.go.enable {
               delve = {
                 command = "${pkgs.delve}/bin/dlv";
-                args = [ "dap" "--listen" "127.0.0.1:$${port}" ];
+                args = [
+                  "dap"
+                  "--listen"
+                  "127.0.0.1:$${port}"
+                ];
               };
             }
             // lib.optionalAttrs langs.node.enable {
               js-debug = {
                 command = "${pkgs.nodejs}/bin/node";
                 args = [
-                  "${pkgs.vscode-js-debug}/lib/node_modules/vscode-js-debug/dist/src/nodeDebug.js"
+                  "${pkgs.vscode-js-debug}/share/vscode/extensions/ms-vscode.js-debug/src/dapDebugServer.js"
                 ];
               };
             }
@@ -207,22 +215,48 @@ in
             };
 
           signs = {
-            dapBreakpoint = {
-              text = "●";
-              texthl = "DapBreakpoint";
+            dapBreakpoint.text = "●";
+            dapBreakpointCondition.text = "●";
+            dapLogPoint.text = "◆";
+          };
+        };
+
+        dap-ui = {
+          enable = true;
+          settings = {
+            icons = {
+              expanded = "▾";
+              collapsed = "▸";
+              current_frame = "*";
             };
-            dapBreakpointCondition = {
-              text = "●";
-              texthl = "DapBreakpointCondition";
-            };
-            dapLogPoint = {
-              text = "◆";
-              texthl = "DapLogPoint";
+            layouts = [
+              {
+                elements = [
+                  { id = "scopes"; size = 0.33; }
+                  { id = "breakpoints"; size = 0.17; }
+                  { id = "stacks"; size = 0.25; }
+                  { id = "watches"; size = 0.25; }
+                ];
+                size = 40;
+                position = "right";
+              }
+              {
+                elements = [
+                  { id = "repl"; size = 0.45; }
+                  { id = "console"; size = 0.55; }
+                ];
+                size = 10;
+                position = "bottom";
+              }
+            ];
+            floating = {
+              max_height = 0.9;
+              max_width = 0.9;
+              border = "rounded";
             };
           };
         };
 
-        dap-ui.enable = true;
         dap-virtual-text.enable = true;
       };
 
@@ -230,66 +264,15 @@ in
         local dap = require("dap")
         local dapui = require("dapui")
 
-        dapui.setup({
-          icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
-          mappings = {
-            expand = { "<CR>", "<2-LeftMouse>" },
-            open = "o",
-            remove = "d",
-            edit = "e",
-            repl = "r",
-            toggle = "t",
-          },
-          layouts = {
-            {
-              elements = {
-                { id = "scopes", size = 0.33 },
-                { id = "breakpoints", size = 0.17 },
-                { id = "stacks", size = 0.25 },
-                { id = "watches", size = 0.25 },
-              },
-              size = 0.33,
-              position = "right",
-            },
-            {
-              elements = {
-                { id = "repl", size = 0.45 },
-                { id = "console", size = 0.55 },
-              },
-              size = 0.27,
-              position = "bottom",
-            },
-          },
-          floating = {
-            max_height = 0.9,
-            max_width = 0.9,
-            border = "rounded",
-          },
-        })
-
         dap.listeners.after.event_initialized["dapui_config"] = function()
           dapui.open()
         end
-
         dap.listeners.before.event_terminated["dapui_config"] = function()
           dapui.close()
         end
-
         dap.listeners.before.event_exited["dapui_config"] = function()
           dapui.close()
         end
-
-        vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Continue" })
-        vim.keymap.set("n", "<F9>", dap.step_over, { desc = "Debug: Step Over" })
-        vim.keymap.set("n", "<F10>", dap.step_into, { desc = "Debug: Step Into" })
-        vim.keymap.set("n", "<F11>", dap.step_out, { desc = "Debug: Step Out" })
-        vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-        vim.keymap.set("n", "<Leader>dB", function()
-          require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-        end, { desc = "Debug: Conditional Breakpoint" })
-        vim.keymap.set("n", "<Leader>dl", dap.run_last, { desc = "Debug: Run Last" })
-        vim.keymap.set("n", "<Leader>du", dapui.toggle, { desc = "Debug: Toggle UI" })
-        vim.keymap.set("n", "<Leader>dr", dap.repl.toggle, { desc = "Debug: Toggle REPL" })
       '';
     };
   };
