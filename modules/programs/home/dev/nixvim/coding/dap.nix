@@ -6,6 +6,8 @@
 }:
 let
   dap = config.gb.home.dev.nixvim.coding.dap;
+  langs = config.gb.home.dev.languages;
+  hasCodelldb = langs.c.enable || langs.rust.enable;
 in
 {
   options = {
@@ -16,10 +18,191 @@ in
 
   config = lib.mkIf dap.enable {
     programs.nixvim = {
+      extraPackages =
+        lib.optionals hasCodelldb [ pkgs.lldb ]
+        ++ lib.optionals langs.python.enable [ pkgs.python3Packages.debugpy ]
+        ++ lib.optionals langs.go.enable [ pkgs.delve ]
+        ++ lib.optionals langs.node.enable [ pkgs.nodejs ]
+        ++ lib.optionals langs.dotnet.enable [ pkgs.netcoredbg ]
+        ++ lib.optionals langs.flutter.enable [ pkgs.dart ]
+        ++ lib.optionals langs.php.enable [ pkgs.php ];
+
       plugins = {
         dap = {
           enable = true;
-          adapters = {};
+
+          adapters =
+            lib.optionalAttrs hasCodelldb {
+              executables.codelldb = {
+                command = "${pkgs.lldb}/bin/codelldb";
+              };
+            }
+            // lib.optionalAttrs langs.python.enable {
+              executables.debugpy = {
+                command = "${pkgs.python3Packages.debugpy}/bin/debugpy";
+              };
+            }
+            // lib.optionalAttrs langs.go.enable {
+              executables.delve = {
+                command = "${pkgs.delve}/bin/dlv";
+                args = [ "dap" "--listen" "127.0.0.1:$${port}" ];
+              };
+            }
+            // lib.optionalAttrs langs.node.enable {
+              executables.js-debug = {
+                command = "${pkgs.nodejs}/bin/node";
+                args = [
+                  "${pkgs.vscode-js-debug}/lib/node_modules/vscode-js-debug/dist/src/nodeDebug.js"
+                ];
+              };
+            }
+            // lib.optionalAttrs langs.dotnet.enable {
+              executables.netcoredbg = {
+                command = "${pkgs.netcoredbg}/bin/netcoredbg";
+                args = [ "--interpreter=vscode" ];
+              };
+            }
+            // lib.optionalAttrs langs.flutter.enable {
+              executables.dart = {
+                command = "${pkgs.dart}/bin/dart";
+                args = [ "debug_adapter" ];
+              };
+            };
+
+          configurations =
+            lib.optionalAttrs hasCodelldb {
+              c = [
+                {
+                  name = "Launch (C/C++)";
+                  type = "codelldb";
+                  request = "launch";
+                  program.__raw = ''
+                    function()
+                      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                    end
+                  '';
+                  cwd = "$${workspaceFolder}";
+                  stopOnEntry = false;
+                }
+              ];
+              cpp = [
+                {
+                  name = "Launch (C++)";
+                  type = "codelldb";
+                  request = "launch";
+                  program.__raw = ''
+                    function()
+                      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                    end
+                  '';
+                  cwd = "$${workspaceFolder}";
+                  stopOnEntry = false;
+                }
+              ];
+              rust = [
+                {
+                  name = "Launch (Rust)";
+                  type = "codelldb";
+                  request = "launch";
+                  program.__raw = ''
+                    function()
+                      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+                    end
+                  '';
+                  cwd = "$${workspaceFolder}";
+                  stopOnEntry = false;
+                }
+              ];
+            }
+            // lib.optionalAttrs langs.python.enable {
+              python = [
+                {
+                  name = "Launch (Python)";
+                  type = "debugpy";
+                  request = "launch";
+                  program = "$${file}";
+                  console = "integratedTerminal";
+                }
+              ];
+            }
+            // lib.optionalAttrs langs.go.enable {
+              go = [
+                {
+                  name = "Launch (Go)";
+                  type = "delve";
+                  request = "launch";
+                  program = "$${file}";
+                }
+                {
+                  name = "Debug Test (Go)";
+                  type = "delve";
+                  request = "launch";
+                  mode = "test";
+                  program = "$${file}";
+                }
+              ];
+            }
+            // lib.optionalAttrs langs.node.enable {
+              javascript = [
+                {
+                  name = "Launch (Node)";
+                  type = "js-debug";
+                  request = "launch";
+                  program = "$${file}";
+                  cwd = "$${workspaceFolder}";
+                  runtimeExecutable = "node";
+                }
+              ];
+              typescript = [
+                {
+                  name = "Launch (TS)";
+                  type = "js-debug";
+                  request = "launch";
+                  program = "$${file}";
+                  cwd = "$${workspaceFolder}";
+                  runtimeExecutable = "node";
+                }
+              ];
+            }
+            // lib.optionalAttrs langs.dotnet.enable {
+              cs = [
+                {
+                  name = "Launch (.NET)";
+                  type = "netcoredbg";
+                  request = "launch";
+                  program.__raw = ''
+                    function()
+                      return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+                    end
+                  '';
+                  cwd = "$${workspaceFolder}";
+                }
+              ];
+            }
+            // lib.optionalAttrs langs.flutter.enable {
+              dart = [
+                {
+                  name = "Launch (Dart)";
+                  type = "dart";
+                  request = "launch";
+                  program = "$${file}";
+                  cwd = "$${workspaceFolder}";
+                }
+              ];
+            }
+            // lib.optionalAttrs langs.php.enable {
+              php = [
+                {
+                  name = "Launch (PHP)";
+                  type = "php";
+                  request = "launch";
+                  program = "$${file}";
+                  cwd = "$${workspaceFolder}";
+                  port = 9003;
+                }
+              ];
+            };
+
           signs = {
             dapBreakpoint = {
               text = "●";
@@ -36,13 +219,8 @@ in
           };
         };
 
-        dap-ui = {
-          enable = true;
-        };
-
-        dap-virtual-text = {
-          enable = true;
-        };
+        dap-ui.enable = true;
+        dap-virtual-text.enable = true;
       };
 
       extraConfigLua = ''
