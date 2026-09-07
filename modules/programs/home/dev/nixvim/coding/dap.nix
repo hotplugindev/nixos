@@ -183,25 +183,7 @@ in
                   request = "launch";
                   program.__raw = ''
                     function()
-                      local dlls = vim.fn.glob(vim.fn.getcwd() .. '/bin/Debug/**/*.dll', true, true)
-                      dlls = vim.tbl_filter(function(dll)
-                        return not dll:find('ref/') and not dll:match('[%.]deps%.json$')
-                      end, dlls)
-                      if #dlls == 0 then
-                        return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-                      end
-                      if #dlls == 1 then
-                        return dlls[1]
-                      end
-                      local choices = {}
-                      for i, dll in ipairs(dlls) do
-                        choices[i] = vim.fn.fnamemodify(dll, ':.')
-                      end
-                      local idx = vim.fn.inputlist(choices)
-                      if idx > 0 and idx <= #dlls then
-                        return dlls[idx]
-                      end
-                      return dlls[1]
+                      return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
                     end
                   '';
                   cwd.__raw = "vim.fn.getcwd()";
@@ -250,18 +232,36 @@ in
             layouts = [
               {
                 elements = [
-                  { id = "scopes"; size = 0.33; }
-                  { id = "breakpoints"; size = 0.17; }
-                  { id = "stacks"; size = 0.25; }
-                  { id = "watches"; size = 0.25; }
+                  {
+                    id = "scopes";
+                    size = 0.33;
+                  }
+                  {
+                    id = "breakpoints";
+                    size = 0.17;
+                  }
+                  {
+                    id = "stacks";
+                    size = 0.25;
+                  }
+                  {
+                    id = "watches";
+                    size = 0.25;
+                  }
                 ];
                 size = 40;
                 position = "right";
               }
               {
                 elements = [
-                  { id = "repl"; size = 0.45; }
-                  { id = "console"; size = 0.55; }
+                  {
+                    id = "repl";
+                    size = 0.45;
+                  }
+                  {
+                    id = "console";
+                    size = 0.55;
+                  }
                 ];
                 size = 10;
                 position = "bottom";
