@@ -39,7 +39,7 @@ in
             }
             // lib.optionalAttrs langs.python.enable {
               executables.debugpy = {
-                command = "${pkgs.python3Packages.debugpy}/bin/debugpy";
+                command = "${pkgs.python3Packages.debugpy}/bin/debugpy-adapter";
               };
             }
             // lib.optionalAttrs langs.go.enable {
