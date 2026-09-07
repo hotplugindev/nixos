@@ -26,7 +26,13 @@ in
         ++ lib.optionals langs.c.enable [ pkgs.clang-tools ]
         ++ lib.optionals langs.dotnet.enable [ pkgs.csharpier ]
         ++ lib.optionals langs.flutter.enable [ pkgs.dart ]
-        ++ lib.optionals langs.php.enable [ pkgs.php84Packages.php-cs-fixer ];
+        ++ lib.optionals langs.php.enable [ pkgs.php84Packages.php-cs-fixer ]
+        ++ lib.optionals langs.java.enable [ pkgs.google-java-format ]
+        ++ lib.optionals langs.kotlin.enable [ pkgs.ktlint ]
+        ++ lib.optionals langs.ruby.enable [ pkgs.rubyPackages.rubocop ]
+        ++ lib.optionals langs.haskell.enable [ pkgs.fourmolu ]
+        ++ lib.optionals langs.scala.enable [ pkgs.scalafmt ]
+        ++ lib.optionals langs.perl.enable [ pkgs.perltidy ];
 
       plugins.conform-nvim = {
         enable = true;
@@ -73,6 +79,24 @@ in
             }
             // lib.optionalAttrs langs.php.enable {
               php = [ "php_cs_fixer" ];
+            }
+            // lib.optionalAttrs langs.java.enable {
+              java = [ "google_java_format" ];
+            }
+            // lib.optionalAttrs langs.kotlin.enable {
+              kotlin = [ "ktlint" ];
+            }
+            // lib.optionalAttrs langs.ruby.enable {
+              ruby = [ "rubocop" ];
+            }
+            // lib.optionalAttrs langs.haskell.enable {
+              haskell = [ "fourmolu" ];
+            }
+            // lib.optionalAttrs langs.scala.enable {
+              scala = [ "scalafmt" ];
+            }
+            // lib.optionalAttrs langs.perl.enable {
+              perl = [ "perltidy" ];
             };
 
           format_on_save = ''

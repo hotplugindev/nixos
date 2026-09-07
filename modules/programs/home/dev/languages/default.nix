@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   imports = [
     ./dotnet.nix
@@ -10,6 +10,15 @@
     ./python.nix
     ./php.nix
     ./flutter.nix
+    ./java.nix
+    ./kotlin.nix
+    ./ruby.nix
+    ./haskell.nix
+    ./elixir.nix
+    ./lua.nix
+    ./scala.nix
+    ./clojure.nix
+    ./perl.nix
+    ./r.nix
   ];
-
 }

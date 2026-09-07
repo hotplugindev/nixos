@@ -41,7 +41,12 @@ in
         ++ lib.optionals langs.python.enable [ pkgs.pyright ]
         ++ lib.optionals langs.dotnet.enable [ pkgs.csharp-ls ]
         ++ lib.optionals langs.php.enable [ pkgs.phpactor ]
-        ++ lib.optionals langs.flutter.enable [ pkgs.dart ];
+        ++ lib.optionals langs.flutter.enable [ pkgs.dart ]
+        ++ lib.optionals langs.java.enable [ pkgs.jdtls ]
+        ++ lib.optionals langs.kotlin.enable [ pkgs.kotlin-language-server ]
+        ++ lib.optionals langs.haskell.enable [ pkgs.haskell-language-server ]
+        ++ lib.optionals langs.scala.enable [ pkgs.metals ]
+        ++ lib.optionals langs.clojure.enable [ pkgs.clojure-lsp ];
 
       plugins = {
         lsp = {
@@ -68,6 +73,11 @@ in
               csharp_ls.enable = langs.dotnet.enable;
               phpactor.enable = langs.php.enable;
               dartls.enable = langs.flutter.enable;
+              jdtls.enable = langs.java.enable;
+              kotlin_language_server.enable = langs.kotlin.enable;
+              hls.enable = langs.haskell.enable;
+              metals.enable = langs.scala.enable;
+              clojure_lsp.enable = langs.clojure.enable;
             }
             // lib.optionalAttrs langs.rust.enable {
               rust_analyzer = {
