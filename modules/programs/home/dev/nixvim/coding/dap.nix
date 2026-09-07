@@ -31,25 +31,25 @@ in
         dap = {
           enable = true;
 
-          adapters =
+          adapters.executables =
             lib.optionalAttrs hasCodelldb {
-              executables.codelldb = {
+              codelldb = {
                 command = "${pkgs.lldb}/bin/codelldb";
               };
             }
             // lib.optionalAttrs langs.python.enable {
-              executables.debugpy = {
+              debugpy = {
                 command = "${pkgs.python3Packages.debugpy}/bin/debugpy-adapter";
               };
             }
             // lib.optionalAttrs langs.go.enable {
-              executables.delve = {
+              delve = {
                 command = "${pkgs.delve}/bin/dlv";
                 args = [ "dap" "--listen" "127.0.0.1:$${port}" ];
               };
             }
             // lib.optionalAttrs langs.node.enable {
-              executables.js-debug = {
+              js-debug = {
                 command = "${pkgs.nodejs}/bin/node";
                 args = [
                   "${pkgs.vscode-js-debug}/lib/node_modules/vscode-js-debug/dist/src/nodeDebug.js"
@@ -57,13 +57,13 @@ in
               };
             }
             // lib.optionalAttrs langs.dotnet.enable {
-              executables.netcoredbg = {
+              netcoredbg = {
                 command = "${pkgs.netcoredbg}/bin/netcoredbg";
                 args = [ "--interpreter=vscode" ];
               };
             }
             // lib.optionalAttrs langs.flutter.enable {
-              executables.dart = {
+              dart = {
                 command = "${pkgs.dart}/bin/dart";
                 args = [ "debug_adapter" ];
               };
