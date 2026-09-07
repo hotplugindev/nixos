@@ -11,8 +11,8 @@ in
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
     };
-    programs.gamemode.enable = true;
 
     gb.requires.system.fonts.core = [ "programs.system.steam" ];
+    gb.requires.system.gaming.gamemode = [ "programs.system.steam" ];
   };
 }
