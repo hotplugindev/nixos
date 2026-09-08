@@ -2,6 +2,7 @@
   gb.home.programs.gaming.steampack.enable = true;
   gb.home.programs.gaming.bottles.enable = true;
   gb.home.programs.gaming.ckan.enable = true;
+  gb.home.programs.gaming.tt.enable = true;
 
   gb.home.terminal.foot.fontSize = "8";
 

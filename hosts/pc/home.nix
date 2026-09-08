@@ -4,6 +4,7 @@
   gb.home.programs.gaming.boxflat.enable = true;
   gb.home.programs.gaming.ckan.enable = true;
   gb.home.programs.gaming.prismlauncher.enable = true;
+  gb.home.programs.gaming.tt.enable = true;
 
   gb.home.programs.ai.opencode.enable = true;
 
