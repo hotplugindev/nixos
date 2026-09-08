@@ -11,6 +11,7 @@ in
 {
   options.gb.requires.system = {
     audio.pipewire = listOption "Request PipeWire audio";
+    audio.ladspa = listOption "Request LADSPA plugin path for PipeWire";
     boot.lanzaboote = listOption "Request Lanzaboote";
     kernel.linuxLatest = listOption "Request the linuxLatest Kernel";
     kernel.linuxZen = listOption "Request the linuxZen Kernel";
@@ -36,6 +37,8 @@ in
     security.gnupg = listOption "Request GnuPG";
     hardware.bluetooth = listOption "Request Bluetooth";
     virtualisation.docker = listOption "Request Docker";
+
+    gaming.gamemode = listOption "Request GameMode";
 
     desktop.mango = listOption "Request Mango desktop stack";
     desktop.greetd = listOption "Request greetd login manager";

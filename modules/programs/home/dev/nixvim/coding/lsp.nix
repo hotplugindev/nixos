@@ -6,6 +6,7 @@
 }:
 let
   lsp = config.gb.home.dev.nixvim.coding.lsp;
+  langs = config.gb.home.dev.languages;
 in
 {
   options = {
@@ -13,88 +14,80 @@ in
       enable = lib.mkEnableOption "Enable nixvim LSP configuration";
       extraPackages = lib.mkOption {
         type = lib.types.listOf lib.types.package;
-        default = with pkgs; [
-          lua-language-server
-          nixd
-          bash-language-server
-          marksman
-          clang-tools
-          gopls
-          vue-language-server
-          vscode-langservers-extracted
-          typescript-language-server
-          zls
-          rustc
-          rust-analyzer
-          rustfmt
-          pyright
-          csharp-ls
-          prettierd
-          stylua
-          nixfmt
-          shfmt
-          ripgrep
-          fd
-          git
-        ];
+        default = [ ];
         description = "Extra packages for nixvim LSP and related workflows";
-      };
-      servers = lib.mkOption {
-        type = lib.types.attrs;
-        default = {
-          nixd.enable = true;
-          lua_ls.enable = true;
-          ts_ls.enable = true;
-          html.enable = true;
-          cssls.enable = true;
-          jsonls.enable = true;
-          bashls.enable = true;
-          marksman.enable = true;
-          rust_analyzer = {
-            enable = true;
-            installCargo = false;
-            installRustc = false;
-          };
-          gopls.enable = true;
-          clangd.enable = true;
-          vue_ls.enable = true;
-          zls.enable = true;
-          pyright.enable = true;
-          csharp_ls.enable = true;
-        };
-        description = "LSP server configuration for nixvim";
       };
     };
   };
 
   config = lib.mkIf lsp.enable {
     programs.nixvim = {
-      extraPackages = lsp.extraPackages;
+      extraPackages =
+        lsp.extraPackages
+        ++ [ pkgs.nixd pkgs.lua-language-server pkgs.bash-language-server pkgs.marksman pkgs.ripgrep pkgs.fd pkgs.git ]
+        ++ lib.optionals langs.node.enable [
+          pkgs.typescript-language-server
+          pkgs.vscode-langservers-extracted
+          pkgs.vue-language-server
+        ]
+        ++ lib.optionals langs.rust.enable [
+          pkgs.rust-analyzer
+          pkgs.rustfmt
+          pkgs.rustc
+        ]
+        ++ lib.optionals langs.go.enable [ pkgs.gopls ]
+        ++ lib.optionals langs.c.enable [ pkgs.clang-tools ]
+        ++ lib.optionals langs.zig.enable [ pkgs.zls ]
+        ++ lib.optionals langs.python.enable [ pkgs.pyright ]
+        ++ lib.optionals langs.dotnet.enable [ pkgs.csharp-ls ]
+        ++ lib.optionals langs.php.enable [ pkgs.phpactor ]
+        ++ lib.optionals langs.flutter.enable [ pkgs.dart ]
+        ++ lib.optionals langs.java.enable [ pkgs.jdtls ]
+        ++ lib.optionals langs.kotlin.enable [ pkgs.kotlin-language-server ]
+        ++ lib.optionals langs.haskell.enable [ pkgs.haskell-language-server ]
+        ++ lib.optionals langs.scala.enable [ pkgs.metals ]
+        ++ lib.optionals langs.clojure.enable [ pkgs.clojure-lsp ];
 
       plugins = {
         lsp = {
           enable = true;
           inlayHints = true;
-          servers = lsp.servers;
 
-          keymaps = {
-            diagnostic = {
-              "[d" = "goto_prev";
-              "]d" = "goto_next";
-              "<leader>ld" = "open_float";
-              "<leader>lq" = "setloclist";
+          servers =
+            {
+              nixd.enable = true;
+              lua_ls.enable = true;
+              bashls.enable = true;
+              marksman.enable = true;
+
+              ts_ls.enable = langs.node.enable;
+              html.enable = langs.node.enable;
+              cssls.enable = langs.node.enable;
+              jsonls.enable = langs.node.enable;
+              vue_ls.enable = langs.node.enable;
+
+              gopls.enable = langs.go.enable;
+              clangd.enable = langs.c.enable;
+              zls.enable = langs.zig.enable;
+              pyright.enable = langs.python.enable;
+              csharp_ls.enable = langs.dotnet.enable;
+              phpactor.enable = langs.php.enable;
+              dartls.enable = langs.flutter.enable;
+              jdtls.enable = langs.java.enable;
+              kotlin_language_server.enable = langs.kotlin.enable;
+              hls.enable = langs.haskell.enable;
+              metals.enable = langs.scala.enable;
+              clojure_lsp.enable = langs.clojure.enable;
+            }
+            // lib.optionalAttrs langs.rust.enable {
+              rust_analyzer = {
+                enable = true;
+                installCargo = false;
+                installRustc = false;
+              };
             };
-            lspBuf = {
-              "gd" = "definition";
-              "gr" = "references";
-              "gI" = "implementation";
-              "gt" = "type_definition";
-              "K" = "hover";
-              "<leader>la" = "code_action";
-              "<leader>lr" = "rename";
-              "<leader>lf" = "format";
-            };
-          };
+
+
         };
 
         lazydev.enable = true;

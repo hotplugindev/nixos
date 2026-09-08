@@ -28,6 +28,8 @@
     ../capabilities/system/kernel/linux-latest.nix
     ../capabilities/system/kernel/linux-zen.nix
     ../capabilities/system/audio/pipewire.nix
+    ../capabilities/system/audio/ladspa.nix
+    ../capabilities/system/gaming/gamemode.nix
     ../capabilities/system/compat/nix-ld.nix
     ../capabilities/system/compat/wine-libraries.nix
     ../capabilities/system/fonts/core.nix
