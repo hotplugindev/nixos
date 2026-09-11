@@ -4,14 +4,15 @@
   ...
 }:
 let
-  git = config.gb.home.dev.nixvim.tools.git;
+  gitsigns = config.gb.home.dev.nixvim.tools.gitsigns;
 in
 {
   options = {
-    gb.home.dev.nixvim.tools.git.enable = lib.mkEnableOption "Enable nixvim git tools";
+    gb.home.dev.nixvim.tools.gitsigns.enable =
+      lib.mkEnableOption "Enable nixvim gitsings for fast git feedback in file";
   };
 
-  config = lib.mkIf git.enable {
+  config = lib.mkIf gitsigns.enable {
     programs.nixvim.plugins = {
       gitsigns = {
         enable = true;

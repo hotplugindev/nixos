@@ -13,6 +13,7 @@ in
 
   config = lib.mkIf git.enable {
     programs.nixvim.keymaps = [
+      # Gitsigns hunk navigation & actions
       {
         mode = "n";
         key = "<leader>gb";
@@ -23,7 +24,7 @@ in
         mode = "n";
         key = "<leader>gd";
         action = "<cmd>Gitsigns diffthis<CR>";
-        options.desc = "Diff this";
+        options.desc = "Diff this (file)";
       }
       {
         mode = "n";
@@ -49,11 +50,27 @@ in
         action = "<cmd>Gitsigns reset_hunk<CR>";
         options.desc = "Reset hunk";
       }
+
+      # Neogit Integration (Replaces Fugitive)
       {
         mode = "n";
         key = "<leader>gs";
-        action = "<cmd>Git<CR>";
-        options.desc = "Git status";
+        action = "<cmd>Neogit<CR>";
+        options.desc = "Neogit status";
+      }
+
+      # Diffview Integration
+      {
+        mode = "n";
+        key = "<leader>gD";
+        action = "<cmd>DiffviewOpen<CR>";
+        options.desc = "Diffview open";
+      }
+      {
+        mode = "n";
+        key = "<leader>gh";
+        action = "<cmd>DiffviewFileHistory<CR>";
+        options.desc = "Diffview file history";
       }
     ];
   };
