@@ -130,7 +130,7 @@ in
       }
       {
         mode = "n";
-        key = "<leader>gF";
+        key = "<leader>gv";
         action = {
           __raw = ''
             function()
