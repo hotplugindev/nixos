@@ -88,8 +88,27 @@ in
       {
         mode = "n";
         key = "<leader>cf";
-        action = "<cmd>lua vim.b.disable_autoformat = not vim.b.disable_autoformat<CR>";
-        options.desc = "Toggle format on save";
+        action.__raw = ''
+          function()
+            local bufnr = vim.api.nvim_get_current_buf()
+            vim.b[bufnr].disable_autoformat = not vim.b[bufnr].disable_autoformat
+            local status = vim.b[bufnr].disable_autoformat and "disabled" or "enabled"
+            vim.notify("Buffer autoformat " .. status)
+          end
+        '';
+        options.desc = "Toggle buffer format on save";
+      }
+      {
+        mode = "n";
+        key = "<leader>cF";
+        action.__raw = ''
+          function()
+            vim.g.disable_autoformat = not vim.g.disable_autoformat
+            local status = vim.g.disable_autoformat and "disabled" or "enabled"
+            vim.notify("Session autoformat " .. status)
+          end
+        '';
+        options.desc = "Toggle session format on save";
       }
     ];
   };
