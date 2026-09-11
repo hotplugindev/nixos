@@ -128,6 +128,22 @@ in
         action = "<cmd>DiffviewFileHistory<CR>";
         options.desc = "Diffview file history";
       }
+      {
+        mode = "n";
+        key = "<leader>gF";
+        action = {
+          __raw = ''
+            function()
+              local base = vim.fn.input("Base branch: ", "main")
+              if base == "" then return end
+              local target = vim.fn.input("Target branch: ", "HEAD")
+              if target == "" then return end
+              vim.cmd("DiffviewOpen " .. base .. ".." .. target)
+            end
+          '';
+        };
+        options.desc = "Compare branches";
+      }
     ];
   };
 }
