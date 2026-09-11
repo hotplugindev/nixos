@@ -35,12 +35,6 @@ in
           changedelete = { text = "~"; };
           untracked = { text = "┆"; };
         };
-        on_attach.__raw = ''
-          function(bufnr)
-            local gs = package.loaded.gitsigns
-            vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gB', ':Gitsigns blame<CR>', { desc = 'Blame (full)' })
-          end
-        '';
       };
     };
   };
