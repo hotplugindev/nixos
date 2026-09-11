@@ -97,24 +97,7 @@ in
         action = "<cmd>Gitsigns toggle_word_diff<CR>";
         options.desc = "Toggle word diff";
       }
-      {
-        mode = "n";
-        key = "<leader>gl";
-        action = "<cmd>GitLink<CR>";
-        options.desc = "Copy permalink";
-      }
-      {
-        mode = "v";
-        key = "<leader>gl";
-        action = ":GitLink<CR>";
-        options.desc = "Copy permalink (visual)";
-      }
-      {
-        mode = "n";
-        key = "<leader>gL";
-        action = "<cmd>GitLink!<CR>";
-        options.desc = "Open permalink in browser";
-      }
+
       {
         mode = "n";
         key = "<leader>gn";
