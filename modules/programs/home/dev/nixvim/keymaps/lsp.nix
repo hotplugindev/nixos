@@ -85,6 +85,12 @@ in
         action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>";
         options.desc = "Format";
       }
+      {
+        mode = "n";
+        key = "<leader>cf";
+        action = "<cmd>lua vim.b.disable_autoformat = not vim.b.disable_autoformat<CR>";
+        options.desc = "Toggle format on save";
+      }
     ];
   };
 }
