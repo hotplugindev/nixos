@@ -88,13 +88,13 @@ in
       {
         mode = "n";
         key = "<leader>gB";
-        action.__raw = ''function() require("gitsigns").toggle_current_line_blame() end'';
+        action = "<cmd>Gitsigns toggle_current_line_blame<CR>";
         options.desc = "Toggle inline blame";
       }
       {
         mode = "n";
         key = "<leader>gw";
-        action.__raw = ''function() require("gitsigns").toggle_word_diff() end'';
+        action = "<cmd>Gitsigns toggle_word_diff<CR>";
         options.desc = "Toggle word diff";
       }
 
