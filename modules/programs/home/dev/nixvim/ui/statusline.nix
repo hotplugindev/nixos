@@ -31,7 +31,19 @@ in
         sections = {
           lualine_a = [ "mode" ];
           lualine_b = [
-            "branch"
+            {
+              __unkeyed-1.__raw = ''
+                function()
+                  local head = vim.b.gitsigns_head
+                  if not head or head == "" then return "" end
+                  local status = vim.b.gitsigns_status_dict or {}
+                  local ahead = status.ahead and status.ahead > 0 and (" ↑" .. status.ahead) or ""
+                  local behind = status.behind and status.behind > 0 and (" ↓" .. status.behind) or ""
+                  return " " .. head .. ahead .. behind
+                end
+              '';
+              icon = "";
+            }
             "diff"
             "diagnostics"
           ];
