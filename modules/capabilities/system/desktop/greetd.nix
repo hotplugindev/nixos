@@ -8,6 +8,18 @@
 let
   requests = config.gb.requires.system.desktop.greetd;
   cfg = config.gb.capabilities.system.desktop.greetd;
+  dmsGreeterBin = inputs.dank-greeter.packages.${pkgs.system}.dms-greeter;
+  dmsGreeterRuntimePath = lib.makeBinPath [
+    pkgs.quickshell
+    inputs.mango.packages.${pkgs.system}.mango
+    pkgs.glib
+  ];
+  dmsGreeterCommand = pkgs.writeShellScriptBin "dms-greeter-session" ''
+    export PATH="${dmsGreeterRuntimePath}:$PATH"
+    exec ${dmsGreeterBin}/bin/dms-greeter \
+      --cache-dir /var/lib/dms-greeter \
+      --command ${config.gb.host.desktop}
+  '';
 in
 {
   options.gb.capabilities.system.desktop.greetd = {
@@ -54,7 +66,7 @@ in
           user = "greeter";
           command =
             if cfg.greeter == "dms" then
-              ''${inputs.dank-greeter.packages.${pkgs.system}.dms-greeter}/bin/dms-greeter --cache-dir /var/lib/dms-greeter --command ${config.gb.host.desktop}''
+              ''${lib.getExe dmsGreeterCommand}''
             else
               ''
                 ${pkgs.tuigreet}/bin/tuigreet \
