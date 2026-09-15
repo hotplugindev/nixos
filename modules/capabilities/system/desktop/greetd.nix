@@ -9,6 +9,8 @@ let
   requests = config.gb.requires.system.desktop.greetd;
   cfg = config.gb.capabilities.system.desktop.greetd;
   dmsEnabled = cfg.greeter == "dms";
+  gnomeKeyringRequested = config.gb.requires.system.desktop.gnomeKeyring != [ ];
+  shellCmd = if config.gb.host.shell != "none" then config.gb.host.shell else "zsh";
 in
 {
   imports = [ inputs.dank-greeter.nixosModules.dank-greeter ];
@@ -24,7 +26,7 @@ in
 
     sessionCommand = lib.mkOption {
       type = lib.types.str;
-      default = "zsh -l -c mango";
+      default = "${shellCmd} -l -c mango";
       description = "Default session command for greetd.";
     };
 
@@ -36,17 +38,18 @@ in
   };
 
   config = lib.mkIf (requests != [ ]) {
-    security.pam.services.greetd.enableGnomeKeyring = true;
+    security.pam.services.greetd.enableGnomeKeyring = gnomeKeyringRequested;
 
     programs.dms-greeter = lib.mkIf dmsEnabled {
       enable = true;
       compositor.name = config.gb.host.desktop;
-      compositor.package = inputs.mango.packages.${pkgs.system}.mango;
-      quickshell.package = inputs.dms.packages.${pkgs.system}.quickshell;
+      compositor.package = inputs.mango.packages.${pkgs.stdenv.hostPlatform.system}.mango;
+      quickshell.package = pkgs.quickshell;
     };
 
     services.greetd = {
       enable = true;
+      restart = true;
       settings = {
         initial_session = lib.mkIf cfg.autologin {
           user = cfg.autologinUser;
