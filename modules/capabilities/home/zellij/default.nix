@@ -25,90 +25,100 @@ in
         keybinds {
           normal {
             bind "Ctrl Space" {
-              SwitchToMode "tmux"
+              SwitchToMode "Tmux"
             }
           }
 
           tmux {
-            // Pane navigation
             bind "h" {
               MoveFocus "Left"
+              SwitchToMode "Normal"
             }
 
             bind "j" {
               MoveFocus "Down"
+              SwitchToMode "Normal"
             }
 
             bind "k" {
               MoveFocus "Up"
+              SwitchToMode "Normal"
             }
 
             bind "l" {
               MoveFocus "Right"
+              SwitchToMode "Normal"
             }
 
-            // Create panes
             bind "n" {
               NewPane
+              SwitchToMode "Normal"
             }
 
             bind "v" {
               NewPane "Down"
+              SwitchToMode "Normal"
             }
 
             bind "s" {
               NewPane "Right"
+              SwitchToMode "Normal"
             }
 
-            // Pane management
             bind "x" {
               CloseFocus
+              SwitchToMode "Normal"
             }
 
             bind "f" {
               ToggleFocusFullscreen
+              SwitchToMode "Normal"
             }
 
             bind "z" {
               TogglePaneFrames
+              SwitchToMode "Normal"
             }
 
-            // Resize
             bind "H" {
               Resize "Increase Left"
+              SwitchToMode "Normal"
             }
 
             bind "J" {
               Resize "Increase Down"
+              SwitchToMode "Normal"
             }
 
             bind "K" {
               Resize "Increase Up"
+              SwitchToMode "Normal"
             }
 
             bind "L" {
               Resize "Increase Right"
+              SwitchToMode "Normal"
             }
 
-            // Tabs
             bind "c" {
               NewTab
+              SwitchToMode "Normal"
             }
 
             bind "Tab" {
               GoToNextTab
+              SwitchToMode "Normal"
             }
 
             bind "b" {
               GoToPreviousTab
+              SwitchToMode "Normal"
             }
 
-            // Session
             bind "d" {
               Detach
             }
 
-            // Return to normal mode
             bind "Esc" {
               SwitchToMode "Normal"
             }
