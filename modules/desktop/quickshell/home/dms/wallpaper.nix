@@ -6,7 +6,13 @@
 let
   mango = config.gb.home.desktop.mango;
   dms = mango.dms;
-  wallpaperPath = "${config.home.homeDirectory}/.config/DankMaterialShell/wallpapers/default";
+  sourceBase = builtins.baseNameOf (toString dms.wallpaper.source);
+  ext =
+    if builtins.match ".*\\..+" sourceBase != null then
+      lib.last (lib.strings.splitString "." sourceBase)
+    else
+      "png";
+  wallpaperPath = "${config.home.homeDirectory}/.config/DankMaterialShell/wallpapers/default.${ext}";
 in
 {
   options.gb.home.desktop.mango.dms.wallpaper = {
@@ -41,7 +47,7 @@ in
       gb.home.desktop.mango.dms.program.session.wallpaperTransition =
         lib.mkDefault dms.wallpaper.transition;
 
-      xdg.configFile."DankMaterialShell/wallpapers/default" = lib.mkIf (dms.wallpaper.source != null) {
+      xdg.configFile."DankMaterialShell/wallpapers/default.${ext}" = lib.mkIf (dms.wallpaper.source != null) {
         source = dms.wallpaper.source;
       };
     })

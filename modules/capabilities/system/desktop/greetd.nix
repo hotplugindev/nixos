@@ -8,20 +8,11 @@
 let
   requests = config.gb.requires.system.desktop.greetd;
   cfg = config.gb.capabilities.system.desktop.greetd;
-  dmsGreeterBin = inputs.dank-greeter.packages.${pkgs.system}.dms-greeter;
-  dmsGreeterRuntimePath = lib.makeBinPath [
-    pkgs.quickshell
-    inputs.mango.packages.${pkgs.system}.mango
-    pkgs.glib
-  ];
-  dmsGreeterCommand = pkgs.writeShellScriptBin "dms-greeter-session" ''
-    export PATH="${dmsGreeterRuntimePath}:$PATH"
-    exec ${dmsGreeterBin}/bin/dms-greeter \
-      --cache-dir /var/lib/dms-greeter \
-      --command ${config.gb.host.desktop}
-  '';
+  dmsEnabled = cfg.greeter == "dms";
 in
 {
+  imports = [ inputs.dank-greeter.nixosModules.dank-greeter ];
+
   options.gb.capabilities.system.desktop.greetd = {
     autologin = lib.mkEnableOption "Enable greetd autologin";
 
@@ -47,12 +38,11 @@ in
   config = lib.mkIf (requests != [ ]) {
     security.pam.services.greetd.enableGnomeKeyring = true;
 
-    systemd.tmpfiles.settings."10-dms-greeter" = lib.mkIf (cfg.greeter == "dms") {
-      "/var/lib/dms-greeter".d = {
-        user = "greeter";
-        group = "greeter";
-        mode = "0750";
-      };
+    programs.dms-greeter = lib.mkIf dmsEnabled {
+      enable = true;
+      compositor.name = config.gb.host.desktop;
+      compositor.package = inputs.mango.packages.${pkgs.system}.mango;
+      quickshell.package = inputs.dms.packages.${pkgs.system}.quickshell;
     };
 
     services.greetd = {
@@ -64,19 +54,15 @@ in
         };
         default_session = {
           user = "greeter";
-          command =
-            if cfg.greeter == "dms" then
-              ''${lib.getExe dmsGreeterCommand}''
-            else
-              ''
-                ${pkgs.tuigreet}/bin/tuigreet \
-                  --time \
-                  --remember \
-                  --remember-user-session \
-                  --user-menu \
-                  --asterisks \
-                  --cmd "${cfg.sessionCommand}"
-              '';
+          command = lib.mkOptionDefault ''
+            ${pkgs.tuigreet}/bin/tuigreet \
+              --time \
+              --remember \
+              --remember-user-session \
+              --user-menu \
+              --asterisks \
+              --cmd "${cfg.sessionCommand}"
+          '';
         };
       };
     };
