@@ -62,6 +62,7 @@ in
           adapters.servers =
             lib.optionalAttrs langs.go.enable {
               delve = {
+                port = "\${port}";
                 executable = {
                   command = "${pkgs.delve}/bin/dlv";
                   args = [
@@ -74,10 +75,12 @@ in
             }
             // lib.optionalAttrs langs.node.enable {
               js-debug = {
+                port = "\${port}";
                 executable = {
                   command = "${pkgs.nodejs}/bin/node";
                   args = [
                     "${pkgs.vscode-js-debug}/share/vscode/extensions/ms-vscode.js-debug/src/dapDebugServer.js"
+                    "\${port}"
                   ];
                 };
               };
