@@ -46,7 +46,7 @@ in
           user = "greeter";
           command =
             if cfg.greeter == "dms" then
-              ''${inputs.dank-greeter.packages.${pkgs.system}.dms-greeter}/bin/dms-greeter''
+              ''${inputs.dank-greeter.packages.${pkgs.system}.dms-greeter}/bin/dms-greeter --command ${config.gb.host.desktop}''
             else
               ''
                 ${pkgs.tuigreet}/bin/tuigreet \
