@@ -35,6 +35,14 @@ in
   config = lib.mkIf (requests != [ ]) {
     security.pam.services.greetd.enableGnomeKeyring = true;
 
+    systemd.tmpfiles.settings."10-dms-greeter" = lib.mkIf (cfg.greeter == "dms") {
+      "/var/lib/dms-greeter".d = {
+        user = "greeter";
+        group = "greeter";
+        mode = "0750";
+      };
+    };
+
     services.greetd = {
       enable = true;
       settings = {
@@ -46,7 +54,7 @@ in
           user = "greeter";
           command =
             if cfg.greeter == "dms" then
-              ''${inputs.dank-greeter.packages.${pkgs.system}.dms-greeter}/bin/dms-greeter --command ${config.gb.host.desktop}''
+              ''${inputs.dank-greeter.packages.${pkgs.system}.dms-greeter}/bin/dms-greeter --cache-dir /var/lib/dms-greeter --command ${config.gb.host.desktop}''
             else
               ''
                 ${pkgs.tuigreet}/bin/tuigreet \
