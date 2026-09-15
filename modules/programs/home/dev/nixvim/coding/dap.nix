@@ -46,12 +46,6 @@ in
                 command = "${pkgs.python3Packages.debugpy}/bin/debugpy-adapter";
               };
             }
-            // lib.optionalAttrs langs.go.enable {
-              delve = {
-                command = "${pkgs.delve}/bin/dlv";
-                args = [ "dap" ];
-              };
-            }
             // lib.optionalAttrs langs.dotnet.enable {
               netcoredbg = {
                 command = "${pkgs.netcoredbg}/bin/netcoredbg";
@@ -65,16 +59,29 @@ in
               };
             };
 
-          adapters.servers = lib.optionalAttrs langs.node.enable {
-            js-debug = {
-              executable = {
-                command = "${pkgs.nodejs}/bin/node";
-                args = [
-                  "${pkgs.vscode-js-debug}/share/vscode/extensions/ms-vscode.js-debug/src/dapDebugServer.js"
-                ];
+          adapters.servers =
+            lib.optionalAttrs langs.go.enable {
+              delve = {
+                executable = {
+                  command = "${pkgs.delve}/bin/dlv";
+                  args = [
+                    "dap"
+                    "--listen"
+                    "127.0.0.1:\${port}"
+                  ];
+                };
+              };
+            }
+            // lib.optionalAttrs langs.node.enable {
+              js-debug = {
+                executable = {
+                  command = "${pkgs.nodejs}/bin/node";
+                  args = [
+                    "${pkgs.vscode-js-debug}/share/vscode/extensions/ms-vscode.js-debug/src/dapDebugServer.js"
+                  ];
+                };
               };
             };
-          };
 
           configurations =
             lib.optionalAttrs hasCodelldb {
