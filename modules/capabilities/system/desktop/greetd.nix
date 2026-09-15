@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -23,6 +24,12 @@ in
       default = "zsh -l -c mango";
       description = "Default session command for greetd.";
     };
+
+    greeter = lib.mkOption {
+      type = lib.types.enum [ "tuigreet" "dms" ];
+      default = "tuigreet";
+      description = "Which greeter to use for greetd.";
+    };
   };
 
   config = lib.mkIf (requests != [ ]) {
@@ -37,15 +44,19 @@ in
         };
         default_session = {
           user = "greeter";
-          command = ''
-            ${pkgs.tuigreet}/bin/tuigreet \
-              --time \
-              --remember \
-              --remember-user-session \
-              --user-menu \
-              --asterisks \
-              --cmd "${cfg.sessionCommand}"
-          '';
+          command =
+            if cfg.greeter == "dms" then
+              ''${inputs.dank-greeter.packages.${pkgs.system}.dms-greeter}/bin/dms-greeter''
+            else
+              ''
+                ${pkgs.tuigreet}/bin/tuigreet \
+                  --time \
+                  --remember \
+                  --remember-user-session \
+                  --user-menu \
+                  --asterisks \
+                  --cmd "${cfg.sessionCommand}"
+              '';
         };
       };
     };
