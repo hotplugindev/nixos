@@ -8,7 +8,7 @@ let
 in
 {
   options = {
-    gb.home.dev.tooling.shell.enable = lib.mkEnableOption "Enable git in the home dir";
+    gb.home.dev.tooling.shell.enable = lib.mkEnableOption "Enable shell in the home dir";
   };
 
   config = lib.mkIf shell.enable {

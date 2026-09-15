@@ -20,6 +20,7 @@
 
     ../capabilities/home/git/default.nix
     ../capabilities/home/shell/default.nix
+    ../capabilities/home/zellij/default.nix
     ../capabilities/home/terminal/foot.nix
     ../capabilities/home/theme/default.nix
     ../capabilities/home/xdg/default.nix

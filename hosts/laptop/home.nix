@@ -22,7 +22,7 @@
   gb.home.desktop.mango.mangowc.settings.values = {
     trackpad_natural_scrolling = 1;
     tap_to_click = 1;
-    disable_while_typing = 1;
+    trackpad_disable_while_typing = 1;
   };
 
   gb.home.desktop.mango.mangowc.monitors = [

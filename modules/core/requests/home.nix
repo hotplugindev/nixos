@@ -16,6 +16,7 @@ in
     theme = listOption "Request theme configuration";
     xdg = listOption "Request xdg configuration";
     networking.kdeconnect = listOption "Request KDE Connect";
+    zellij = listOption "Request zellij configuration";
 
     desktop.mango = listOption "Request Mango home desktop";
     desktop.dms = listOption "Request DankMaterialShell";

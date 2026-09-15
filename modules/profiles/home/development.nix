@@ -7,10 +7,12 @@ in
   config = lib.mkIf enabled {
     gb.requires.home.git = [ requester ];
     gb.requires.home.shell = [ requester ];
+    gb.requires.home.zellij = [ requester ];
 
     gb.home.dev.nixvim.enable = lib.mkDefault true;
     gb.home.dev.tooling.git.enable = lib.mkDefault true;
     gb.home.dev.tooling.shell.enable = lib.mkDefault true;
+    gb.home.dev.tooling.zellij.enable = lib.mkDefault true;
     gb.home.dev.tooling.base.enable = lib.mkDefault true;
     gb.home.dev.editors.vscode.enable = lib.mkDefault true;
     gb.home.dev.editors.zed.enable = lib.mkDefault true;
