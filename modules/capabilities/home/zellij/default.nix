@@ -24,7 +24,7 @@ in
       extraConfig = ''
         keybinds clear-defaults=true {
             locked {
-                bind "Ctrl g" { SwitchToMode "normal"; }
+                bind "Ctrl space" { SwitchToMode "normal"; }
             }
             pane {
                 bind "left" { MoveFocus "left"; }
@@ -203,7 +203,7 @@ in
                 bind "Alt Shift p" { ToggleGroupMarking; }
             }
             shared_except "locked" "renametab" "renamepane" {
-                bind "Ctrl g" { SwitchToMode "locked"; }
+                bind "Ctrl space" { SwitchToMode "locked"; }
                 bind "Ctrl q" { Quit; }
             }
             shared_except "locked" "entersearch" {
