@@ -18,6 +18,7 @@ in
         pane_viewport_serialization = true;
         scrollback_lines_to_serialize = 10000;
         scroll_buffer_size = 10000;
+        show_startup_tips = false;
       };
 
       extraConfig = ''
