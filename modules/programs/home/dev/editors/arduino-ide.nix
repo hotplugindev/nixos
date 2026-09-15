@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.dev.editors.arduino-ide.enable = lib.mkEnableOption "Enable Vscode";
+    gb.home.dev.editors.arduino-ide.enable = lib.mkEnableOption "Enable Arduino IDE";
   };
 
   config = lib.mkIf arduino-ide.enable {

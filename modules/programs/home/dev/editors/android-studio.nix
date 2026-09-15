@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.dev.editors.android-studio.enable = lib.mkEnableOption "Enable Vscode";
+    gb.home.dev.editors.android-studio.enable = lib.mkEnableOption "Enable Android Studio";
   };
 
   config = lib.mkIf android-studio.enable {

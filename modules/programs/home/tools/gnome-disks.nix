@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.tools.gnomeDisks.enable = lib.mkEnableOption "Enable brave web browser";
+    gb.home.tools.gnomeDisks.enable = lib.mkEnableOption "Enable GNOME Disks";
   };
 
   config = lib.mkIf gnomeDisks.enable {

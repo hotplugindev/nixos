@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.dev.editors.jetbrains-rider.enable = lib.mkEnableOption "Enable Vscode";
+    gb.home.dev.editors.jetbrains-rider.enable = lib.mkEnableOption "Enable JetBrains Rider";
   };
 
   config = lib.mkIf jetbrains-rider.enable {

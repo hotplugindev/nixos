@@ -10,7 +10,7 @@ in
 {
   options = {
     gb.home.programs.remote.tigervnc.enable =
-      lib.mkEnableOption "Enable remmina remote desktop connections";
+      lib.mkEnableOption "Enable TigerVNC remote desktop client";
   };
 
   config = lib.mkIf tigervnc.enable {

@@ -16,7 +16,7 @@ The goal is not just to split files into folders. The goal is to make ownership 
 - hosts stay small and declarative
 - programs do not secretly configure unrelated system behavior
 - profiles describe intent, not low-level implementation
-- the active configuration does not depend on the archived `old/` tree
+- the active configuration stays clean and self-contained
 
 The current hosts are:
 
@@ -63,12 +63,7 @@ The main user is:
 │   ├── capabilities/
 │   ├── programs/
 │   └── desktop/
-├── docs/
-│   └── audit/
-└── old/
 ```
-
-The `old/` directory is only a migration archive. It must not be imported by active configuration. Once the new configuration builds correctly and no active file references `old/`, it can be removed.
 
 ---
 
@@ -142,10 +137,11 @@ Each host has:
 - a Home Manager host module
 - optional extra modules
 
-Example host metadata:
+Example host declaration in `hosts/default.nix`:
 
 ```nix
-{
+laptop = {
+  system = "x86_64-linux";
   class = "laptop";
   roles = [ "workstation" "desktop" "gaming" "development" ];
   desktop = "mango";
@@ -159,7 +155,9 @@ Example host metadata:
     hasTouchpad = true;
     hasPrinter = false;
   };
-}
+
+  extraModules = [ ];
+};
 ```
 
 Host metadata should describe the machine. It should not implement services directly.
@@ -209,10 +207,10 @@ System host files are for machine-specific system details:
 Examples:
 
 ```nix
-networking.hostName = config.gb.host.name;
-gb.programs.steam.enable = true;
-gb.programs.wine.enable = true;
-gb.programs.sunshine.enable = true;
+gb.programs.system.steam.enable = true;
+gb.programs.system.wine.enable = true;
+gb.programs.system.sunshine.enable = true;
+gb.requires.system.graphics.amd = [ "hosts.pc" ];
 ```
 
 System host files should not contain reusable implementation that belongs in modules.
@@ -235,14 +233,14 @@ Example:
   gb.home.programs.remote.tigervnc.enable = true;
   gb.home.programs.remote.moonlight-qt.enable = true;
 
-  gb.home.desktop.mango.monitors = [
+  gb.home.desktop.mango.mangowc.monitors = [
     "name:eDP-1,width:2256,height:1504,refresh:60,x:0,y:10,scale:1.333,vrr:0,rr:0"
   ];
 
-  gb.home.desktop.mango.settings.values = {
+  gb.home.desktop.mango.mangowc.settings.values = {
     trackpad_natural_scrolling = 1;
     tap_to_click = 1;
-    disable_while_typing = 1;
+    trackpad_disable_while_typing = 1;
   };
 }
 ```
@@ -344,8 +342,27 @@ Requests are lists of strings. The strings identify who requested a capability.
 Example:
 
 ```nix
-gb.requires.home.git = [ "profile.home.development" ];
+newhost = {
+  system = "x86_64-linux";
+  class = "desktop";
+  roles = [ "workstation" "desktop" ];
+  desktop = "mango";
+  shell = "zsh";
+
+  hardware = {
+    cpu = "amd";
+    gpu = "amd";
+    hasBattery = false;
+    hasBluetooth = true;
+    hasTouchpad = false;
+    hasPrinter = false;
+  };
+
+  extraModules = [ ];
+};
 ```
+
+The flake automatically creates `nixosConfigurations.newhost` from `hosts/default.nix`.
 
 This means:
 
@@ -389,7 +406,6 @@ workstation
 desktop
 laptop
 gaming
-development
 ```
 
 Profiles are allowed to enable multiple defaults or request capabilities.
@@ -684,7 +700,7 @@ Host-specific monitor values stay in host Home Manager files.
 Example:
 
 ```nix
-gb.home.desktop.mango.monitors = [
+gb.home.desktop.mango.mangowc.monitors = [
   "name:eDP-1,width:2256,height:1504,refresh:60,x:0,y:10,scale:1.333,vrr:0,rr:0"
 ];
 ```
@@ -699,13 +715,13 @@ modules/desktop/quickshell/
 
 This keeps shell UI integration separate from Mango itself.
 
-A host or profile should be able to select a profile such as:
+DMS is enabled through the Mango home module:
 
 ```nix
-gb.home.desktop.quickshell.profile = "dms";
+gb.home.desktop.mango.dms.enable = true;
 ```
 
-The QuickShell module handles the implementation.
+The QuickShell/DMS module handles the implementation.
 
 ---
 
@@ -743,6 +759,7 @@ Example: the laptop.
 
 ```nix
 {
+  system = "x86_64-linux";
   class = "laptop";
   roles = [ "workstation" "desktop" "gaming" "development" ];
   desktop = "mango";
@@ -752,8 +769,12 @@ Example: the laptop.
     cpu = "intel";
     gpu = "intel";
     hasBattery = true;
+    hasBluetooth = true;
     hasTouchpad = true;
+    hasPrinter = false;
   };
+
+  extraModules = [ inputs.nixos-hardware.nixosModules.framework-13th-gen-intel ];
 }
 ```
 
@@ -775,11 +796,6 @@ The laptop profile requests:
 The gaming profile enables:
 
 - Steam
-
-The development profile requests:
-
-- Git
-- shell support
 
 ### 3. Capabilities React
 
@@ -811,7 +827,7 @@ Those modules install their apps and request capabilities when needed.
 Host-specific values like monitor layout are applied:
 
 ```nix
-gb.home.desktop.mango.monitors = [
+gb.home.desktop.mango.mangowc.monitors = [
   "name:eDP-1,width:2256,height:1504,refresh:60,x:0,y:10,scale:1.333,vrr:0,rr:0"
 ];
 ```
@@ -920,28 +936,25 @@ Example:
 ```nix
 newhost = {
   system = "x86_64-linux";
+  class = "desktop";
+  roles = [ "workstation" "desktop" ];
+  desktop = "mango";
+  shell = "zsh";
 
-  metadata = {
-    class = "desktop";
-    roles = [ "workstation" "desktop" ];
-    desktop = "mango";
-    shell = "zsh";
-
-    hardware = {
-      cpu = "amd";
-      gpu = "amd";
-      hasBattery = false;
-      hasBluetooth = true;
-      hasTouchpad = false;
-      hasPrinter = false;
-    };
+  hardware = {
+    cpu = "amd";
+    gpu = "amd";
+    hasBattery = false;
+    hasBluetooth = true;
+    hasTouchpad = false;
+    hasPrinter = false;
   };
 
-  nixosModule = ./newhost;
-  homeModule = ./newhost/home.nix;
   extraModules = [ ];
 };
 ```
+
+The flake automatically creates `nixosConfigurations.newhost` from `hosts/default.nix`.
 
 2. Create:
 
@@ -1033,12 +1046,12 @@ sudo nixos-rebuild test --flake .#laptop --show-trace
 Use these commands to find duplicate ownership:
 
 ```bash
-grep -R "programs.git" -n . --exclude-dir=.git --exclude-dir=old
-grep -R "programs.zsh" -n . --exclude-dir=.git --exclude-dir=old
-grep -R "fonts.packages" -n . --exclude-dir=.git --exclude-dir=old
-grep -R "services.pipewire" -n . --exclude-dir=.git --exclude-dir=old
-grep -R "programs.steam" -n . --exclude-dir=.git --exclude-dir=old
-grep -R "services.openssh" -n . --exclude-dir=.git --exclude-dir=old
+grep -R "programs.git" -n . --exclude-dir=.git
+grep -R "programs.zsh" -n . --exclude-dir=.git
+grep -R "fonts.packages" -n . --exclude-dir=.git
+grep -R "services.pipewire" -n . --exclude-dir=.git
+grep -R "programs.steam" -n . --exclude-dir=.git
+grep -R "services.openssh" -n . --exclude-dir=.git
 ```
 
 Expected ownership:
@@ -1089,40 +1102,6 @@ These commands help answer:
 
 ---
 
-## Removing `old/`
-
-`old/` is a migration archive only.
-
-Before deleting it, verify no active file imports it:
-
-```bash
-grep -R "old/" -n . \
-  --exclude-dir=.git \
-  --exclude-dir=old
-```
-
-Then verify both systems build:
-
-```bash
-nix flake check --show-trace
-nix build .#nixosConfigurations.pc.config.system.build.toplevel --show-trace
-nix build .#nixosConfigurations.laptop.config.system.build.toplevel --show-trace
-nix build .#nixosConfigurations.pc.config.home-manager.users.hotplugin.activationPackage --show-trace
-nix build .#nixosConfigurations.laptop.config.home-manager.users.hotplugin.activationPackage --show-trace
-```
-
-If all checks pass:
-
-```bash
-git rm -r old
-git commit -m "Remove archived old configuration"
-git push
-```
-
-Do not delete `old/` if any active module still imports it.
-
----
-
 ## Maintenance Rules
 
 1. One real setting has one owner.
@@ -1131,10 +1110,9 @@ Do not delete `old/` if any active module still imports it.
 4. Profiles express intent.
 5. Hosts contain machine-specific facts and overrides.
 6. Aggregate imports stay explicit.
-7. `old/` must not be active configuration.
-8. If multiple hosts need the same behavior, move it out of host files.
-9. If multiple programs need the same dependency, make or use a capability.
-10. Always test both hosts before switching.
+7. If multiple hosts need the same behavior, move it out of host files.
+8. If multiple programs need the same dependency, make or use a capability.
+9. Always test both hosts before switching.
 
 ---
 

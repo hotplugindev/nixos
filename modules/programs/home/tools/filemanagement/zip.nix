@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.tools.filemanagment.zip.enable = lib.mkEnableOption "Enable brave web browser";
+    gb.home.tools.filemanagment.zip.enable = lib.mkEnableOption "Enable zip and unzip";
   };
 
   config = lib.mkIf zip.enable {

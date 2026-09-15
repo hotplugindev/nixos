@@ -9,6 +9,4 @@
     ./aider-chat.nix
     ./opencode.nix
   ];
-
-  gb.home.programs.ai.llama-cpp.enable = lib.mkDefault true;
 }

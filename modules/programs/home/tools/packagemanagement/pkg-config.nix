@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.tools.packagemanagement.pkg-config.enable = lib.mkEnableOption "Enable brave web browser";
+    gb.home.tools.packagemanagement.pkg-config.enable = lib.mkEnableOption "Enable pkg-config";
   };
 
   config = lib.mkIf pkg-config.enable {

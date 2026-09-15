@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.dev.editors.zed.enable = lib.mkEnableOption "Enable Vscode";
+    gb.home.dev.editors.zed.enable = lib.mkEnableOption "Enable Zed";
   };
 
   config = lib.mkIf zed.enable {

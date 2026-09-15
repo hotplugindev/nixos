@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.tools.audiomanagement.pavucontrol.enable = lib.mkEnableOption "Enable brave web browser";
+    gb.home.tools.audiomanagement.pavucontrol.enable = lib.mkEnableOption "Enable pavucontrol";
   };
 
   config = lib.mkIf pavucontrol.enable {

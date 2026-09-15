@@ -115,9 +115,8 @@
         };
     in
     {
-      nixosConfigurations = {
-        pc = mkHost "pc" (hosts.pc // { name = "pc"; });
-        laptop = mkHost "laptop" (hosts.laptop // { name = "laptop"; });
-      };
+      nixosConfigurations = lib.mapAttrs (
+        hostName: host: mkHost hostName (host // { name = hostName; })
+      ) hosts;
     };
 }

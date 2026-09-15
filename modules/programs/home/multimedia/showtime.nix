@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.programs.multimedia.showtime.enable = lib.mkEnableOption "Enable spotify music player";
+    gb.home.programs.multimedia.showtime.enable = lib.mkEnableOption "Enable Showtime";
   };
 
   config = lib.mkIf showtime.enable {

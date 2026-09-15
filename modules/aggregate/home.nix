@@ -41,7 +41,7 @@
   ];
 
   config = {
-    home.stateVersion = "26.05";
+    home.stateVersion = config.gb.host.stateVersion;
     programs.home-manager.enable = true;
   };
 }

@@ -17,6 +17,7 @@ in
     gb.requires.system.virtualisation.docker = [ requester ];
     gb.requires.system.hardware.bluetooth = lib.mkIf config.gb.host.hardware.hasBluetooth [ requester ];
     gb.requires.system.security.gnupg = [ requester ];
+    gb.requires.system.shell.zsh = lib.mkIf (config.gb.host.shell == "zsh") [ requester ];
     gb.requires.system.kernel.linuxZen = [ requester ];
   };
 }

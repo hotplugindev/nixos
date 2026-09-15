@@ -19,7 +19,6 @@
     ../profiles/system/desktop.nix
     ../profiles/system/laptop.nix
     ../profiles/system/gaming.nix
-    ../profiles/system/development.nix
 
     ../capabilities/system/nix/default.nix
     ../capabilities/system/boot/systemdboot.nix
@@ -54,6 +53,7 @@
     ../capabilities/system/power/power-profiles.nix
     ../capabilities/system/shell/zsh.nix
     ../capabilities/system/hardware/bluetooth.nix
+    ../capabilities/system/hardware/arduino.nix
 
     ../capabilities/system/desktop/greetd.nix
     ../capabilities/system/desktop/xdg-portal.nix
@@ -73,6 +73,6 @@
   config = {
     networking.hostName = config.gb.host.name;
     nixpkgs.hostPlatform = lib.mkDefault config.gb.host.system;
-    system.stateVersion = "26.05";
+    system.stateVersion = config.gb.host.stateVersion;
   };
 }

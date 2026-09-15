@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.programs.ai.llama-cpp.enable = lib.mkEnableOption "Enable codex openai";
+    gb.home.programs.ai.llama-cpp.enable = lib.mkEnableOption "Enable llama.cpp";
   };
 
   config = lib.mkIf llama-cpp.enable {

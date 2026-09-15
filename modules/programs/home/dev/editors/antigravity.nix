@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.dev.editors.antigravity.enable = lib.mkEnableOption "Enable Vscode";
+    gb.home.dev.editors.antigravity.enable = lib.mkEnableOption "Enable Antigravity";
   };
 
   config = lib.mkIf antigravity.enable {

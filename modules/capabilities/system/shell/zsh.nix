@@ -5,10 +5,10 @@
   ...
 }:
 let
-  enabled = config.gb.host.shell == "zsh";
+  requested = config.gb.requires.system.shell.zsh != [ ];
 in
 {
-  config = lib.mkIf enabled {
+  config = lib.mkIf requested {
     programs.zsh.enable = true;
     users.users.${config.gb.user.username}.shell = pkgs.zsh;
   };

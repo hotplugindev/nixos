@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.programs.communication.element.enable = lib.mkEnableOption "Enable discord";
+    gb.home.programs.communication.element.enable = lib.mkEnableOption "Enable Element";
   };
 
   config = lib.mkIf element.enable {

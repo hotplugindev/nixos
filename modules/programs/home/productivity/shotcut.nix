@@ -10,7 +10,7 @@ in
 {
   options = {
     gb.home.programs.productivity.shotcut.enable =
-      lib.mkEnableOption "Enables the gnu image manipulation prgram";
+      lib.mkEnableOption "Enable Shotcut video editor";
   };
 
   config = lib.mkIf shotcut.enable {

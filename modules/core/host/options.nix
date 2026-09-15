@@ -8,6 +8,7 @@ let
   hostMeta = host;
   hardwareMeta = hostMeta.hardware or { };
   defaultStr = value: if value == null then "" else value;
+  stateVersionValue = hostMeta.stateVersion or "26.05";
   defaultList = value: if value == null then [ ] else value;
   defaultBool = value: if value == null then false else value;
   defaultEnum = value: if value == null then "none" else value;
@@ -83,6 +84,11 @@ in
       ];
       default = shellValue;
       description = "User shell";
+    };
+    stateVersion = lib.mkOption {
+      type = lib.types.str;
+      default = stateVersionValue;
+      description = "NixOS state version at install time";
     };
     hardware = {
       cpu = lib.mkOption {

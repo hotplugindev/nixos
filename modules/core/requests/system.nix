@@ -35,7 +35,9 @@ in
     firmware.fwupd = listOption "Request fwupd";
     power.profiles = listOption "Request power profiles";
     security.gnupg = listOption "Request GnuPG";
+    shell.zsh = listOption "Request Zsh system shell";
     hardware.bluetooth = listOption "Request Bluetooth";
+    hardware.arduino = listOption "Request Arduino udev rules";
     virtualisation.docker = listOption "Request Docker";
 
     gaming.gamemode = listOption "Request GameMode";

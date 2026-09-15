@@ -5,5 +5,4 @@
     ./tigervnc.nix
     ./moonlight-qt.nix
   ];
-
 }
