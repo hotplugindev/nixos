@@ -10,7 +10,7 @@ let
   cfg = config.gb.capabilities.system.desktop.greetd;
   dmsEnabled = cfg.greeter == "dms";
   gnomeKeyringRequested = config.gb.requires.system.desktop.gnomeKeyring != [ ];
-  shellCmd = if config.gb.host.shell != "none" then config.gb.host.shell else "zsh";
+  shellCmd = if config.gb.host.shell != "none" then config.gb.host.shell else "bash";
 in
 {
   imports = [ inputs.dank-greeter.nixosModules.dank-greeter ];
@@ -31,7 +31,10 @@ in
     };
 
     greeter = lib.mkOption {
-      type = lib.types.enum [ "tuigreet" "dms" ];
+      type = lib.types.enum [
+        "tuigreet"
+        "dms"
+      ];
       default = "tuigreet";
       description = "Which greeter to use for greetd.";
     };
