@@ -49,7 +49,11 @@ in
             // lib.optionalAttrs langs.go.enable {
               delve = {
                 command = "${pkgs.delve}/bin/dlv";
-                args = [ "dap" ];
+                args = [
+                  "dap"
+                  "--listen"
+                  "127.0.0.1:$${port}"
+                ];
               };
             }
             // lib.optionalAttrs langs.node.enable {
