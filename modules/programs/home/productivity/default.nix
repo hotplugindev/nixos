@@ -8,9 +8,11 @@
     ./bitwarden.nix
     ./shotcut.nix
     ./davinci-resolve.nix
+    ./logseq.nix
   ];
 
   gb.home.programs.productivity.obsidian.enable = lib.mkDefault true;
+  gb.home.programs.productivity.logseq.enable = lib.mkDefault true;
   gb.home.programs.productivity.onlyoffice.enable = lib.mkDefault true;
   gb.home.programs.productivity.gimp.enable = lib.mkDefault true;
 
