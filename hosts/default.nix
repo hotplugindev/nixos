@@ -28,7 +28,6 @@
     roles = [
       "workstation"
       "desktop"
-      "gaming"
       "development"
     ];
     desktop = "mango";
