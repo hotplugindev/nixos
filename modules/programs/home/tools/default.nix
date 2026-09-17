@@ -7,6 +7,4 @@
 
     ./gnome-disks.nix
   ];
-
-  gb.home.tools.gnomeDisks.enable = lib.mkDefault true;
 }

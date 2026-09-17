@@ -32,9 +32,15 @@
     ../capabilities/home/desktop/cliphist.nix
     ../capabilities/home/desktop/nextcloud.nix
 
-    ../programs/home/default.nix
+    ../programs/home/ai/default.nix
+    ../programs/home/communication/default.nix
     ../programs/home/dev/default.nix
+    ../programs/home/gaming/default.nix
+    ../programs/home/multimedia/default.nix
+    ../programs/home/productivity/default.nix
+    ../programs/home/remote/default.nix
     ../programs/home/tools/default.nix
+    ../programs/home/web/default.nix
 
     ../desktop/mango/home/default.nix
     ../desktop/quickshell/home/default.nix
