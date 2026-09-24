@@ -1,6 +1,5 @@
 {
   gb.home.programs.gaming.steampack.enable = true;
-  gb.home.programs.gaming.bottles.enable = true;
   gb.home.programs.gaming.boxflat.enable = true;
   gb.home.programs.gaming.ckan.enable = true;
   gb.home.programs.gaming.prismlauncher.enable = true;
