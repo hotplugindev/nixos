@@ -7,6 +7,7 @@
 {
   imports = [
     inputs.dms-plugin-registry.homeModules.default
+    inputs.spicetify-nix.homeManagerModules.default
 
     ../core/host/options.nix
     ../core/user/options.nix
@@ -37,6 +38,7 @@
     ../programs/home/dev/default.nix
     ../programs/home/gaming/default.nix
     ../programs/home/multimedia/default.nix
+    ../programs/home/entertainment/default.nix
     ../programs/home/productivity/default.nix
     ../programs/home/remote/default.nix
     ../programs/home/tools/default.nix
