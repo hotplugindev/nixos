@@ -430,7 +430,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
-        "spicetify-nix": "spicetify-nix"
+        "spicetify": "spicetify"
       }
     },
     "rust-overlay": {
@@ -477,7 +477,7 @@
         "type": "github"
       }
     },
-    "spicetify-nix": {
+    "spicetify": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
