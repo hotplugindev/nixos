@@ -12,6 +12,7 @@ in
     gb.requires.system.fonts.emoji = [ requester ];
     gb.requires.system.security.polkit = [ requester ];
     gb.requires.system.storage.gvfs = [ requester ];
+    gb.requires.system.storage.zram = [ requester ];
     gb.requires.system.compat.nixLd = [ requester ];
     gb.requires.system.virtualisation.libvirt = [ requester ];
     gb.requires.system.virtualisation.docker = [ requester ];

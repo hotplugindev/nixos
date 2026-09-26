@@ -47,6 +47,7 @@
     ../capabilities/system/security/polkit.nix
     ../capabilities/system/security/gnupg.nix
     ../capabilities/system/storage/gvfs.nix
+    ../capabilities/system/storage/zram.nix
     ../capabilities/system/virtualisation/libvirt.nix
     ../capabilities/system/virtualisation/docker.nix
     ../capabilities/system/firmware/fwupd.nix

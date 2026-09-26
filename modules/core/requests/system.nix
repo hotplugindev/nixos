@@ -30,6 +30,7 @@ in
     networking.kdeconnect = listOption "Request KDE Connect";
     security.polkit = listOption "Request Polkit";
     storage.gvfs = listOption "Request GVFS";
+    storage.zram = listOption "Request zram swap";
     virtualisation.libvirt = listOption "Request libvirt";
 
     firmware.fwupd = listOption "Request fwupd";
