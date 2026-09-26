@@ -7,7 +7,7 @@
 {
   imports = [
     inputs.dms-plugin-registry.homeModules.default
-    inputs.spicetify-nix.homeManagerModules.default
+    inputs.spicetify.homeManagerModules.default
 
     ../core/host/options.nix
     ../core/user/options.nix

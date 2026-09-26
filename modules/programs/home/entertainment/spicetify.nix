@@ -7,7 +7,7 @@
 }:
 let
   spicetify = config.gb.home.programs.multimedia.spicetify;
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  spicePkgs = inputs.spicetify.legacyPackages.${pkgs.system};
 in
 {
   options = {
