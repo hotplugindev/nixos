@@ -10,7 +10,8 @@ let
 in
 {
   options = {
-    gb.home.programs.gaming.boxflat.enable = lib.mkEnableOption "Enables Bottles windows emulator";
+    gb.home.programs.gaming.boxflat.enable =
+      lib.mkEnableOption "Enables BoxFlat Moza wheel configuration tool";
   };
 
   config = lib.mkIf boxflat.enable {

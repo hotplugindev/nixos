@@ -10,7 +10,7 @@ in
 {
   options = {
     gb.home.programs.gaming.prismlauncher.enable =
-      lib.mkEnableOption "Enables some essentials for steam like protonup or mangohud";
+      lib.mkEnableOption "Enables Prism Launcher for Minecraft";
   };
 
   config = lib.mkIf prismlauncher.enable {

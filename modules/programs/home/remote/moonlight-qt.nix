@@ -9,7 +9,7 @@ let
 in
 {
   options = {
-    gb.home.programs.remote.moonlight-qt.enable = lib.mkEnableOption "Sunshine remote dekstop client";
+    gb.home.programs.remote.moonlight-qt.enable = lib.mkEnableOption "Sunshine remote desktop client";
   };
 
   config = lib.mkIf moonlight-qt.enable {
