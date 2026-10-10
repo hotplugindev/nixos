@@ -5,7 +5,7 @@
   gb.home.programs.gaming.prismlauncher.enable = true;
   gb.home.programs.gaming.tt.enable = true;
 
-  gb.home.programs.multimedia.sonora.enable = true;
+  gb.home.programs.entertainment.sonora.enable = true;
 
   gb.home.programs.ai.opencode.enable = true;
 

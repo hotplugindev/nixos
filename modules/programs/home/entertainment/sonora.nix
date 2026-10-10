@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.gb.home.programs.multimedia.sonora;
+  cfg = config.gb.home.programs.entertainment.sonora;
 in
 {
   imports = [
@@ -13,7 +13,7 @@ in
   ];
 
   options = {
-    gb.home.programs.multimedia.sonora = {
+    gb.home.programs.entertainment.sonora = {
       enable = lib.mkEnableOption "Enable sonora music player";
 
       settings = lib.mkOption {

@@ -575,7 +575,7 @@ Home programs include things like:
 modules/programs/home/ai/codex.nix
 modules/programs/home/gaming/bottles.nix
 modules/programs/home/gaming/ckan.nix
-modules/programs/home/multimedia/spotify.nix
+modules/programs/home/entertainment/spotify.nix
 modules/programs/home/remote/moonlight-qt.nix
 modules/programs/home/remote/tigervnc.nix
 ```
@@ -590,10 +590,10 @@ Spotify is a simple app module:
 { lib, config, pkgs, ... }:
 
 let
-  cfg = config.gb.home.programs.multimedia.spotify;
+  cfg = config.gb.home.programs.entertainment.spotify;
 in
 {
-  options.gb.home.programs.multimedia.spotify.enable =
+  options.gb.home.programs.entertainment.spotify.enable =
     lib.mkEnableOption "Spotify";
 
   config = lib.mkIf cfg.enable {
