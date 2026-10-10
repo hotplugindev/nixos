@@ -2,5 +2,6 @@
 {
   imports = [
     ./spotify.nix
+    ./sonora.nix
   ];
 }

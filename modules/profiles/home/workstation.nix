@@ -7,7 +7,7 @@ in
   config = lib.mkIf enabled {
     gb.requires.home.networking.kdeconnect = [ requester ];
 
-    gb.home.programs.multimedia.spotify.enable = lib.mkDefault true;
+    gb.home.programs.entertainment.spotify.enable = lib.mkDefault true;
     gb.home.programs.multimedia.showtime.enable = lib.mkDefault true;
     gb.home.programs.productivity.obsidian.enable = lib.mkDefault true;
     gb.home.programs.productivity.logseq.enable = lib.mkDefault true;

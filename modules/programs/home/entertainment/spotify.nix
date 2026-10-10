@@ -5,11 +5,11 @@
   ...
 }:
 let
-  spotify = config.gb.home.programs.multimedia.spotify;
+  spotify = config.gb.home.programs.entertainment.spotify;
 in
 {
   options = {
-    gb.home.programs.multimedia.spotify.enable = lib.mkEnableOption "Enable spotify music player";
+    gb.home.programs.entertainment.spotify.enable = lib.mkEnableOption "Enable spotify music player";
   };
 
   config = lib.mkIf spotify.enable {
