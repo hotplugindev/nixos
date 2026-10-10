@@ -202,7 +202,7 @@
 
     dmsIncludes.enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = false;
       description = "Include DMS-managed snippets under `~/.config/mango/dms/`.";
     };
 
