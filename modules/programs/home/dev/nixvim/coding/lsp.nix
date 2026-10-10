@@ -24,7 +24,15 @@ in
     programs.nixvim = {
       extraPackages =
         lsp.extraPackages
-        ++ [ pkgs.nixd pkgs.lua-language-server pkgs.bash-language-server pkgs.marksman pkgs.ripgrep pkgs.fd pkgs.git ]
+        ++ [
+          pkgs.nixd
+          pkgs.lua-language-server
+          pkgs.bash-language-server
+          pkgs.marksman
+          pkgs.ripgrep
+          pkgs.fd
+          pkgs.git
+        ]
         ++ lib.optionals langs.node.enable [
           pkgs.typescript-language-server
           pkgs.vscode-langservers-extracted
@@ -42,7 +50,7 @@ in
         ++ lib.optionals langs.dotnet.enable [ pkgs.csharp-ls ]
         ++ lib.optionals langs.php.enable [ pkgs.phpactor ]
         ++ lib.optionals langs.flutter.enable [ pkgs.dart ]
-        ++ lib.optionals langs.java.enable [ pkgs.jdtls ]
+        ++ lib.optionals langs.java.enable [ pkgs.jdt-language-server ]
         ++ lib.optionals langs.kotlin.enable [ pkgs.kotlin-language-server ]
         ++ lib.optionals langs.haskell.enable [ pkgs.haskell-language-server ]
         ++ lib.optionals langs.scala.enable [ pkgs.metals ]
@@ -53,40 +61,38 @@ in
           enable = true;
           inlayHints = true;
 
-          servers =
-            {
-              nixd.enable = true;
-              lua_ls.enable = true;
-              bashls.enable = true;
-              marksman.enable = true;
+          servers = {
+            nixd.enable = true;
+            lua_ls.enable = true;
+            bashls.enable = true;
+            marksman.enable = true;
 
-              ts_ls.enable = langs.node.enable;
-              html.enable = langs.node.enable;
-              cssls.enable = langs.node.enable;
-              jsonls.enable = langs.node.enable;
-              vue_ls.enable = langs.node.enable;
+            ts_ls.enable = langs.node.enable;
+            html.enable = langs.node.enable;
+            cssls.enable = langs.node.enable;
+            jsonls.enable = langs.node.enable;
+            vue_ls.enable = langs.node.enable;
 
-              gopls.enable = langs.go.enable;
-              clangd.enable = langs.c.enable;
-              zls.enable = langs.zig.enable;
-              pyright.enable = langs.python.enable;
-              csharp_ls.enable = langs.dotnet.enable;
-              phpactor.enable = langs.php.enable;
-              dartls.enable = langs.flutter.enable;
-              jdtls.enable = langs.java.enable;
-              kotlin_language_server.enable = langs.kotlin.enable;
-              hls.enable = langs.haskell.enable;
-              metals.enable = langs.scala.enable;
-              clojure_lsp.enable = langs.clojure.enable;
-            }
-            // lib.optionalAttrs langs.rust.enable {
-              rust_analyzer = {
-                enable = true;
-                installCargo = false;
-                installRustc = false;
-              };
+            gopls.enable = langs.go.enable;
+            clangd.enable = langs.c.enable;
+            zls.enable = langs.zig.enable;
+            pyright.enable = langs.python.enable;
+            csharp_ls.enable = langs.dotnet.enable;
+            phpactor.enable = langs.php.enable;
+            dartls.enable = langs.flutter.enable;
+            jdtls.enable = langs.java.enable;
+            kotlin_language_server.enable = langs.kotlin.enable;
+            hls.enable = langs.haskell.enable;
+            metals.enable = langs.scala.enable;
+            clojure_lsp.enable = langs.clojure.enable;
+          }
+          // lib.optionalAttrs langs.rust.enable {
+            rust_analyzer = {
+              enable = true;
+              installCargo = false;
+              installRustc = false;
             };
-
+          };
 
         };
 

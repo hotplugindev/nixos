@@ -21,5 +21,6 @@ in
     gb.home.dev.languages.rust.enable = lib.mkDefault true;
     gb.home.dev.languages.python.enable = lib.mkDefault true;
     gb.home.dev.languages.go.enable = lib.mkDefault true;
+    gb.home.dev.languages.java.enable = lib.mkDefault true;
   };
 }

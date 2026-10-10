@@ -10,17 +10,17 @@ let
   defaultSettings = {
     xwayland_persistence = 1;
     focus_on_activate = 1;
-    sloppyfocus = 1;
-    warpcursor = 1;
+    sloppy_focus = 1;
+    warp_cursor = 1;
     drag_tile_to_tile = 1;
     single_scratchpad = 1;
     cursor_size = 24;
     cursor_theme = "Adwaita";
-    gappih = 5;
-    gappiv = 5;
-    gappoh = 10;
-    gappov = 10;
-    borderpx = 2;
+    gap_inner_horizontal = 5;
+    gap_inner_vertical = 5;
+    gap_outer_horizontal = 10;
+    gap_outer_vertical = 10;
+    border_px = 2;
     enable_hotarea = false;
   };
 
@@ -36,11 +36,11 @@ let
 
   envLines = lib.mapAttrsToList (key: value: "env=${key},${value}") cfg.env;
   bindLines = cfg.bindLines ++ cfg.bindLinesExtra;
-  monitorLines = map (line: "monitorrule=${line}") cfg.monitors;
+  monitorLines = map (line: "monitor_rule=${line}") cfg.monitors;
   ruleLines = map (line: "${line}") cfg.rules;
 
   includeLines = lib.concatMapStringsSep "\n" (
-    file: "source-optional=~/.config/mango/dms/${file}"
+    file: "source_optional=~/.config/mango/dms/${file}"
   ) cfg.dmsIncludes.files;
 
   mangoExtraConfigText = lib.concatStringsSep "\n" [
