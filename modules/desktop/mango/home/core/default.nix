@@ -5,8 +5,14 @@
 
     wallpaper.default = lib.mkOption {
       type = lib.types.path;
-      default = ../assets/kitty.png;
+      default = ../../../assets/kitty.png;
       description = "Default wallpaper source for desktop shells.";
+    };
+
+    wallpaper.directory = lib.mkOption {
+      type = lib.types.path;
+      default = ../../../assets;
+      description = "Shared wallpaper directory browsed by desktop shells.";
     };
   };
 

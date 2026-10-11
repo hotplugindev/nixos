@@ -733,6 +733,8 @@ gb.home.desktop.mango.mangowc.monitors = [
 
 MangoWC keybindings are compositor-native by default. A shell may suppress them and inject its own (see DMS below).
 
+Shared wallpaper images live in `modules/desktop/assets/` and are exposed through `gb.home.desktop.mango.core.wallpaper` (`default` for the active image, `directory` for the browsable folder). Both DMS and Noctalia consume these; Noctalia points its wallpaper picker and automation at the directory, so all bundled wallpapers are selectable without copying them into the home config.
+
 ### Desktop shells
 
 Desktop shell integrations live under:
@@ -945,7 +947,17 @@ gb.home.desktopshells.noctalia.wallpaper = {
 };
 ```
 
-This sets `config.wallpaper.directory`, `fill_mode`, `transition`, `transition_duration` and symlinks the source image into `~/.config/noctalia/wallpapers/default.<ext>`.
+**Changing your background.** Set `wallpaper.source` to any image; the module links it to `~/.config/noctalia/wallpapers/default.<ext>` and writes `config.wallpaper.default.path` — the key Noctalia uses as the active wallpaper on every output at startup:
+
+```nix
+gb.home.desktopshells.noctalia.wallpaper.source = /path/to/image.png;
+```
+
+`fillMode`, `transition`, and `transitionDuration` tune framing and animation. Setting `source = null` skips the active wallpaper (only the picker folder is configured).
+
+Two caveats from Noctalia's two-layer config model:
+- Picking a wallpaper in the wallpaper panel or via IPC writes `wallpaper.default.path` to `~/.local/state/noctalia/settings.toml`, which loads *after* your declarative config and overrides it. To restore the declarative value, remove that key (or the whole `settings.toml`) and restart the shell.
+- To rotate a folder instead of pinning one image, point `config.wallpaper.directory` at it and enable `config.wallpaper.automation` (`automation.enabled = true; automation.interval_seconds = 600;`). The panel and the `/wall` launcher provider browse the same folder.
 
 **Service** (`gb.home.desktopshells.noctalia.service`):
 
