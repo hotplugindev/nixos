@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 let
   mango = config.gb.desktop.mango;
   shellCmd = if config.gb.host.shell != "none" then config.gb.host.shell else "zsh";

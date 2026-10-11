@@ -200,22 +200,10 @@
       description = "Additional raw rules lines.";
     };
 
-    dmsIncludes.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Include DMS-managed snippets under `~/.config/mango/dms/`.";
-    };
-
-    dmsIncludes.files = lib.mkOption {
+    settings.sourceFiles = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [
-        "colors.conf"
-        "outputs.conf"
-        "layout.conf"
-        "cursor.conf"
-        "binds.conf"
-      ];
-      description = "DMS include files that must exist for MangoWC startup.";
+      default = [ ];
+      description = "Additional config files sourced via `source_optional=`. Populated by integrations (e.g. DMS); the WM itself stays agnostic.";
     };
 
     settings.base = lib.mkOption {

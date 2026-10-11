@@ -39,9 +39,9 @@ let
   monitorLines = map (line: "monitor_rule=${line}") cfg.monitors;
   ruleLines = map (line: "${line}") cfg.rules;
 
-  includeLines = lib.concatMapStringsSep "\n" (
-    file: "source_optional=~/.config/mango/dms/${file}"
-  ) cfg.dmsIncludes.files;
+  sourceLines = lib.concatMapStringsSep "\n" (
+    file: "source_optional=${file}"
+  ) cfg.settings.sourceFiles;
 
   mangoExtraConfigText = lib.concatStringsSep "\n" [
     cfg.settings.base
@@ -49,7 +49,7 @@ let
     (lib.concatStringsSep "\n" monitorLines)
     (lib.concatStringsSep "\n" ruleLines)
     (lib.concatStringsSep "\n" bindLines)
-    (lib.optionalString cfg.dmsIncludes.enable includeLines)
+    sourceLines
     cfg.settings.extra
   ];
 

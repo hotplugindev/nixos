@@ -8,5 +8,6 @@
     ./options/default.nix
     ./program/default.nix
     ./wallpaper.nix
+    ./includes.nix
   ];
 }
