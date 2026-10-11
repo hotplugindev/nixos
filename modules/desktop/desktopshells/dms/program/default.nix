@@ -4,10 +4,10 @@
   ...
 }:
 let
-  mango = config.gb.home.desktop.mango;
+  dms = config.gb.home.desktopshells.dms;
 in
 {
-  config = lib.mkIf (mango.enable && mango.dms.enable) {
+  config = lib.mkIf dms.enable {
 
     programs.dank-material-shell = {
       enable = lib.mkDefault true;
@@ -23,7 +23,6 @@ in
         currentThemeName = lib.mkDefault "dynamic";
         currentThemeCategory = lib.mkDefault "dynamic";
         matugenScheme = lib.mkDefault "scheme-neutral";
-        #matugenScheme = "scheme-content";
 
         controlCenterWidgets = [
           {

@@ -25,6 +25,8 @@ in
         swaylock
         qt6Packages.qt6ct
         polkit_gnome
+        grim
+        slurp
         wl-clipboard
         wlr-randr
       ]

@@ -35,7 +35,10 @@ let
   ) finalSettings;
 
   envLines = lib.mapAttrsToList (key: value: "env=${key},${value}") cfg.env;
-  bindLines = cfg.bindLines ++ cfg.bindLinesExtra;
+  bindLines =
+    cfg.bindLines
+    ++ lib.optionals cfg.systemBinds.enable cfg.systemBindLines
+    ++ cfg.bindLinesExtra;
   monitorLines = map (line: "monitor_rule=${line}") cfg.monitors;
   ruleLines = map (line: "${line}") cfg.rules;
 

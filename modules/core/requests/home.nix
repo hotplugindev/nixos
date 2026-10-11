@@ -19,7 +19,7 @@ in
     zellij = listOption "Request zellij configuration";
 
     desktop.mango = listOption "Request Mango home desktop";
-    desktop.dms = listOption "Request DankMaterialShell";
+    desktopshells.dms = listOption "Request DankMaterialShell desktop shell";
     desktop.sessionTarget = listOption "Request Mango session target";
     desktop.authAgent = listOption "Request polkit auth agent";
     desktop.dbusEnv = listOption "Request dbus env import service";

@@ -4,8 +4,8 @@
   ...
 }:
 let
-  mango = config.gb.home.desktop.mango;
-  dms = mango.dms;
+  dms = config.gb.home.desktopshells.dms;
+  mangoWallpaper = lib.attrByPath [ "gb" "home" "desktop" "mango" "core" "wallpaper" "default" ] null config;
   sourceBase = builtins.baseNameOf (toString dms.wallpaper.source);
   ext =
     if builtins.match ".*\\..+" sourceBase != null then
@@ -15,12 +15,12 @@ let
   wallpaperPath = "${config.home.homeDirectory}/.config/DankMaterialShell/wallpapers/default.${ext}";
 in
 {
-  options.gb.home.desktop.mango.dms.wallpaper = {
+  options.gb.home.desktopshells.dms.wallpaper = {
     enable = lib.mkEnableOption "Enable declarative DMS wallpaper defaults";
 
     source = lib.mkOption {
       type = with lib.types; nullOr path;
-      default = config.gb.home.desktop.mango.core.wallpaper.default;
+      default = mangoWallpaper;
       description = "Source image linked to `~/.config/DankMaterialShell/wallpapers/default`.";
     };
 
@@ -39,12 +39,12 @@ in
 
   config = lib.mkMerge [
     {
-      gb.home.desktop.mango.dms.wallpaper.enable = lib.mkDefault true;
+      gb.home.desktopshells.dms.wallpaper.enable = lib.mkDefault true;
     }
-    (lib.mkIf (mango.enable && dms.enable && dms.wallpaper.enable) {
-      gb.home.desktop.mango.dms.program.settings.wallpaperFillMode = lib.mkDefault dms.wallpaper.fillMode;
-      gb.home.desktop.mango.dms.program.session.wallpaperPath = lib.mkDefault wallpaperPath;
-      gb.home.desktop.mango.dms.program.session.wallpaperTransition =
+    (lib.mkIf (dms.enable && dms.wallpaper.enable) {
+      gb.home.desktopshells.dms.program.settings.wallpaperFillMode = lib.mkDefault dms.wallpaper.fillMode;
+      gb.home.desktopshells.dms.program.session.wallpaperPath = lib.mkDefault wallpaperPath;
+      gb.home.desktopshells.dms.program.session.wallpaperTransition =
         lib.mkDefault dms.wallpaper.transition;
 
       xdg.configFile."DankMaterialShell/wallpapers/default.${ext}" = lib.mkIf (dms.wallpaper.source != null) {

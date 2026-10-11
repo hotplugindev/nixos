@@ -16,12 +16,14 @@ let
   defaultCpu = value: if value == null then "generic" else value;
   defaultGpu = value: if value == null then "none" else value;
   defaultShell = value: if value == null then "none" else value;
+  defaultDesktopShell = value: if value == null then "dms" else value;
   nameValue = if hostName != null then hostName else (hostMeta.name or "");
   systemValue = hostMeta.system or "";
   classValue = defaultClass (hostMeta.class or null);
   rolesValue = defaultList (hostMeta.roles or null);
   desktopValue = defaultEnum (hostMeta.desktop or null);
   shellValue = defaultShell (hostMeta.shell or null);
+  desktopShellValue = defaultDesktopShell (hostMeta.desktopShell or null);
   cpuValue = defaultCpu (hardwareMeta.cpu or null);
   gpuValue = defaultGpu (hardwareMeta.gpu or null);
   hasBatteryValue = defaultBool (hardwareMeta.hasBattery or null);
@@ -73,7 +75,16 @@ in
         "none"
       ];
       default = desktopValue;
-      description = "Desktop stack";
+      description = "Desktop compositor stack";
+    };
+    desktopShell = lib.mkOption {
+      type = lib.types.enum [
+        "dms"
+        "noctalia"
+        "none"
+      ];
+      default = desktopShellValue;
+      description = "Desktop shell (UI layer on top of the compositor)";
     };
     shell = lib.mkOption {
       type = lib.types.enum [

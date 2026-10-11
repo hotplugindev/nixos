@@ -17,7 +17,6 @@ in
     enable = lib.mkEnableOption "Enable Mango desktop domain";
     services.enable = lib.mkEnableOption "Enable Mango session services";
     mangowc.enable = lib.mkEnableOption "Enable MangoWC compositor stack";
-    dms.enable = lib.mkEnableOption "Enable DankMaterialShell stack";
     legacy.enable = lib.mkEnableOption "Enable archived old Mango stack";
   };
 
@@ -31,6 +30,5 @@ in
 
     gb.home.desktop.mango.services.enable = lib.mkDefault mango.enable;
     gb.home.desktop.mango.mangowc.enable = lib.mkDefault mango.enable;
-    gb.home.desktop.mango.dms.enable = lib.mkDefault mango.enable;
   };
 }

@@ -2,7 +2,7 @@
 {
   imports = [
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "program" ]
+      [ "gb" "home" "desktopshells" "dms" "program" ]
       [ "programs" "dank-material-shell" ]
     )
   ];

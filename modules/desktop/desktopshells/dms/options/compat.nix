@@ -2,52 +2,52 @@
 {
   imports = [
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "settings" ]
+      [ "gb" "home" "desktopshells" "dms" "settings" ]
       [ "programs" "dank-material-shell" "settings" ]
     )
 
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "session" ]
+      [ "gb" "home" "desktopshells" "dms" "session" ]
       [ "programs" "dank-material-shell" "session" ]
     )
 
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "clipboardSettings" ]
+      [ "gb" "home" "desktopshells" "dms" "clipboardSettings" ]
       [ "programs" "dank-material-shell" "clipboardSettings" ]
     )
 
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "plugins" ]
+      [ "gb" "home" "desktopshells" "dms" "plugins" ]
       [ "programs" "dank-material-shell" "plugins" ]
     )
 
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "enableSystemMonitoring" ]
+      [ "gb" "home" "desktopshells" "dms" "enableSystemMonitoring" ]
       [ "programs" "dank-material-shell" "enableSystemMonitoring" ]
     )
 
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "enableVPN" ]
+      [ "gb" "home" "desktopshells" "dms" "enableVPN" ]
       [ "programs" "dank-material-shell" "enableVPN" ]
     )
 
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "enableDynamicTheming" ]
+      [ "gb" "home" "desktopshells" "dms" "enableDynamicTheming" ]
       [ "programs" "dank-material-shell" "enableDynamicTheming" ]
     )
 
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "enableAudioWavelength" ]
+      [ "gb" "home" "desktopshells" "dms" "enableAudioWavelength" ]
       [ "programs" "dank-material-shell" "enableAudioWavelength" ]
     )
 
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "enableCalendarEvents" ]
+      [ "gb" "home" "desktopshells" "dms" "enableCalendarEvents" ]
       [ "programs" "dank-material-shell" "enableCalendarEvents" ]
     )
 
     (lib.mkAliasOptionModule
-      [ "gb" "home" "desktop" "mango" "dms" "enableClipboardPaste" ]
+      [ "gb" "home" "desktopshells" "dms" "enableClipboardPaste" ]
       [ "programs" "dank-material-shell" "enableClipboardPaste" ]
     )
   ];

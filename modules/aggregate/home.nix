@@ -44,7 +44,7 @@
     ../programs/home/web/default.nix
 
     ../desktop/mango/home/default.nix
-    ../desktop/quickshell/home/default.nix
+    ../desktop/desktopshells/default.nix
   ];
 
   config = {

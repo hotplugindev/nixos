@@ -38,6 +38,27 @@
       description = "Extra raw binds appended to MangoWC configuration.";
     };
 
+    systemBinds.enable = lib.mkEnableOption "Native system keybindings (lock, screenshot, audio, brightness, media)";
+
+    systemBindLines = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        "bind=SUPER,M,spawn,swaylock"
+        "bind=NONE,Print,spawn,grim"
+        "bind=CTRL,Print,spawn_shell,grim -g \"$(slurp)\""
+        "bind=NONE,XF86AudioMute,spawn,pamixer --toggle-mute"
+        "bind=NONE,XF86AudioRaiseVolume,spawn,pamixer -i 5"
+        "bind=NONE,XF86AudioLowerVolume,spawn,pamixer -d 5"
+        "bind=NONE,XF86MonBrightnessUp,spawn,brightnessctl s +5%"
+        "bind=NONE,XF86MonBrightnessDown,spawn,brightnessctl s 5%-"
+        "bind=NONE,XF86AudioPlay,spawn,playerctl play-pause"
+        "bind=NONE,XF86AudioNext,spawn,playerctl next"
+        "bind=NONE,XF86AudioPrev,spawn,playerctl previous"
+        "switchbind=fold,spawn,swaylock"
+      ];
+      description = "System-control binds rendered when no desktop shell provides them.";
+    };
+
     bindLines = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
@@ -45,30 +66,6 @@
         "bind=SUPER+SHIFT,M,quit"
         "bind=SUPER,Return,spawn,foot"
         "bind=SUPER,E,spawn,nautilus"
-        "bind=SUPER,Space,spawn,dms ipc call launcher toggle"
-        "bind=SUPER,M,spawn,dms ipc call lock lock"
-        "bind=SUPER,Q,killclient"
-        "bind=SUPER+SHIFT,F,togglefloating"
-        "bind=SUPER,F,togglefullscreen"
-        "bind=SUPER,A,togglemaximizescreen"
-        "bind=SUPER,G,toggleglobal"
-        "bind=SUPER,O,toggleoverlay"
-        "bind=SUPER,I,minimized"
-        "bind=SUPER+SHIFT,I,restore_minimized"
-        "bind=SUPER,S,toggle_scratchpad"
-        "bind=SUPER,V,spawn_shell,dms ipc call clipboard toggle"
-        "bind=SUPER+SHIFT,V,spawn,dms clipboard clear"
-        "bind=NONE,Print,spawn_shell,dms screenshot"
-        "bind=CTRL,Print,spawn_shell,dms screenshot full"
-        "bind=ALT,Print,spawn_shell,dms screenshot window"
-        "bind=NONE,XF86AudioMute,spawn,dms ipc call audio mute"
-        "bind=NONE,XF86AudioRaiseVolume,spawn,dms ipc call audio increment 5"
-        "bind=NONE,XF86AudioLowerVolume,spawn,dms ipc call audio decrement 5"
-        "bind=NONE,XF86MonBrightnessUp,spawn,dms ipc call brightness increment 5 \"\""
-        "bind=NONE,XF86MonBrightnessDown,spawn,dms ipc call brightness decrement 5 \"\""
-        "bind=NONE,XF86AudioPlay,spawn,dms ipc call mpris playPause"
-        "bind=NONE,XF86AudioNext,spawn,dms ipc call mpris next"
-        "bind=NONE,XF86AudioPrev,spawn,dms ipc call mpris previous"
         "bind=SUPER,left,focusdir,left"
         "bind=SUPER,right,focusdir,right"
         "bind=SUPER,up,focusdir,up"
@@ -112,7 +109,6 @@
         "gesturebind=none,right,3,viewtoleft_have_client"
         "gesturebind=none,up,3,toggleoverview"
         "gesturebind=none,down,3,toggleoverview"
-        "switchbind=fold,spawn,dms ipc call lock lock"
         "switchbind=unfold,spawn,wlr-dpms on"
         "bind=SUPER,1,view,1,0"
         "bind=SUPER,2,view,2,0"
@@ -244,5 +240,8 @@
     };
   };
 
-  config.gb.home.desktop.mango.mangowc.packages.enable = lib.mkDefault true;
+  config = {
+    gb.home.desktop.mango.mangowc.packages.enable = lib.mkDefault true;
+    gb.home.desktop.mango.mangowc.systemBinds.enable = lib.mkDefault true;
+  };
 }

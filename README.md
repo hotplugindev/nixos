@@ -145,6 +145,7 @@ laptop = {
   class = "laptop";
   roles = [ "workstation" "desktop" "gaming" "development" ];
   desktop = "mango";
+  desktopShell = "dms";
   shell = "zsh";
 
   hardware = {
@@ -167,6 +168,7 @@ Good:
 ```nix
 class = "laptop";
 desktop = "mango";
+desktopShell = "dms";
 hardware.hasTouchpad = true;
 ```
 
@@ -347,6 +349,7 @@ newhost = {
   class = "desktop";
   roles = [ "workstation" "desktop" ];
   desktop = "mango";
+  desktopShell = "dms";
   shell = "zsh";
 
   hardware = {
@@ -444,7 +447,7 @@ A Home desktop profile may request:
 - theme
 - XDG integration
 - Mango home integration
-- QuickShell/DMS integration
+- Desktop shell (DMS) integration
 
 Profiles should not own low-level implementation details. They should express what a machine is meant to be.
 
@@ -674,7 +677,7 @@ Important areas:
 
 ```text
 modules/desktop/mango/
-modules/desktop/quickshell/
+modules/desktop/desktopshells/
 ```
 
 ### Mango
@@ -705,23 +708,41 @@ gb.home.desktop.mango.mangowc.monitors = [
 ];
 ```
 
-### QuickShell / Dank Material Shell
+### Desktop shells
 
-QuickShell and Dank Material Shell integration lives under:
+Desktop shell integrations live under:
 
 ```text
-modules/desktop/quickshell/
+modules/desktop/desktopshells/
 ```
 
-This keeps shell UI integration separate from Mango itself.
+Each shell is isolated in its own directory:
 
-DMS is enabled through the Mango home module:
+```text
+modules/desktop/desktopshells/dms/
+modules/desktop/desktopshells/noctalia/
+```
+
+The compositor and the shell are decoupled:
+
+- Mango/MangoWC owns compositor/session behavior and does not reference a shell.
+- A desktop shell may integrate with a compositor through compositor-specific modules.
+- DMS currently provides MangoWC integration under `desktopshells/dms/compositors/mango.nix`.
+- MangoWC default keybindings stay compositor-native; DMS injects shell-specific bindings through `bindLinesExtra`.
+
+DMS is enabled through the host desktop shell option:
 
 ```nix
-gb.home.desktop.mango.dms.enable = true;
+gb.host.desktopShell = "dms";
 ```
 
-The QuickShell/DMS module handles the implementation.
+or directly in Home Manager:
+
+```nix
+gb.home.desktopshells.dms.enable = true;
+```
+
+The DMS module handles program configuration, service startup, wallpaper defaults, and compositor integration.
 
 ---
 
@@ -763,6 +784,7 @@ Example: the laptop.
   class = "laptop";
   roles = [ "workstation" "desktop" "gaming" "development" ];
   desktop = "mango";
+  desktopShell = "dms";
   shell = "zsh";
 
   hardware = {
@@ -939,6 +961,7 @@ newhost = {
   class = "desktop";
   roles = [ "workstation" "desktop" ];
   desktop = "mango";
+  desktopShell = "dms";
   shell = "zsh";
 
   hardware = {
