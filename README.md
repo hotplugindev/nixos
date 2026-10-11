@@ -665,20 +665,52 @@ Then the relevant capabilities provide the implementation.
 
 ## Desktop
 
-The active desktop stack is Mango.
-
-Desktop modules live under:
+Desktop selection is data-driven. Two registries describe every supported compositor and shell, and the profiles read from them instead of hardcoding Mango.
 
 ```text
-modules/desktop/
+modules/core/desktops.nix   # compositor registry
+modules/core/shells.nix     # desktop-shell registry
 ```
 
-Important areas:
+Each desktop entry declares:
 
-```text
-modules/desktop/mango/
-modules/desktop/desktopshells/
+- `sessionCommand shell` — the greetd session command
+- `sessionTarget` — the systemd user target that gates session services
+- `customSessionTarget` — whether this repo must create the target (Mango) or the upstream module already does (Sway/Hyprland)
+- `systemRequests` / `homeRequests` — which capabilities the desktop needs
+- `deferred` — whether the desktop is selectable but not yet implemented
+
+Each shell entry declares only `deferred` today; shells are wired through their own modules.
+
+### Switching desktops and shells
+
+A host picks its compositor and shell with two options:
+
+```nix
+gb.host.desktop = "mango";      # mango | sway | hyprland | gnome | kde | none
+gb.host.desktopShell = "dms";   # dms | noctalia | none
 ```
+
+The profiles then:
+
+1. Enable `gb.desktop.<name>` (system) and `gb.home.desktop.<name>` (home).
+2. Request the desktop's capabilities via `gb.requires.system.desktop.*` / `gb.requires.home.desktop.*`.
+3. Set the greetd `sessionCommand` and the active `wayland.systemd.target`.
+4. Enable the selected shell module.
+
+Adding a new compositor is therefore: add one entry to `desktops.nix`, write a `system/default.nix` + `home/default.nix` pair under `modules/desktop/<name>/`, and import both in the aggregates. No profile logic changes.
+
+### Supported compositors
+
+| Desktop | Status | Notes |
+|---|---|---|
+| Mango | active (default) | Custom session target; full MangoWC config generation. |
+| Sway | active | Uses nixpkgs `programs.sway` + HM `wayland.windowManager.sway`. |
+| Hyprland | active | Uses nixpkgs `programs.hyprland` + HM `wayland.windowManager.hyprland`; configures its own portals, so it does not request the generic xdg-portal capability. |
+| GNOME | deferred | Placeholder only (`modules/desktop/gnome/`); selecting it is a no-op until implemented. |
+| KDE/Plasma | deferred | Placeholder only (`modules/desktop/kde/`); selecting it is a no-op until implemented. |
+
+GNOME and KDE are full desktop environments that own their display manager and have no separate shell layer, so they are intentionally left for a later pass.
 
 ### Mango
 
@@ -689,24 +721,17 @@ modules/desktop/mango/system/default.nix
 modules/desktop/mango/home/default.nix
 ```
 
-The system module owns system/session-level Mango behavior.
+The system module owns system/session-level Mango behavior. The home module owns user-level MangoWC configuration (config generation, monitor declarations, settings values).
 
-The home module owns user-level Mango configuration, including:
-
-- MangoWC config
-- monitor declarations
-- settings values
-- Mango-related user configuration
-
-Host-specific monitor values stay in host Home Manager files.
-
-Example:
+Host-specific monitor values stay in host Home Manager files:
 
 ```nix
 gb.home.desktop.mango.mangowc.monitors = [
   "name:eDP-1,width:2256,height:1504,refresh:60,x:0,y:10,scale:1.333,vrr:0,rr:0"
 ];
 ```
+
+MangoWC keybindings are compositor-native by default. A shell may suppress them and inject its own (see DMS below).
 
 ### Desktop shells
 
@@ -725,24 +750,20 @@ modules/desktop/desktopshells/noctalia/
 
 The compositor and the shell are decoupled:
 
-- Mango/MangoWC owns compositor/session behavior and does not reference a shell.
-- A desktop shell may integrate with a compositor through compositor-specific modules.
-- DMS currently provides MangoWC integration under `desktopshells/dms/compositors/mango.nix`.
-- MangoWC default keybindings stay compositor-native; DMS injects shell-specific bindings through `bindLinesExtra`.
+- A compositor owns session behavior and never references a shell.
+- A shell may integrate with a compositor through compositor-specific modules.
 
-DMS is enabled through the host desktop shell option:
+**DMS** is invasive on MangoWC: it provides `desktopshells/dms/compositors/mango.nix`, which sources DMS-managed snippets into MangoWC, injects its IPC keybindings via `bindLinesExtra`, and suppresses MangoWC's native system binds. Enable with:
 
 ```nix
 gb.host.desktopShell = "dms";
 ```
 
-or directly in Home Manager:
+**Noctalia** is non-invasive: it gates only on the active session target (`wayland.systemd.target`) and injects no compositor keybindings, so it works on any supported compositor without per-compositor modules. Its config is rendered to `~/.config/noctalia/config.toml` from `gb.home.desktopshells.noctalia.settings`. Enable with:
 
 ```nix
-gb.home.desktopshells.dms.enable = true;
+gb.host.desktopShell = "noctalia";
 ```
-
-The DMS module handles program configuration, service startup, wallpaper defaults, and compositor integration.
 
 ---
 

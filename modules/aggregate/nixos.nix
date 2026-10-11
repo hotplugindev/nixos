@@ -69,6 +69,8 @@
     ../programs/system/scripts/default.nix
 
     ../desktop/mango/system/default.nix
+    ../desktop/sway/system/default.nix
+    ../desktop/hyprland/system/default.nix
   ];
 
   config = {

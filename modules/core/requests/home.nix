@@ -20,6 +20,7 @@ in
 
     desktop.mango = listOption "Request Mango home desktop";
     desktopshells.dms = listOption "Request DankMaterialShell desktop shell";
+    desktopshells.noctalia = listOption "Request Noctalia desktop shell";
     desktop.sessionTarget = listOption "Request Mango session target";
     desktop.authAgent = listOption "Request polkit auth agent";
     desktop.dbusEnv = listOption "Request dbus env import service";

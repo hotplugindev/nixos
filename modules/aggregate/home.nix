@@ -43,6 +43,8 @@
 
     ../desktop/mango/home/default.nix
     ../desktop/desktopshells/default.nix
+    ../desktop/sway/home/default.nix
+    ../desktop/hyprland/home/default.nix
   ];
 
   config = {

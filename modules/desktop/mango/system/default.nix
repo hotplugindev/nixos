@@ -1,8 +1,6 @@
 { lib, config, ... }:
 let
   mango = config.gb.desktop.mango;
-  shellCmd = if config.gb.host.shell != "none" then config.gb.host.shell else "zsh";
-  mangoCommand = "${shellCmd} -l -c mango";
   mangoPkg = config.programs.mango.package;
 in
 {
@@ -23,16 +21,5 @@ in
     };
 
     security.pam.services.swaylock.fprintAuth = false;
-
-    gb.requires.system.desktop.greetd = [ "desktop.mango" ];
-    gb.requires.system.desktop.xdgPortal = [ "desktop.mango" ];
-    gb.requires.system.desktop.xwayland = [ "desktop.mango" ];
-    gb.requires.system.desktop.gnomeKeyring = [ "desktop.mango" ];
-    gb.requires.system.desktop.dconf = [ "desktop.mango" ];
-
-    gb.capabilities.system.desktop.greetd = {
-      autologin = lib.mkDefault mango.autologin;
-      sessionCommand = lib.mkDefault mangoCommand;
-    };
   };
 }

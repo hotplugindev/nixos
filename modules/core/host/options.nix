@@ -70,8 +70,10 @@ in
     desktop = lib.mkOption {
       type = lib.types.enum [
         "mango"
+        "sway"
         "hyprland"
         "gnome"
+        "kde"
         "none"
       ];
       default = desktopValue;

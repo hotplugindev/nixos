@@ -26,8 +26,8 @@ in
 
     sessionCommand = lib.mkOption {
       type = lib.types.str;
-      default = "${shellCmd} -l -c mango";
-      description = "Default session command for greetd.";
+      default = "";
+      description = "Session command for greetd; provided by the active desktop profile.";
     };
 
     greeter = lib.mkOption {

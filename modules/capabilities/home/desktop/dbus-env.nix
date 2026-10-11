@@ -6,7 +6,7 @@
 }:
 let
   requests = config.gb.requires.home.desktop.dbusEnv;
-  startupTarget = config.gb.home.desktop.mango.mangowc.startupTarget;
+  startupTarget = config.gb.home.desktop.activeSessionTarget;
 in
 {
   config = lib.mkIf (requests != [ ]) {
