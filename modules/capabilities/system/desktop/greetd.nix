@@ -9,8 +9,10 @@ let
   requests = config.gb.requires.system.desktop.greetd;
   cfg = config.gb.capabilities.system.desktop.greetd;
   dmsEnabled = cfg.greeter == "dms";
+  noctaliaEnabled = cfg.greeter == "noctalia";
   gnomeKeyringRequested = config.gb.requires.system.desktop.gnomeKeyring != [ ];
   shellCmd = if config.gb.host.shell != "none" then config.gb.host.shell else "bash";
+  tomlFormat = pkgs.formats.toml { };
 in
 {
   imports = [ inputs.dank-greeter.nixosModules.dank-greeter ];
@@ -34,9 +36,20 @@ in
       type = lib.types.enum [
         "tuigreet"
         "dms"
+        "noctalia"
       ];
       default = "tuigreet";
       description = "Which greeter to use for greetd.";
+    };
+
+    noctalia = {
+      package = lib.mkPackageOption pkgs "noctalia-greeter" { };
+
+      settings = lib.mkOption {
+        type = tomlFormat.type;
+        default = { };
+        description = "Declarative greeter.toml for noctalia-greeter. Written to /var/lib/noctalia-greeter/greeter.toml.";
+      };
     };
   };
 
@@ -50,6 +63,16 @@ in
       quickshell.package = pkgs.quickshell;
     };
 
+    environment.systemPackages = lib.mkIf noctaliaEnabled [ cfg.noctalia.package ];
+
+    systemd.tmpfiles.rules = lib.mkIf noctaliaEnabled [
+      "d /var/lib/noctalia-greeter 0750 greeter greeter -"
+    ];
+
+    environment.etc."noctalia-greeter/greeter.toml" = lib.mkIf (noctaliaEnabled && cfg.noctalia.settings != { }) {
+      source = tomlFormat.generate "greeter.toml" cfg.noctalia.settings;
+    };
+
     services.greetd = {
       enable = true;
       restart = true;
@@ -60,15 +83,21 @@ in
         };
         default_session = {
           user = "greeter";
-          command = lib.mkOptionDefault ''
-            ${pkgs.tuigreet}/bin/tuigreet \
-              --time \
-              --remember \
-              --remember-user-session \
-              --user-menu \
-              --asterisks \
-              --cmd "${cfg.sessionCommand}"
-          '';
+          command =
+            if noctaliaEnabled then
+              lib.mkForce ''
+                ${lib.getExe cfg.noctalia.package}
+              ''
+            else
+              lib.mkOptionDefault ''
+                ${pkgs.tuigreet}/bin/tuigreet \
+                  --time \
+                  --remember \
+                  --remember-user-session \
+                  --user-menu \
+                  --asterisks \
+                  --cmd "${cfg.sessionCommand}"
+              '';
         };
       };
     };

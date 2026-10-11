@@ -10,7 +10,7 @@
       "development"
     ];
     desktop = "mango";
-    desktopshell = "noctalia";
+    desktopShell = "noctalia";
     shell = "zsh";
     hardware = {
       cpu = "amd";
@@ -32,6 +32,7 @@
       "development"
     ];
     desktop = "mango";
+    desktopShell = "dms";
     shell = "zsh";
     hardware = {
       cpu = "intel";

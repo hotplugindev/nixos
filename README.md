@@ -23,7 +23,7 @@ The current hosts are:
 | Host     | Class   | Desktop | Roles                                     |
 | -------- | ------- | ------- | ----------------------------------------- |
 | `pc`     | desktop | Mango   | workstation, desktop, gaming, development |
-| `laptop` | laptop  | Mango   | workstation, desktop, gaming, development |
+| `laptop` | laptop  | Mango   | workstation, desktop, development         |
 
 The main user is:
 
@@ -702,13 +702,13 @@ Adding a new compositor is therefore: add one entry to `desktops.nix`, write a `
 
 ### Supported compositors
 
-| Desktop | Status | Notes |
-|---|---|---|
-| Mango | active (default) | Custom session target; full MangoWC config generation. |
-| Sway | active | Uses nixpkgs `programs.sway` + HM `wayland.windowManager.sway`. |
-| Hyprland | active | Uses nixpkgs `programs.hyprland` + HM `wayland.windowManager.hyprland`; configures its own portals, so it does not request the generic xdg-portal capability. |
-| GNOME | deferred | Placeholder only (`modules/desktop/gnome/`); selecting it is a no-op until implemented. |
-| KDE/Plasma | deferred | Placeholder only (`modules/desktop/kde/`); selecting it is a no-op until implemented. |
+| Desktop    | Status           | Notes                                                                                                                                                         |
+| ---------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mango      | active (default) | Custom session target; full MangoWC config generation.                                                                                                        |
+| Sway       | active           | Uses nixpkgs `programs.sway` + HM `wayland.windowManager.sway`.                                                                                               |
+| Hyprland   | active           | Uses nixpkgs `programs.hyprland` + HM `wayland.windowManager.hyprland`; configures its own portals, so it does not request the generic xdg-portal capability. |
+| GNOME      | deferred         | Placeholder only (`modules/desktop/gnome/`); selecting it is a no-op until implemented.                                                                       |
+| KDE/Plasma | deferred         | Placeholder only (`modules/desktop/kde/`); selecting it is a no-op until implemented.                                                                         |
 
 GNOME and KDE are full desktop environments that own their display manager and have no separate shell layer, so they are intentionally left for a later pass.
 
@@ -764,6 +764,28 @@ gb.host.desktopShell = "dms";
 ```nix
 gb.host.desktopShell = "noctalia";
 ```
+
+### Greeters
+
+The greetd capability supports three greeters, selected independently of the compositor and shell:
+
+```nix
+gb.capabilities.system.desktop.greetd.greeter = "tuigreet";  # default
+gb.capabilities.system.desktop.greetd.greeter = "dms";       # DankMaterialShell greeter
+gb.capabilities.system.desktop.greetd.greeter = "noctalia";  # Noctalia greeter
+```
+
+**Noctalia greeter** launches `noctalia-greeter-session` (bundled wlroots compositor + greeter UI). Its declarative config lives at `/var/lib/noctalia-greeter/greeter.toml`, rendered from:
+
+```nix
+gb.capabilities.system.desktop.greetd.noctalia.settings = {
+  session.default = "Mango";
+  appearance.scheme = "Noctalia";
+  clock.time_format = "{:%H:%M}";
+};
+```
+
+The greeter discovers sessions from `wayland-sessions` directories. List available names with `noctalia-greeter sessions`.
 
 ---
 
