@@ -9,5 +9,6 @@
     ./shotcut.nix
     ./davinci-resolve.nix
     ./logseq.nix
+    ./zotero.nix
   ];
 }

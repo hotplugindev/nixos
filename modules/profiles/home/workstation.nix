@@ -10,6 +10,7 @@ in
     gb.home.programs.entertainment.spotify.enable = lib.mkDefault true;
     gb.home.programs.multimedia.showtime.enable = lib.mkDefault true;
     gb.home.programs.productivity.obsidian.enable = lib.mkDefault true;
+    gb.home.programs.productivity.zotero.enable = lib.mkDefault true;
     gb.home.programs.productivity.onlyoffice.enable = lib.mkDefault true;
     gb.home.programs.productivity.gimp.enable = lib.mkDefault true;
     gb.home.programs.productivity.nextcloud.enable = lib.mkDefault true;
