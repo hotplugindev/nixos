@@ -20,6 +20,20 @@ in
         description = "Inject Noctalia IPC keybindings into MangoWC via bindLinesExtra.";
       };
     };
+
+    styling = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Inject shell-owned visual styling (rounded corners, border radius) into MangoWC.";
+      };
+
+      borderRadius = lib.mkOption {
+        type = lib.types.int;
+        default = 6;
+        description = "Window corner radius in pixels.";
+      };
+    };
   };
 
   config = lib.mkMerge [
@@ -29,6 +43,11 @@ in
 
     (lib.mkIf (noctalia.enable && noctalia.compositors.mango.enable) {
       gb.home.desktopshells.noctalia.service.target = lib.mkDefault mango.mangowc.startupTarget;
+    })
+
+    (lib.mkIf (noctalia.enable && noctalia.compositors.mango.enable && noctalia.compositors.mango.styling.enable) {
+      gb.home.desktop.mango.mangowc.settings.values.border_radius = lib.mkDefault noctalia.compositors.mango.styling.borderRadius;
+      gb.home.desktop.mango.mangowc.settings.values.no_radius_when_single = lib.mkDefault 0;
     })
 
     (lib.mkIf (noctalia.enable && noctalia.compositors.mango.enable && noctalia.compositors.mango.binds.enable) {

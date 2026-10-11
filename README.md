@@ -769,10 +769,14 @@ gb.host.desktopShell = "noctalia";
 
 Noctalia's weather location defaults to `"Brixen - Bressanone, 39042"` (matching DMS), configured via `gb.home.desktopshells.noctalia.config.location.address`.
 
-To opt out of keybind injection (e.g. to manage your own compositor binds):
+Noctalia also owns shell-level visual styling on MangoWC (rounded corners via `border_radius`), mirroring what DMS does at runtime. This is the compositor module's responsibility, not Mango's — the compositor stays agnostic, the shell provides looks.
+
+To opt out of keybind injection or styling independently:
 
 ```nix
 gb.home.desktopshells.noctalia.compositors.mango.binds.enable = false;
+gb.home.desktopshells.noctalia.compositors.mango.styling.enable = false;
+gb.home.desktopshells.noctalia.compositors.mango.styling.borderRadius = 10;
 ```
 
 #### Noctalia configuration
