@@ -761,10 +761,18 @@ The compositor and the shell are decoupled:
 gb.host.desktopShell = "dms";
 ```
 
-**Noctalia** is non-invasive: it gates only on the active session target (`wayland.systemd.target`) and injects no compositor keybindings, so it works on any supported compositor without per-compositor modules. Enable with:
+**Noctalia** is non-invasive at its core: it gates only on the active session target (`wayland.systemd.target`) and renders its own UI without modifying compositor configuration. However, it provides a compositor module (`desktopshells/noctalia/compositors/mango.nix`) that injects Noctalia IPC keybindings into MangoWC (launcher, lock, clipboard, screenshots, audio, brightness, media) and suppresses MangoWC's native system binds, mirroring the DMS pattern. Enable with:
 
 ```nix
 gb.host.desktopShell = "noctalia";
+```
+
+Noctalia's weather location defaults to `"Brixen - Bressanone, 39042"` (matching DMS), configured via `gb.home.desktopshells.noctalia.config.location.address`.
+
+To opt out of keybind injection (e.g. to manage your own compositor binds):
+
+```nix
+gb.home.desktopshells.noctalia.compositors.mango.binds.enable = false;
 ```
 
 #### Noctalia configuration

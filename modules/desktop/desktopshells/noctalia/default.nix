@@ -5,6 +5,8 @@
     ./program/default.nix
     ./services.nix
     ./wallpaper.nix
+    ./location.nix
+    ./compositors/mango.nix
   ];
 
   options.gb.home.desktopshells.noctalia = {
