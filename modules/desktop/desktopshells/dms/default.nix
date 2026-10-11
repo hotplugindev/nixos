@@ -2,6 +2,7 @@
 {
   imports = [
     inputs.dms.homeModules.dank-material-shell
+    inputs.dms-plugin-registry.homeModules.default
     ./options/default.nix
     ./program/default.nix
     ./wallpaper.nix
@@ -9,5 +10,6 @@
     ./compositors/mango.nix
   ];
 
-  options.gb.home.desktopshells.dms.enable = lib.mkEnableOption "Enable DankMaterialShell desktop shell";
+  options.gb.home.desktopshells.dms.enable =
+    lib.mkEnableOption "Enable DankMaterialShell desktop shell";
 }

@@ -6,8 +6,6 @@
 }:
 {
   imports = [
-    inputs.dms-plugin-registry.homeModules.default
-
     ../core/host/options.nix
     ../core/user/options.nix
     ../core/requests/home.nix
