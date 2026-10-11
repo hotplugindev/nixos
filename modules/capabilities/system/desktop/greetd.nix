@@ -65,13 +65,17 @@ in
 
     environment.systemPackages = lib.mkIf noctaliaEnabled [ cfg.noctalia.package ];
 
-    systemd.tmpfiles.rules = lib.mkIf noctaliaEnabled [
-      "d /var/lib/noctalia-greeter 0750 greeter greeter -"
-    ];
-
-    environment.etc."noctalia-greeter/greeter.toml" = lib.mkIf (noctaliaEnabled && cfg.noctalia.settings != { }) {
-      source = tomlFormat.generate "greeter.toml" cfg.noctalia.settings;
-    };
+    systemd.tmpfiles.rules = lib.mkIf noctaliaEnabled (
+      [ "d /var/lib/noctalia-greeter 0750 greeter greeter -" ]
+      ++ lib.optionals (cfg.noctalia.settings != { }) [
+        (
+          let
+            src = tomlFormat.generate "noctalia-greeter.toml" cfg.noctalia.settings;
+          in
+          "L+ /var/lib/noctalia-greeter/greeter.toml - greeter greeter - ${src}"
+        )
+      ]
+    );
 
     services.greetd = {
       enable = true;

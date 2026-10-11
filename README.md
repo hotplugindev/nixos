@@ -759,11 +759,217 @@ The compositor and the shell are decoupled:
 gb.host.desktopShell = "dms";
 ```
 
-**Noctalia** is non-invasive: it gates only on the active session target (`wayland.systemd.target`) and injects no compositor keybindings, so it works on any supported compositor without per-compositor modules. Its config is rendered to `~/.config/noctalia/config.toml` from `gb.home.desktopshells.noctalia.settings`. Enable with:
+**Noctalia** is non-invasive: it gates only on the active session target (`wayland.systemd.target`) and injects no compositor keybindings, so it works on any supported compositor without per-compositor modules. Enable with:
 
 ```nix
 gb.host.desktopShell = "noctalia";
 ```
+
+#### Noctalia configuration
+
+Noctalia's full config surface is exposed as typed Nix options under `gb.home.desktopshells.noctalia.config.*`. Every key mirrors the TOML path in `~/.config/noctalia/config.toml` (dots become attribute paths). All typed options default to `null`, meaning "use the built-in default from `noctalia config export full`".
+
+The module directory:
+
+```text
+modules/desktop/desktopshells/noctalia/
+├── default.nix              # enable, package, settings (escape hatch)
+├── baseline.nix             # full defaults from noctalia config export full
+├── program/default.nix      # merges baseline + typed config + settings → config.toml
+├── services.nix             # systemd user service gated on active session target
+├── wallpaper.nix            # declarative wallpaper defaults
+└── options/
+    ├── default.nix          # imports generated.nix
+    └── generated.nix        # typed options for every fixed-shape config key
+```
+
+**Three layers, merged in order (later wins):**
+
+1. `baseline.nix` — all built-in defaults (773 lines, auto-generated from `noctalia config export full`).
+2. `gb.home.desktopshells.noctalia.config.*` — typed options with enums on closed vocabularies (e.g. `theme.mode`, `shell.panel.transparency_mode`, `dock.position`). Setting a value overrides the baseline; leaving it `null` keeps the default.
+3. `gb.home.desktopshells.noctalia.settings` — raw attrset merged last. Use for arbitrary-keyed tables not covered by typed options (bar instances, widget definitions, launcher providers, custom palette maps, dmenu entries, hot-corner commands, idle behaviors, session actions, plugin settings).
+
+**Typed options (examples):**
+
+```nix
+gb.home.desktopshells.noctalia.config = {
+  theme = {
+    mode = "dark";
+    source = "builtin";
+    builtin = "Noctalia";
+    pure_black_dark = true;
+  };
+
+  shell = {
+    font_family = "JetBrainsMono Nerd Font";
+    corner_radius_scale = 0.5;
+    offline_mode = true;
+    telemetry_enabled = false;
+    setup_wizard_enabled = false;
+    polkit_agent = true;
+
+    panel = {
+      transparency_mode = "glass";
+      borders = false;
+      shadow = false;
+      launcher_placement = "floating";
+      launcher_position = "center";
+    };
+
+    screenshot = {
+      save_to_file = true;
+      copy_to_clipboard = true;
+      freeze_screen = true;
+      annotate = false;
+    };
+
+    launcher = {
+      categories = true;
+      show_icons = true;
+      compact = false;
+      sort_by_usage = true;
+      provider_prefix = "/";
+    };
+  };
+
+  bar.order = [ "default" ];
+
+  dock = {
+    enabled = true;
+    position = "bottom";
+    icon_size = 40;
+    magnification = true;
+    magnification_scale = 1.3;
+    auto_hide = true;
+  };
+
+  wallpaper = {
+    enabled = true;
+    fill_mode = "crop";
+    transition_duration = 800.0;
+    automation.enabled = true;
+    automation.interval_seconds = 600;
+  };
+
+  notification = {
+    enable_daemon = true;
+    position = "top_right";
+    max_visible = 5;
+  };
+
+  osd = {
+    enabled = true;
+    position = "top_center";
+    orientation = "horizontal";
+  };
+
+  idle = {
+    behavior.lock.enabled = true;
+    behavior.lock.timeout = 300.0;
+    behavior_order = [ "lock" "screen-off" ];
+  };
+
+  hot_corners = {
+    enabled = true;
+    top_left.action = "launcher";
+    bottom_right.action = "command";
+    bottom_right.command = "swaylock -f";
+  };
+
+  weather.unit = "metric";
+  battery.warning_threshold = 15;
+  nightlight.enabled = true;
+  nightlight.temperature_night = 3500;
+};
+```
+
+**Raw `settings` escape hatch (for arbitrary-keyed tables):**
+
+```nix
+gb.home.desktopshells.noctalia.settings = {
+  bar.default = {
+    start = [ "launcher" "workspaces" "active_window" ];
+    center = [ "clock" ];
+    end = [ "media" "volume" "battery" "control-center" ];
+    thickness = 30;
+    padding = 10;
+    widget_spacing = 4;
+    capsule = true;
+    capsule_fill = "surface_variant";
+  };
+
+  widget = {
+    clock = { type = "clock"; format = "{:%H:%M}"; };
+    mytext = { type = "text"; text = "hello"; };
+  };
+
+  shell.launcher.providers.calculator = {
+    prefix = "calc";
+    global = true;
+  };
+
+  shell.launcher.dmenu.entry.ssh = {
+    command = "awk '/^Host /{print $2}' ~/.ssh/config";
+    exec = "foot ssh {selection}";
+    prefix = "ssh";
+    glyph = "server";
+  };
+
+  shell.keyboard_layout.custom_labels = {
+    "English (US)" = "EN";
+    "German (Neo 2)" = "Neo2";
+  };
+
+  plugins.enabled = [ "noctalia-dev/weather" "noctalia-dev/clipboard" ];
+
+  hooks.started = [ "notify-send 'Noctalia started'" ];
+
+  shell.session.actions = [
+    { action = "lock"; enabled = true; shortcut = "1"; }
+    { action = "logout"; enabled = true; shortcut = "2"; }
+    { action = "reboot"; enabled = true; shortcut = "4"; }
+    { action = "shutdown"; enabled = true; shortcut = "5"; variant = "destructive"; }
+  ];
+};
+```
+
+**Wallpaper convenience layer** (`gb.home.desktopshells.noctalia.wallpaper`):
+
+```nix
+gb.home.desktopshells.noctalia.wallpaper = {
+  enable = true;           # default when noctalia is enabled
+  source = ./my-wallpaper.jpg;  # defaults to mango core wallpaper if available
+  fillMode = "crop";       # center | crop | fit | stretch | repeat | span
+  transition = [ "fade" "zoom" ];
+  transitionDuration = 800.0;
+};
+```
+
+This sets `config.wallpaper.directory`, `fill_mode`, `transition`, `transition_duration` and symlinks the source image into `~/.config/noctalia/wallpapers/default.<ext>`.
+
+**Service** (`gb.home.desktopshells.noctalia.service`):
+
+```nix
+gb.home.desktopshells.noctalia.service = {
+  enable = true;   # default when noctalia is enabled
+  target = "mango-session.target";  # auto-set by compositor integration; override manually if needed
+};
+```
+
+**Discovering available keys:**
+
+```bash
+# dump the full effective config (every key + default)
+noctalia config export full > /tmp/noctalia-full.toml
+
+# validate a specific file
+noctalia config validate /path/to/config.toml
+
+# count settings UI controls (sanity check)
+noctalia config settings-count
+```
+
+The typed options in `options/generated.nix` cover every fixed-shape key from the export. Arbitrary-keyed tables (bar instances, widget defs, launcher providers, dmenu entries, custom labels, plugin settings, session actions, idle behaviors) are intentionally left to the `settings` escape hatch because their keys are user-defined.
 
 ### Greeters
 

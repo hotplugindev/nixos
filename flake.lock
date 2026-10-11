@@ -445,15 +445,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1791715968,
-        "narHash": "sha256-pMtnsyOTXRIs5aVaORh4ounUhdPXQBw7dr7l5q+GkHI=",
-        "owner": "hotplugindev",
+        "lastModified": 1791720416,
+        "narHash": "sha256-aCn2jFkpF9qbLNrS/5MPYq7fxqT6sVAQZdqcVKvAAd8=",
+        "owner": "rootscripts",
         "repo": "riff",
-        "rev": "a5c7e08d8ca8211014e842d96a5380f6e5ad9b82",
+        "rev": "cadb101c69dbc8c6dfb915d3cfea3067cd90f85a",
         "type": "github"
       },
       "original": {
-        "owner": "hotplugindev",
+        "owner": "rootscripts",
         "repo": "riff",
         "type": "github"
       }

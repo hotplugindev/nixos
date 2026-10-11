@@ -40,7 +40,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     riff = {
-      url = "github:hotplugindev/riff";
+      url = "github:rootscripts/riff";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
