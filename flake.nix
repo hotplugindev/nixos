@@ -39,6 +39,10 @@
       url = "github:sonorahq/sonora";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    riff = {
+      url = "github:hotplugindev/riff";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

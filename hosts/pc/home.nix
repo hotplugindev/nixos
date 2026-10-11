@@ -6,6 +6,7 @@
   gb.home.programs.gaming.tt.enable = true;
 
   gb.home.programs.entertainment.sonora.enable = true;
+  gb.home.programs.entertainment.riff.enable = true;
 
   gb.home.programs.ai.opencode.enable = true;
 
