@@ -10,5 +10,5 @@
 
   gb.system.scripts.turbo-toggle.enable = true;
 
-  gb.capabilities.system.desktop.greetd.greeter = "dms";
+  gb.capabilities.system.desktop.greetd.greeter = "noctalia";
 }
