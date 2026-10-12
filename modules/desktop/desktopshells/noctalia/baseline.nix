@@ -659,7 +659,7 @@
     };
   };
   theme = {
-    builtin = "Noctalia";
+    builtin = "Gruvbox";
     community_palette = "Oxocarbon";
     custom_palette = "";
     mode = "dark";

@@ -5,7 +5,7 @@
 
     wallpaper.default = lib.mkOption {
       type = lib.types.path;
-      default = ../../../assets/kitty.png;
+      default = ../../../assets/gruv-dark.png;
       description = "Default wallpaper source for desktop shells.";
     };
 
