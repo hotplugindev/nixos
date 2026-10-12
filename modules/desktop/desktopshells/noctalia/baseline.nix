@@ -28,14 +28,18 @@
       capsule_padding = 6.0;
       capsule_thickness = 0.76;
       center = [
+        "media"
+        "spacer"
         "clock"
+        "spacer"
+        "cpu"
+        "ram"
       ];
       concave_edge_corners = true;
       contact_shadow = false;
       dead_zone = { };
       enabled = true;
       end = [
-        "media"
         "tray"
         "notifications"
         "clipboard"
@@ -69,7 +73,6 @@
       smart_auto_hide = false;
       start = [
         "launcher"
-        "wallpaper"
         "workspaces"
       ];
       thickness = 34;
