@@ -8,5 +8,6 @@
     ./qwen-code.nix
     ./aider-chat.nix
     ./opencode.nix
+    ./opencode-desktop.nix
   ];
 }
