@@ -7,6 +7,7 @@
     ./antigravity.nix
     ./arduino-ide.nix
     ./jetbrains-rider.nix
+    ./jetbrains-idea.nix
   ];
 
 }
