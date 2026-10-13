@@ -8,7 +8,6 @@
   gb.home.programs.entertainment.sonora.enable = true;
 
   gb.home.programs.ai.opencode.enable = true;
-  gb.home.programs.ai.opencode-desktop.enable = true;
 
   gb.home.desktop.mango.mangowc.monitors = [
     "name:DP-2,width:1920,height:1080,refresh:240,x:1920,y:0,scale:1"
