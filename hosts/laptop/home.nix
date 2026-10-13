@@ -3,6 +3,8 @@
 
   gb.home.terminal.foot.fontSize = "8";
 
+  gb.home.dev.editors.jetbrains-idea.enable = true;
+
   gb.home.programs.ai.opencode.enable = true;
 
   gb.home.programs.remote.tigervnc.enable = true;
