@@ -10,6 +10,8 @@
   gb.home.programs.remote.tigervnc.enable = true;
   gb.home.programs.remote.moonlight-qt.enable = true;
 
+  gb.home.dev.nixvim.tools.leetcode.enable = true;
+
   gb.home.desktop.mango.mangowc.settings.values = {
     trackpad_natural_scrolling = 1;
     tap_to_click = 1;
