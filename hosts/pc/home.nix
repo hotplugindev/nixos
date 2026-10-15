@@ -9,6 +9,8 @@
 
   gb.home.programs.entertainment.sonora.enable = true;
 
+  gb.home.dev.nixvim.tools.leetcode.enable = true;
+
   gb.home.programs.ai.opencode.enable = true;
 
   gb.home.desktop.mango.mangowc.monitors = [
