@@ -5,6 +5,8 @@
   gb.home.programs.gaming.prismlauncher.enable = true;
   gb.home.programs.gaming.tt.enable = true;
 
+  gb.home.programs.gaming.heroic.enable = true;
+
   gb.home.dev.editors.jetbrains-idea.enable = true;
 
   gb.home.programs.entertainment.sonora.enable = true;
