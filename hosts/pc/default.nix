@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./hardware.nix
@@ -17,6 +22,9 @@
   gb.requires.system.graphics.amd = [ "hosts.pc" ];
 
   users.users.${config.gb.user.username}.extraGroups = [ "uinput" ];
+
+  # Enables MTP mounting support in file managers
+  services.gvfs.enable = true;
 
   networking = {
     interfaces = {
