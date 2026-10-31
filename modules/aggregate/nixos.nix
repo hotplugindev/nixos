@@ -65,6 +65,7 @@
     ../programs/system/steam.nix
     ../programs/system/wine.nix
     ../programs/system/sunshine.nix
+    ../programs/system/warp.nix
     ../programs/system/noisetorch.nix
     ../programs/system/scripts/default.nix
 

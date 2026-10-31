@@ -15,6 +15,8 @@
   gb.programs.system.wine.enable = true;
   gb.programs.system.noisetorch.enable = true;
 
+  gb.programs.system.warp.enable = true;
+
   gb.desktop.mango.autologin = true;
 
   gb.requires.system.boot.lanzaboote = [ "hosts.pc" ];
