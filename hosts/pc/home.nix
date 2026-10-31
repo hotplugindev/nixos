@@ -10,6 +10,7 @@
   gb.home.dev.editors.jetbrains-idea.enable = true;
 
   gb.home.programs.entertainment.sonora.enable = true;
+  gb.home.programs.communication.vesktop.enable = true;
 
   gb.home.dev.nixvim.tools.leetcode.enable = true;
 
