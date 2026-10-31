@@ -5,8 +5,6 @@
   gb.home.programs.gaming.prismlauncher.enable = true;
   gb.home.programs.gaming.tt.enable = true;
 
-  gb.home.programs.communication.discord.enable = false;
-
   gb.home.programs.gaming.heroic.enable = true;
 
   gb.home.dev.editors.jetbrains-idea.enable = true;
