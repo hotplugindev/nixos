@@ -8,6 +8,7 @@
     ./ckan.nix
     ./prismlauncher.nix
     ./tt.nix
+    ./osu.nix
   ];
 
 }

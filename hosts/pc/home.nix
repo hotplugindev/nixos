@@ -6,6 +6,7 @@
   gb.home.programs.gaming.tt.enable = true;
 
   gb.home.programs.gaming.heroic.enable = true;
+  gb.home.programs.gaming.osu.enable = true;
 
   gb.home.dev.editors.jetbrains-idea.enable = true;
 
