@@ -54,7 +54,8 @@ in
         ++ lib.optionals langs.kotlin.enable [ pkgs.kotlin-language-server ]
         ++ lib.optionals langs.haskell.enable [ pkgs.haskell-language-server ]
         ++ lib.optionals langs.scala.enable [ pkgs.metals ]
-        ++ lib.optionals langs.clojure.enable [ pkgs.clojure-lsp ];
+        ++ lib.optionals langs.clojure.enable [ pkgs.clojure-lsp ]
+        ++ lib.optionals langs.systemverilog.enable [ pkgs.verible ];
 
       plugins = {
         lsp = {
@@ -85,6 +86,7 @@ in
             hls.enable = langs.haskell.enable;
             metals.enable = langs.scala.enable;
             clojure_lsp.enable = langs.clojure.enable;
+            verible.enable = langs.systemverilog.enable;
           }
           // lib.optionalAttrs langs.rust.enable {
             rust_analyzer = {

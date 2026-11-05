@@ -32,7 +32,8 @@ in
         ++ lib.optionals langs.ruby.enable [ pkgs.rubyPackages.rubocop ]
         ++ lib.optionals langs.haskell.enable [ pkgs.fourmolu ]
         ++ lib.optionals langs.scala.enable [ pkgs.scalafmt ]
-        ++ lib.optionals langs.perl.enable [ pkgs.perltidy ];
+        ++ lib.optionals langs.perl.enable [ pkgs.perltidy ]
+        ++ lib.optionals langs.systemverilog.enable [ pkgs.verible ];
 
       plugins.conform-nvim = {
         enable = true;
@@ -97,6 +98,10 @@ in
             }
             // lib.optionalAttrs langs.perl.enable {
               perl = [ "perltidy" ];
+            }
+            // lib.optionalAttrs langs.systemverilog.enable {
+              verilog = [ "verible" ];
+              systemverilog = [ "verible" ];
             };
 
           format_on_save = ''

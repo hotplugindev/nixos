@@ -20,5 +20,6 @@
     ./clojure.nix
     ./perl.nix
     ./r.nix
+    ./systemverilog.nix
   ];
 }
