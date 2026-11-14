@@ -103,7 +103,7 @@ in
         "bind=NONE,XF86AudioPlay,spawn,dms ipc call mpris playPause"
         "bind=NONE,XF86AudioNext,spawn,dms ipc call mpris next"
         "bind=NONE,XF86AudioPrev,spawn,dms ipc call mpris previous"
-        "switchbind=fold,spawn,dms ipc call lock lock"
+        "switchbind=lid:on,spawn,dms ipc call lock lock"
       ];
     })
   ];

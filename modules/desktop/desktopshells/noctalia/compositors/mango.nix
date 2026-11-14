@@ -199,22 +199,22 @@ in
 
       # Balanced floating bar aligned with Mango's 10px outer gap
       gb.home.desktopshells.noctalia.settings.bar.default = {
-        margin_edge = lib.mkDefault 8;
-        margin_ends = lib.mkDefault 10;
-        margin_opposite_edge = lib.mkDefault 0;
-        thickness = lib.mkDefault 36;
-        radius = lib.mkDefault noctalia.compositors.mango.styling.borderRadius;
-        background_opacity = lib.mkDefault 0.82;
-        border_width = lib.mkDefault 1.0;
-        border = lib.mkDefault "outline";
-        shadow = lib.mkDefault true;
-        center = lib.mkDefault [
+        margin_edge = 8;
+        margin_ends = 10;
+        margin_opposite_edge = 0;
+        thickness = 36;
+        radius = noctalia.compositors.mango.styling.borderRadius;
+        background_opacity = 0.82;
+        border_width = 1.0;
+        border = "outline";
+        shadow = true;
+        center = [
           "media"
           "spacer"
           "clock"
           "spacer"
         ];
-        end = lib.mkDefault [
+        end = [
           "tray"
           "cpu"
           "ram"
@@ -273,7 +273,7 @@ in
         "bind=NONE,XF86AudioPlay,spawn,${noctaliaExe} msg media toggle"
         "bind=NONE,XF86AudioNext,spawn,${noctaliaExe} msg media next"
         "bind=NONE,XF86AudioPrev,spawn,${noctaliaExe} msg media previous"
-        "switchbind=fold,spawn,${noctaliaExe} msg session lock"
+        "switchbind=lid:on,spawn,${noctaliaExe} msg session lock"
       ];
     })
   ];

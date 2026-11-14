@@ -38,6 +38,7 @@ in
     programs.nixvim = {
       enable = true;
       defaultEditor = nixvim.defaultEditor;
+      nixpkgs.source = inputs.nixpkgs;
 
       clipboard = {
         register = "unnamedplus";

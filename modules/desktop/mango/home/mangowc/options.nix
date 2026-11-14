@@ -54,7 +54,7 @@
         "bind=NONE,XF86AudioPlay,spawn,playerctl play-pause"
         "bind=NONE,XF86AudioNext,spawn,playerctl next"
         "bind=NONE,XF86AudioPrev,spawn,playerctl previous"
-        "switchbind=fold,spawn,swaylock"
+        "switchbind=lid:on,spawn,swaylock"
       ];
       description = "System-control binds rendered when no desktop shell provides them.";
     };
@@ -118,7 +118,7 @@
         "gesturebind=none,right,3,viewtoleft_have_client"
         "gesturebind=none,up,3,toggleoverview"
         "gesturebind=none,down,3,toggleoverview"
-        "switchbind=unfold,spawn,wlr-dpms on"
+        "switchbind=lid:off,spawn,wlr-dpms on"
         "bind=SUPER,1,view,1,0"
         "bind=SUPER,2,view,2,0"
         "bind=SUPER,3,view,3,0"
