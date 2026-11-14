@@ -68,7 +68,7 @@
       radius_top_right = 12;
       reserve_space = true;
       scale = 1.0;
-      shadow = true;
+      shadow = false;
       show_on_workspace_switch = true;
       smart_auto_hide = false;
       start = [
