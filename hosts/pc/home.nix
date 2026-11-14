@@ -11,7 +11,7 @@
 
   gb.home.dev.editors.jetbrains-idea.enable = true;
 
-  gb.home.programs.ai.gemini-cli.enable = true;
+  gb.home.programs.ai.antigravity-cli.enable = true;
 
   gb.home.programs.entertainment.sonora.enable = true;
   gb.home.programs.communication.vesktop.enable = true;
