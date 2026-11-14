@@ -70,6 +70,13 @@ in
       xdg.configFile."noctalia/wallpapers/default.${ext}" = lib.mkIf (noctalia.wallpaper.source != null) {
         source = noctalia.wallpaper.source;
       };
+
+      home.activation.noctaliaWallpaperSanitize = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        settings_file="$HOME/.local/state/noctalia/settings.toml"
+        if [ -f "$settings_file" ]; then
+          sed -i 's|path = "/nix/store/[^"]*"|path = "${wallpaperFile}"|g' "$settings_file"
+        fi
+      '';
     })
   ];
 }

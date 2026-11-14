@@ -201,6 +201,15 @@
       type = lib.types.listOf lib.types.str;
       default = [
         "enable_hotarea = false"
+        "layer_rule=noctalia-wallpaper,no_blur,no_animation,no_shadow"
+        "layer_rule=noctalia-bar-default,animation_type_open=slide,animation_type_close=slide"
+        "layer_rule=noctalia-launcher,animation_type_open=zoom,animation_type_close=zoom"
+        "layer_rule=noctalia-control-center,animation_type_open=slide,animation_type_close=slide"
+        "layer_rule=noctalia-notifications,animation_type_open=slide,animation_type_close=slide"
+        "layer_rule=noctalia-clipboard,animation_type_open=zoom,animation_type_close=zoom"
+        "window_rule=app_id:pavucontrol,is_floating=1"
+        "window_rule=app_id:nm-connection-editor,is_floating=1"
+        "window_rule=app_id:blueman-manager,is_floating=1"
       ];
       description = "Additional raw rules lines.";
     };

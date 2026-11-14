@@ -16,12 +16,73 @@ let
     single_scratchpad = 1;
     cursor_size = 24;
     cursor_theme = "Adwaita";
-    gap_inner_horizontal = 5;
-    gap_inner_vertical = 5;
+    gap_inner_horizontal = 6;
+    gap_inner_vertical = 6;
     gap_outer_horizontal = 10;
     gap_outer_vertical = 10;
     border_px = 2;
+    border_radius = 12;
+    no_radius_when_single = 0;
+    no_border_when_single = 0;
     enable_hotarea = false;
+
+    # Smooth window and layer blur (frosted glass aesthetic)
+    blur = 1;
+    blur_layer = 1;
+    blur_optimized = 1;
+    blur_params_radius = 6;
+    blur_params_num_passes = 2;
+    blur_params_noise = 0.02;
+    blur_params_brightness = 0.9;
+    blur_params_contrast = 0.9;
+    blur_params_saturation = 1.15;
+
+    # Elegant drop shadows with depth
+    shadows = 1;
+    layer_shadows = 1;
+    shadow_only_floating = 1;
+    shadows_size = 14;
+    shadows_blur = 18;
+    shadows_position_x = 0;
+    shadows_position_y = 4;
+    shadows_color = "0x00000077";
+
+    # Subtle dimming on unfocused windows for focus immersion
+    dim_enable = 1;
+    dim_focused_color = "0x00000000";
+    dim_unfocused_color = "0x00000028";
+
+    # Fluid animations for windows and layer surfaces
+    animations = 1;
+    layer_animations = 1;
+    animation_type_open = "zoom";
+    animation_type_close = "slide";
+    layer_animation_type_open = "slide";
+    layer_animation_type_close = "slide";
+    animation_fade_in = 1;
+    animation_fade_out = 1;
+    fade_in_begin_opacity = 0.4;
+    fade_out_begin_opacity = 0.4;
+    animation_duration_move = 260;
+    animation_duration_open = 220;
+    animation_duration_tag = 180;
+    animation_duration_close = 180;
+    animation_duration_focus = 140;
+    animation_curve_move = "0.05, 0.9, 0.1, 1.05";
+    animation_curve_open = "0.05, 0.9, 0.1, 1.05";
+    animation_curve_tag = "0.05, 0.9, 0.1, 1.05";
+    animation_curve_close = "0.3, 0, 0.8, 0.15";
+    animation_curve_focus = "0.05, 0.9, 0.1, 1.05";
+
+    # Default dark theme palette matching Gruvbox Dark / warm charcoal
+    root_color = "0x1d2021ff";
+    border_color = "0x3c3836aa";
+    focus_color = "0xd79921ff";
+    urgent_color = "0xfb4934ff";
+    drop_color = "0xd7992166";
+    split_color = "0xb8bb26ff";
+    maximized_screen_color = "0x83a598ff";
+    scratchpad_color = "0xd3869bff";
   };
 
   finalSettings = defaultSettings // cfg.settings.values;
