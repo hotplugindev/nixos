@@ -10,5 +10,8 @@
     ./davinci-resolve.nix
     ./logseq.nix
     ./zotero.nix
+    ./filmcraft.nix
+    ./photocraft.nix
+    ./soundcraft.nix
   ];
 }

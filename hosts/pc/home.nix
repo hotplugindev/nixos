@@ -9,6 +9,8 @@
   gb.home.programs.gaming.heroic.enable = true;
   gb.home.programs.gaming.osu.enable = true;
 
+  gb.home.programs.productivity.filmcraft.enable = true;
+
   gb.home.dev.editors.jetbrains-idea.enable = true;
 
   gb.home.programs.ai.antigravity-cli.enable = true;
