@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf filmcraft.enable {
     home.packages = [
-      pkgs-unstable.soundcraft
+      pkgs-unstable.filmcraft
     ];
   };
 }
