@@ -9,6 +9,7 @@
     ./prismlauncher.nix
     ./tt.nix
     ./osu.nix
+    ./quadrapassel.nix
   ];
 
 }
