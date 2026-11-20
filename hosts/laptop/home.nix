@@ -7,6 +7,8 @@
 
   gb.home.programs.ai.opencode.enable = true;
 
+  gb.home.programs.gaming.quadrapassel.enable = true;
+
   gb.home.programs.remote.tigervnc.enable = true;
   gb.home.programs.remote.moonlight-qt.enable = true;
 
