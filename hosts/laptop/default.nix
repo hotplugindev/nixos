@@ -5,6 +5,8 @@
     ./storage.nix
   ];
 
+  gb.programs.system.steam.enable = true;
+
   gb.requires.system.graphics.intel = [ "hosts.laptop" ];
   gb.requires.system.hardware.arduino = [ "hosts.laptop" ];
 
