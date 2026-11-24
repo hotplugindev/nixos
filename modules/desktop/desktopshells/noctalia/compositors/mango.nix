@@ -174,53 +174,6 @@ in
 
     (lib.mkIf (noctalia.enable && noctalia.compositors.mango.enable) {
       gb.home.desktopshells.noctalia.service.target = lib.mkDefault mango.mangowc.startupTarget;
-
-      # Clean, minimal neutral-dark Noctalia Shell styling
-      gb.home.desktopshells.noctalia.config.shell.panel = {
-        transparency_mode = lib.mkDefault "solid";
-        shadow = lib.mkDefault true;
-      };
-
-      gb.home.desktopshells.noctalia.config.backdrop = {
-        enabled = lib.mkDefault false;
-        blur_intensity = lib.mkDefault 0.0;
-        tint_intensity = lib.mkDefault 0.3;
-      };
-
-      gb.home.desktopshells.noctalia.config.lockscreen = {
-        blurred_desktop = lib.mkDefault false;
-        blur_intensity = lib.mkDefault 0.0;
-      };
-
-      gb.home.desktopshells.noctalia.config.theme = {
-        mode = lib.mkDefault "dark";
-        pure_black_dark = lib.mkDefault true;
-      };
-
-      # Clean, edge-to-edge minimal top bar
-      gb.home.desktopshells.noctalia.settings.bar.default = {
-        margin_edge = 0;
-        margin_ends = 0;
-        margin_opposite_edge = 0;
-        thickness = 36;
-        radius = 0;
-        background_opacity = 0.88;
-        border_width = 0.0;
-        shadow = false;
-        center = [
-          "clock"
-        ];
-        end = [
-          "network_rx"
-          "network_tx"
-          "tray"
-          "volume"
-          "brightness"
-          "power_rate"
-          "battery"
-          "control-center"
-        ];
-      };
     })
 
     (lib.mkIf (noctalia.enable && noctalia.compositors.mango.enable && noctalia.compositors.mango.styling.enable) {
