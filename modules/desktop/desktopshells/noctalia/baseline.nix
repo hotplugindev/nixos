@@ -453,8 +453,8 @@
     };
     app_icon_colorize = false;
     avatar_path = "";
-    button_borders = true;
-    card_borders = true;
+    button_borders = false;
+    card_borders = false;
     clipboard_auto_paste = "auto";
     clipboard_confirm_clear_history = true;
     clipboard_enabled = true;
@@ -469,7 +469,7 @@
     greeter_sync = {
       auto_sync = false;
     };
-    input_borders = true;
+    input_borders = false;
     keyboard_layout = { };
     launch_apps_as_systemd_services = false;
     launch_apps_custom_command = "";
@@ -520,13 +520,13 @@
       session_placement = "attached";
       session_position = "auto";
       shadow = true;
-      transparency_mode = "glass";
+      transparency_mode = "solid";
       wallpaper_placement = "attached";
       wallpaper_position = "auto";
     };
     password_style = "default";
     polkit_agent = true;
-    popup_borders = true;
+    popup_borders = false;
     popup_shadows = true;
     privacy = {
       cam_filter_regex = "";
