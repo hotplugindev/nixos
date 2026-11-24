@@ -673,7 +673,7 @@
     };
   };
   theme = {
-    builtin = "Gruvbox";
+    builtin = "Kanagawa";
     community_palette = "Oxocarbon";
     custom_palette = "";
     mode = "dark";

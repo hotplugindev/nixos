@@ -24,7 +24,7 @@ let
 
     colors = {}
     scheme_source = "builtin"
-    scheme_name = "Gruvbox"
+    scheme_name = "Kanagawa"
 
     try:
         if os.path.exists(settings_file):
@@ -169,58 +169,70 @@ in
 
   config = lib.mkMerge [
     {
-      gb.home.desktopshells.noctalia.compositors.mango.enable = lib.mkDefault (noctalia.enable && mangowcEnabled);
+      gb.home.desktopshells.noctalia.compositors.mango.enable = lib.mkDefault (
+        noctalia.enable && mangowcEnabled
+      );
     }
 
     (lib.mkIf (noctalia.enable && noctalia.compositors.mango.enable) {
       gb.home.desktopshells.noctalia.service.target = lib.mkDefault mango.mangowc.startupTarget;
     })
 
-    (lib.mkIf (noctalia.enable && noctalia.compositors.mango.enable && noctalia.compositors.mango.styling.enable) {
-      gb.home.desktop.mango.mangowc.settings.values.border_radius = lib.mkDefault noctalia.compositors.mango.styling.borderRadius;
-      gb.home.desktop.mango.mangowc.settings.values.no_radius_when_single = lib.mkDefault 0;
-    })
+    (lib.mkIf
+      (noctalia.enable && noctalia.compositors.mango.enable && noctalia.compositors.mango.styling.enable)
+      {
+        gb.home.desktop.mango.mangowc.settings.values.border_radius =
+          lib.mkDefault noctalia.compositors.mango.styling.borderRadius;
+        gb.home.desktop.mango.mangowc.settings.values.no_radius_when_single = lib.mkDefault 0;
+      }
+    )
 
-    (lib.mkIf (noctalia.enable && noctalia.compositors.mango.enable && noctalia.compositors.mango.sync.enable) {
-      gb.home.desktop.mango.mangowc.settings.sourceFiles = [
-        "~/.config/mango/noctalia.conf"
-      ];
+    (lib.mkIf
+      (noctalia.enable && noctalia.compositors.mango.enable && noctalia.compositors.mango.sync.enable)
+      {
+        gb.home.desktop.mango.mangowc.settings.sourceFiles = [
+          "~/.config/mango/noctalia.conf"
+        ];
 
-      home.packages = [ noctaliaMangoSync ];
+        home.packages = [ noctaliaMangoSync ];
 
-      # Trigger sync whenever Noctalia theme or colors change
-      gb.home.desktopshells.noctalia.config.hooks = {
-        colors_changed = [ (lib.getExe noctaliaMangoSync) ];
-        theme_mode_changed = [ (lib.getExe noctaliaMangoSync) ];
-        wallpaper_changed = [ (lib.getExe noctaliaMangoSync) ];
-      };
+        # Trigger sync whenever Noctalia theme or colors change
+        gb.home.desktopshells.noctalia.config.hooks = {
+          colors_changed = [ (lib.getExe noctaliaMangoSync) ];
+          theme_mode_changed = [ (lib.getExe noctaliaMangoSync) ];
+          wallpaper_changed = [ (lib.getExe noctaliaMangoSync) ];
+        };
 
-      home.activation.mangoNoctaliaThemeSync = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        ${lib.getExe noctaliaMangoSync} || true
-      '';
-    })
+        home.activation.mangoNoctaliaThemeSync = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          ${lib.getExe noctaliaMangoSync} || true
+        '';
+      }
+    )
 
-    (lib.mkIf (noctalia.enable && noctalia.compositors.mango.enable && noctalia.compositors.mango.binds.enable) {
-      gb.home.desktop.mango.mangowc.systemBinds.enable = lib.mkForce false;
+    (lib.mkIf
+      (noctalia.enable && noctalia.compositors.mango.enable && noctalia.compositors.mango.binds.enable)
+      {
+        gb.home.desktop.mango.mangowc.systemBinds.enable = lib.mkForce false;
 
-      gb.home.desktop.mango.mangowc.bindLinesExtra = [
-        "bind=SUPER,Space,spawn,${noctaliaExe} msg panel-toggle launcher"
-        "bind=SUPER,M,spawn,${noctaliaExe} msg session lock"
-        "bind=SUPER,V,spawn,${noctaliaExe} msg panel-toggle clipboard"
-        "bind=SUPER+SHIFT,V,spawn,${noctaliaExe} msg clipboard-clear"
-        "bind=NONE,Print,spawn,${noctaliaExe} msg screenshot-region"
-        "bind=CTRL,Print,spawn,${noctaliaExe} msg screenshot-fullscreen"
-        "bind=ALT,Print,spawn,${noctaliaExe} msg screenshot-annotate"
-        "bind=NONE,XF86AudioMute,spawn,${noctaliaExe} msg volume-mute"
-        "bind=NONE,XF86AudioRaiseVolume,spawn,${noctaliaExe} msg volume-up 5"
-        "bind=NONE,XF86AudioLowerVolume,spawn,${noctaliaExe} msg volume-down 5"
-        "bind=NONE,XF86MonBrightnessUp,spawn,${noctaliaExe} msg brightness-up"
-        "bind=NONE,XF86MonBrightnessDown,spawn,${noctaliaExe} msg brightness-down"
-        "bind=NONE,XF86AudioPlay,spawn,${noctaliaExe} msg media toggle"
-        "bind=NONE,XF86AudioNext,spawn,${noctaliaExe} msg media next"
-        "bind=NONE,XF86AudioPrev,spawn,${noctaliaExe} msg media previous"
-        "switchbind=lid:on,spawn,${noctaliaExe} msg session lock"
-      ];
-    })
+        gb.home.desktop.mango.mangowc.bindLinesExtra = [
+          "bind=SUPER,Space,spawn,${noctaliaExe} msg panel-toggle launcher"
+          "bind=SUPER,M,spawn,${noctaliaExe} msg session lock"
+          "bind=SUPER,V,spawn,${noctaliaExe} msg panel-toggle clipboard"
+          "bind=SUPER+SHIFT,V,spawn,${noctaliaExe} msg clipboard-clear"
+          "bind=NONE,Print,spawn,${noctaliaExe} msg screenshot-region"
+          "bind=CTRL,Print,spawn,${noctaliaExe} msg screenshot-fullscreen"
+          "bind=ALT,Print,spawn,${noctaliaExe} msg screenshot-annotate"
+          "bind=NONE,XF86AudioMute,spawn,${noctaliaExe} msg volume-mute"
+          "bind=NONE,XF86AudioRaiseVolume,spawn,${noctaliaExe} msg volume-up 5"
+          "bind=NONE,XF86AudioLowerVolume,spawn,${noctaliaExe} msg volume-down 5"
+          "bind=NONE,XF86MonBrightnessUp,spawn,${noctaliaExe} msg brightness-up"
+          "bind=NONE,XF86MonBrightnessDown,spawn,${noctaliaExe} msg brightness-down"
+          "bind=NONE,XF86AudioPlay,spawn,${noctaliaExe} msg media toggle"
+          "bind=NONE,XF86AudioNext,spawn,${noctaliaExe} msg media next"
+          "bind=NONE,XF86AudioPrev,spawn,${noctaliaExe} msg media previous"
+          "switchbind=lid:on,spawn,${noctaliaExe} msg session lock"
+        ];
+      }
+    )
   ];
 }
