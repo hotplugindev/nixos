@@ -41,16 +41,16 @@ let
     shadows = 1;
     layer_shadows = 1;
     shadow_only_floating = 0;
-    shadows_size = 14;
-    shadows_blur = 18;
+    shadows_size = 16;
+    shadows_blur = 20;
     shadows_position_x = 0;
-    shadows_position_y = 4;
-    shadows_color = "0x00000077";
+    shadows_position_y = 2;
+    shadows_color = "0x00000066";
 
     # Subtle dimming on unfocused windows for focus immersion
     dim_enable = 1;
     dim_focused_color = "0x00000000";
-    dim_unfocused_color = "0x00000055";
+    dim_unfocused_color = "0x00000018";
 
     # Fluid animations for windows and layer surfaces
     animations = 1;
