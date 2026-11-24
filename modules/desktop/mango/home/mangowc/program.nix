@@ -21,7 +21,7 @@ let
     gap_outer_horizontal = 10;
     gap_outer_vertical = 10;
     border_px = 0;
-    border_radius = 6;
+    border_radius = 10;
     no_radius_when_single = 0;
     no_border_when_single = 0;
     enable_hotarea = false;
