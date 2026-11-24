@@ -8,6 +8,7 @@
   imports = [
     inputs.lanzaboote.nixosModules.lanzaboote
     inputs.mango.nixosModules.mango
+    inputs.umbriel.nixosModules.default
 
     ../core/host/options.nix
     ../core/user/options.nix
@@ -70,6 +71,7 @@
     ../programs/system/scripts/default.nix
 
     ../desktop/mango/system/default.nix
+    ../desktop/umbriel/system/default.nix
     ../desktop/sway/system/default.nix
     ../desktop/hyprland/system/default.nix
   ];

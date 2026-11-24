@@ -9,7 +9,7 @@
       "gaming"
       "development"
     ];
-    desktop = "mango";
+    desktop = "umbriel";
     desktopShell = "noctalia";
     shell = "zsh";
     hardware = {

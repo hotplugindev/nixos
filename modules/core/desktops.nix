@@ -1,4 +1,28 @@
 {
+  umbriel = {
+    sessionCommand =
+      shell:
+      "${shell} -l -c start-umbriel"
+    ;
+    sessionTarget = "umbriel-session.target";
+    customSessionTarget = true;
+    systemRequests = [
+      "greetd"
+      "xdgPortal"
+      "xwayland"
+      "gnomeKeyring"
+      "dconf"
+    ];
+    homeRequests = [
+      "sessionTarget"
+      "authAgent"
+      "dbusEnv"
+      "cliphist"
+      "nextcloud"
+    ];
+    deferred = false;
+  };
+
   mango = {
     sessionCommand =
       shell:

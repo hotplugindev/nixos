@@ -6,7 +6,14 @@
 let
   noctalia = config.gb.home.desktopshells.noctalia;
   mangoWallpaper = lib.attrByPath [ "gb" "home" "desktop" "mango" "core" "wallpaper" "default" ] null config;
-  sharedAssets = lib.attrByPath [ "gb" "home" "desktop" "mango" "core" "wallpaper" "directory" ] null config;
+  umbrielWallpaper = lib.attrByPath [ "gb" "home" "desktop" "umbriel" "core" "wallpaper" "default" ] null config;
+  defaultWallpaper = if mangoWallpaper != null then mangoWallpaper else umbrielWallpaper;
+  sharedAssets =
+    let
+      mangoAssets = lib.attrByPath [ "gb" "home" "desktop" "mango" "core" "wallpaper" "directory" ] null config;
+      umbrielAssets = lib.attrByPath [ "gb" "home" "desktop" "umbriel" "core" "wallpaper" "directory" ] null config;
+    in
+    if mangoAssets != null then mangoAssets else umbrielAssets;
   sourceBase = builtins.baseNameOf (toString noctalia.wallpaper.source);
   ext =
     if builtins.match ".*\\..+" sourceBase != null then
@@ -24,7 +31,7 @@ in
     source = lib.mkOption {
       type = with lib.types;
       nullOr path;
-      default = mangoWallpaper;
+      default = defaultWallpaper;
       description = "Source image linked to `~/.config/noctalia/wallpapers/default.<ext>` and applied as the active wallpaper via `wallpaper.default.path`.";
     };
 

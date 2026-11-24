@@ -22,7 +22,7 @@ The current hosts are:
 
 | Host     | Class   | Desktop | Roles                                     |
 | -------- | ------- | ------- | ----------------------------------------- |
-| `pc`     | desktop | Mango   | workstation, desktop, gaming, development |
+| `pc`     | desktop | Umbriel | workstation, desktop, gaming, development |
 | `laptop` | laptop  | Mango   | workstation, desktop, development         |
 
 The main user is:
@@ -687,7 +687,7 @@ Each shell entry declares only `deferred` today; shells are wired through their 
 A host picks its compositor and shell with two options:
 
 ```nix
-gb.host.desktop = "mango";      # mango | sway | hyprland | gnome | kde | none
+gb.host.desktop = "mango";      # mango | umbriel | sway | hyprland | gnome | kde | none
 gb.host.desktopShell = "dms";   # dms | noctalia | none
 ```
 
@@ -705,6 +705,7 @@ Adding a new compositor is therefore: add one entry to `desktops.nix`, write a `
 | Desktop    | Status           | Notes                                                                                                                                                         |
 | ---------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Mango      | active (default) | Custom session target; full MangoWC config generation.                                                                                                        |
+| Umbriel    | active           | Custom session target (`umbriel-session.target`); uses `noctalia-dev/umbriel` (`programs.umbriel.enable`) via `modules/desktop/umbriel/`.                   |
 | Sway       | active           | Uses nixpkgs `programs.sway` + HM `wayland.windowManager.sway`.                                                                                               |
 | Hyprland   | active           | Uses nixpkgs `programs.hyprland` + HM `wayland.windowManager.hyprland`; configures its own portals, so it does not request the generic xdg-portal capability. |
 | GNOME      | deferred         | Placeholder only (`modules/desktop/gnome/`); selecting it is a no-op until implemented.                                                                       |

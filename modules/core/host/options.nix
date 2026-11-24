@@ -70,6 +70,7 @@ in
     desktop = lib.mkOption {
       type = lib.types.enum [
         "mango"
+        "umbriel"
         "sway"
         "hyprland"
         "gnome"

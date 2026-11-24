@@ -7,6 +7,7 @@
     ./wallpaper.nix
     ./location.nix
     ./compositors/mango.nix
+    ./compositors/umbriel.nix
   ];
 
   options.gb.home.desktopshells.noctalia = {
