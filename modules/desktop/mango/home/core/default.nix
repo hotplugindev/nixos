@@ -5,7 +5,7 @@
 
     wallpaper.default = lib.mkOption {
       type = lib.types.path;
-      default = ../../../assets/space.jpg;
+      default = ../../../assets/pixel-earth.png;
       description = "Default wallpaper source for desktop shells.";
     };
 

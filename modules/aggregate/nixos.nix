@@ -24,6 +24,7 @@
     ../capabilities/system/nix/default.nix
     ../capabilities/system/boot/systemdboot.nix
     ../capabilities/system/boot/lanzaboote.nix
+    ../capabilities/system/boot/plymouth.nix
     ../capabilities/system/kernel/default.nix
     ../capabilities/system/kernel/linux-latest.nix
     ../capabilities/system/kernel/linux-zen.nix

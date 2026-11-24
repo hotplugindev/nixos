@@ -20,5 +20,6 @@ in
     gb.requires.system.security.gnupg = [ requester ];
     gb.requires.system.shell.zsh = lib.mkIf (config.gb.host.shell == "zsh") [ requester ];
     gb.requires.system.kernel.linuxZen = [ requester ];
+    gb.requires.system.boot.plymouth = [ requester ];
   };
 }

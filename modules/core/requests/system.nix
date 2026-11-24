@@ -13,6 +13,7 @@ in
     audio.pipewire = listOption "Request PipeWire audio";
     audio.ladspa = listOption "Request LADSPA plugin path for PipeWire";
     boot.lanzaboote = listOption "Request Lanzaboote";
+    boot.plymouth = listOption "Request Plymouth boot animation";
     kernel.linuxLatest = listOption "Request the linuxLatest Kernel";
     kernel.linuxZen = listOption "Request the linuxZen Kernel";
     compat.nixLd = listOption "Request nix-ld";
