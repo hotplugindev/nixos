@@ -175,57 +175,50 @@ in
     (lib.mkIf (noctalia.enable && noctalia.compositors.mango.enable) {
       gb.home.desktopshells.noctalia.service.target = lib.mkDefault mango.mangowc.startupTarget;
 
-      # Cohesive Noctalia Shell styling with frosted glass and balanced geometry
+      # Clean, minimal neutral-dark Noctalia Shell styling
       gb.home.desktopshells.noctalia.config.shell.panel = {
-        transparency_mode = lib.mkDefault "glass";
+        transparency_mode = lib.mkDefault "solid";
         shadow = lib.mkDefault true;
       };
 
       gb.home.desktopshells.noctalia.config.backdrop = {
-        enabled = lib.mkDefault true;
-        blur_intensity = lib.mkDefault 0.55;
+        enabled = lib.mkDefault false;
+        blur_intensity = lib.mkDefault 0.0;
         tint_intensity = lib.mkDefault 0.3;
       };
 
       gb.home.desktopshells.noctalia.config.lockscreen = {
-        blurred_desktop = lib.mkDefault true;
-        blur_intensity = lib.mkDefault 0.7;
+        blurred_desktop = lib.mkDefault false;
+        blur_intensity = lib.mkDefault 0.0;
       };
 
       gb.home.desktopshells.noctalia.config.theme = {
         mode = lib.mkDefault "dark";
-        pure_black_dark = lib.mkDefault false;
+        pure_black_dark = lib.mkDefault true;
       };
 
-      # Balanced floating bar aligned with Mango's 10px outer gap
+      # Clean, edge-to-edge minimal top bar
       gb.home.desktopshells.noctalia.settings.bar.default = {
-        margin_edge = 8;
-        margin_ends = 10;
+        margin_edge = 0;
+        margin_ends = 0;
         margin_opposite_edge = 0;
         thickness = 36;
-        radius = noctalia.compositors.mango.styling.borderRadius;
-        background_opacity = 0.82;
-        border_width = 1.0;
-        border = "outline";
-        shadow = true;
+        radius = 0;
+        background_opacity = 0.88;
+        border_width = 0.0;
+        shadow = false;
         center = [
-          "media"
-          "spacer"
           "clock"
-          "spacer"
         ];
         end = [
+          "network_rx"
+          "network_tx"
           "tray"
-          "cpu"
-          "ram"
-          "network"
-          "bluetooth"
           "volume"
           "brightness"
+          "power_rate"
           "battery"
-          "notifications"
           "control-center"
-          "session"
         ];
       };
     })
