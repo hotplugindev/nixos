@@ -679,7 +679,7 @@
     mode = "dark";
     pure_black_dark = false;
     shell_mode = "follow";
-    source = "wallpaper";
+    source = "builtin";
     templates = {
       builtin_ids = [ ];
       community_ids = [ ];
@@ -807,7 +807,7 @@
     };
     workspaces = {
       empty_color = "#1e293b";
-      focused_color = "#ffffff";
+      focused_color = "#ebdbb2";
       hide_when_empty = true;
       occupied_color = "#334155";
       style = "regular";
