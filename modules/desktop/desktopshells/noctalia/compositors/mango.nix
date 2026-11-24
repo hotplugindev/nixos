@@ -153,7 +153,7 @@ in
 
       borderRadius = lib.mkOption {
         type = lib.types.int;
-        default = 12;
+        default = 6;
         description = "Window corner radius in pixels.";
       };
     };
