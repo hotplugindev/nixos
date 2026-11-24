@@ -28,7 +28,7 @@ let
 
     # Smooth window and layer blur (frosted glass aesthetic)
     blur = 1;
-    blur_layer = 1;
+    blur_layer = 0;
     blur_optimized = 1;
     blur_params_radius = 6;
     blur_params_num_passes = 2;
