@@ -40,7 +40,7 @@ let
     # Elegant drop shadows with depth
     shadows = 1;
     layer_shadows = 1;
-    shadow_only_floating = 1;
+    shadow_only_floating = 0;
     shadows_size = 14;
     shadows_blur = 18;
     shadows_position_x = 0;
@@ -50,7 +50,7 @@ let
     # Subtle dimming on unfocused windows for focus immersion
     dim_enable = 1;
     dim_focused_color = "0x00000000";
-    dim_unfocused_color = "0x00000028";
+    dim_unfocused_color = "0x00000055";
 
     # Fluid animations for windows and layer surfaces
     animations = 1;
