@@ -12,6 +12,8 @@
   gb.home.programs.remote.tigervnc.enable = true;
   gb.home.programs.remote.moonlight-qt.enable = true;
 
+  gb.home.programs.ai.antigravity-cli.enable = true;
+
   gb.home.dev.nixvim.tools.leetcode.enable = true;
 
   gb.home.dev.languages.systemverilog.enable = true;
