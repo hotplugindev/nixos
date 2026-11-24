@@ -18,7 +18,7 @@
   bar = {
     default = {
       auto_hide = false;
-      background_opacity = 0.85;
+      background_opacity = 1.0;
       border = "outline";
       border_width = 0.0;
       capsule = false;
@@ -30,7 +30,7 @@
       center = [
         "clock"
       ];
-      compositor_blur = true;
+      compositor_blur = false;
       concave_edge_corners = true;
       contact_shadow = false;
       dead_zone = { };
@@ -381,7 +381,7 @@
     temperature_night = 4000;
   };
   notification = {
-    background_opacity = 0.90;
+    background_opacity = 1.0;
     border = false;
     border_width = 0;
     collapse_on_dismiss = true;
@@ -398,7 +398,7 @@
     show_app_name = true;
   };
   osd = {
-    background_opacity = 0.90;
+    background_opacity = 1.0;
     border = false;
     border_width = 0;
     enabled = true;
@@ -677,7 +677,7 @@
     community_palette = "Oxocarbon";
     custom_palette = "";
     mode = "dark";
-    pure_black_dark = true;
+    pure_black_dark = false;
     shell_mode = "follow";
     source = "wallpaper";
     templates = {
