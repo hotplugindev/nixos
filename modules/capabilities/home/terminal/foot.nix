@@ -19,7 +19,6 @@ in
           font = "JetBrains Mono:size=${foot.fontSize}:style=Medium:antialias=true:autohint=true, monospace:size=12";
           dpi-aware = "yes";
           initial-window-size-pixels = "1920x1080";
-          pad = "6x6";
           selection-target = "clipboard";
           term = "foot";
         };
