@@ -20,7 +20,7 @@ let
     gap_inner_vertical = 6;
     gap_outer_horizontal = 10;
     gap_outer_vertical = 10;
-    border_px = 2;
+    border_px = 0;
     border_radius = 12;
     no_radius_when_single = 0;
     no_border_when_single = 0;
