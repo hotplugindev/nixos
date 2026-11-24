@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   requested = config.gb.requires.system.boot.plymouth != [ ];
 in
@@ -7,7 +12,12 @@ in
     boot = {
       plymouth = {
         enable = true;
-        theme = lib.mkDefault "spinner";
+        theme = lib.mkDefault "black_hud";
+        themePackages = [
+          (pkgs.adi1090x-plymouth-themes.override {
+            selected_themes = [ "black_hud" ];
+          })
+        ];
       };
 
       consoleLogLevel = lib.mkDefault 0;
