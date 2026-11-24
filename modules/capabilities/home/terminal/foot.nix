@@ -19,6 +19,7 @@ in
           font = "JetBrains Mono:size=${foot.fontSize}:style=Medium:antialias=true:autohint=true, monospace:size=12";
           dpi-aware = "yes";
           initial-window-size-pixels = "1920x1080";
+          pad = "14x14";
           selection-target = "clipboard";
           term = "foot";
         };
@@ -44,7 +45,7 @@ in
         };
 
         cursor = {
-          style = "block";
+          style = "beam";
         };
 
         mouse = {
@@ -52,7 +53,7 @@ in
         };
 
         colors-dark = {
-          alpha = 0.9;
+          alpha = 1.0;
           foreground = "D1B88E";
           background = "201b14";
           regular0 = "262626";
