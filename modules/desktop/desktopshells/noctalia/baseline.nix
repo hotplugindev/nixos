@@ -18,7 +18,7 @@
   bar = {
     default = {
       auto_hide = false;
-      background_opacity = 1.0;
+      background_opacity = 0.85;
       border = "outline";
       border_width = 0.0;
       capsule = false;
@@ -28,44 +28,38 @@
       capsule_padding = 6.0;
       capsule_thickness = 0.76;
       center = [
-        "media"
-        "spacer"
         "clock"
-        "spacer"
-        "cpu"
-        "ram"
       ];
+      compositor_blur = true;
       concave_edge_corners = true;
       contact_shadow = false;
       dead_zone = { };
       enabled = true;
       end = [
+        "network_rx"
+        "network_tx"
         "tray"
-        "notifications"
-        "clipboard"
-        "network"
-        "bluetooth"
         "volume"
         "brightness"
+        "power_rate"
         "battery"
         "control-center"
-        "session"
       ];
       font_scale = 1.0;
       font_weight = 500;
       hover_highlight = true;
       layer = "top";
       margin_edge = 0;
-      margin_ends = 100;
+      margin_ends = 0;
       margin_opposite_edge = 0;
-      padding = 14;
+      padding = 16;
       panel_overlap = 1;
       position = "top";
-      radius = 12;
-      radius_bottom_left = 12;
-      radius_bottom_right = 12;
-      radius_top_left = 12;
-      radius_top_right = 12;
+      radius = 0;
+      radius_bottom_left = 0;
+      radius_bottom_right = 0;
+      radius_top_left = 0;
+      radius_top_right = 0;
       reserve_space = true;
       scale = 1.0;
       shadow = false;
@@ -75,8 +69,8 @@
         "launcher"
         "workspaces"
       ];
-      thickness = 34;
-      widget_spacing = 6;
+      thickness = 36;
+      widget_spacing = 10;
     };
     order = [
       "default"
@@ -298,13 +292,15 @@
   };
   lockscreen = {
     allow_empty_password = false;
-    blur_intensity = 0.5;
+    blur_intensity = 0.0;
     blurred_desktop = false;
     enabled = true;
     fingerprint = true;
     lock_before_suspend = true;
     monitors = [ ];
-    tint_intensity = 0.3;
+    tint_color = "#000000";
+    tint_intensity = 1.0;
+    transition = [ "fade" ];
     wallpaper = "";
   };
   lockscreen_widgets = {
@@ -385,8 +381,9 @@
     temperature_night = 4000;
   };
   notification = {
-    background_opacity = 0.97;
-    border = true;
+    background_opacity = 0.90;
+    border = false;
+    border_width = 0;
     collapse_on_dismiss = true;
     enable_daemon = true;
     history_retention_hours = 0;
@@ -401,8 +398,9 @@
     show_app_name = true;
   };
   osd = {
-    background_opacity = 0.97;
-    border = true;
+    background_opacity = 0.90;
+    border = false;
+    border_width = 0;
     enabled = true;
     kinds = {
       bluetooth = true;
@@ -425,7 +423,7 @@
     offset_x = 20;
     offset_y = 8;
     orientation = "horizontal";
-    position = "top_center";
+    position = "top_right";
     position_vertical = "top_center";
     scale = 1.0;
   };
@@ -451,7 +449,7 @@
   shell = {
     animation = {
       enabled = true;
-      speed = 1.0;
+      speed = 1.2;
     };
     app_icon_colorize = false;
     avatar_path = "";
@@ -467,7 +465,7 @@
     date_format = "%A, %x";
     disable_mipmaps = false;
     external_ip_enabled = false;
-    font_family = "sans-serif";
+    font_family = "JetBrainsMono Nerd Font";
     greeter_sync = {
       auto_sync = false;
     };
@@ -479,15 +477,21 @@
       app_grid = false;
       auto_paste = "auto";
       categories = true;
-      compact = false;
+      category_icons_only = true;
+      compact = true;
+      default_view = "all";
       dmenu = { };
       fetch_exchange_rates = true;
       pinned = [ ];
       provider_prefix = "/";
+      search_position = "top";
       show_app_actions = false;
-      show_app_origin_indicator = true;
+      show_app_origin_indicator = false;
       show_icons = true;
+      show_session_button = true;
+      show_settings_button = true;
       sort_by_usage = true;
+      width = 640;
     };
     mpris = {
       blacklist = [ ];
@@ -495,7 +499,8 @@
     niri_overview_type_to_launch_enabled = false;
     offline_mode = false;
     panel = {
-      borders = true;
+      border_width = 0.0;
+      borders = false;
       clipboard_placement = "floating";
       clipboard_position = "center";
       control_center_placement = "attached";
@@ -515,12 +520,12 @@
       session_placement = "attached";
       session_position = "auto";
       shadow = true;
-      transparency_mode = "solid";
+      transparency_mode = "glass";
       wallpaper_placement = "attached";
       wallpaper_position = "auto";
     };
     password_style = "default";
-    polkit_agent = false;
+    polkit_agent = true;
     popup_borders = true;
     popup_shadows = true;
     privacy = {
@@ -607,15 +612,21 @@
     settings_window_translucent = false;
     setup_wizard_enabled = true;
     shadow = {
-      alpha = 0.55;
+      alpha = 0.4;
       direction = "down";
     };
     shared_gl_context = true;
     show_location = true;
     telemetry_enabled = false;
-    time_format = "{:%H:%M}";
+    time_format = "{:%H:%M:%S}";
     window_switcher = {
+      current_workspace_only = false;
       mru = false;
+      show_all_outputs = false;
+      show_app_icon = true;
+      show_caption = true;
+      show_count = true;
+      style = "compact";
     };
   };
   storage = {
@@ -666,9 +677,9 @@
     community_palette = "Oxocarbon";
     custom_palette = "";
     mode = "dark";
-    pure_black_dark = false;
+    pure_black_dark = true;
     shell_mode = "follow";
-    source = "builtin";
+    source = "wallpaper";
     templates = {
       builtin_ids = [ ];
       community_ids = [ ];
@@ -717,6 +728,15 @@
       title_scroll = "none";
       type = "active_window";
     };
+    battery = {
+      display_mode = "glyph";
+      label_content = "percent";
+      show_label = true;
+    };
+    clock = {
+      format = "{:%H:%M}";
+      interactive = true;
+    };
     cpu = {
       stat = "cpu_usage";
       type = "sysmon";
@@ -748,17 +768,30 @@
       title_scroll = "none";
       type = "media";
     };
+    network = {
+      show_label = false;
+      show_vpn_label = false;
+    };
     network_rx = {
+      network_speed_compact = true;
       stat = "net_rx";
       type = "sysmon";
     };
     network_tx = {
+      network_speed_compact = true;
       stat = "net_tx";
       type = "sysmon";
     };
     output_volume = {
       device = "output";
       type = "volume";
+    };
+    power_rate = {
+      display_mode = "none";
+      hide_when_full = true;
+      label_content = "rate";
+      show_label = true;
+      type = "battery";
     };
     ram = {
       stat = "ram_used";
@@ -771,6 +804,14 @@
     temp = {
       stat = "cpu_temp";
       type = "sysmon";
+    };
+    workspaces = {
+      empty_color = "#1e293b";
+      focused_color = "#ffffff";
+      hide_when_empty = true;
+      occupied_color = "#334155";
+      style = "regular";
+      urgent_color = "#ef4444";
     };
   };
 }
