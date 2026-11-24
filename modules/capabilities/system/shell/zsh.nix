@@ -12,7 +12,10 @@ in
     programs.zsh = {
       enable = true;
       promptInit = ''
-        PROMPT=$'\n %n@%m:%~ > '
+        PROMPT=" %n@%m:%~ > "
+      '';
+      interactiveShellInit = ''
+        echo
       '';
     };
     users.users.${config.gb.user.username}.shell = pkgs.zsh;
