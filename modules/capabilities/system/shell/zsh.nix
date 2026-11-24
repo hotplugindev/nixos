@@ -9,7 +9,12 @@ let
 in
 {
   config = lib.mkIf requested {
-    programs.zsh.enable = true;
+    programs.zsh = {
+      enable = true;
+      promptInit = ''
+        PROMPT=$'\n %n@%m:%~ > '
+      '';
+    };
     users.users.${config.gb.user.username}.shell = pkgs.zsh;
   };
 }
