@@ -33,6 +33,7 @@
         "clock"
         "spacer"
         "ram"
+        "ram"
       ];
       compositor_blur = false;
       concave_edge_corners = true;
