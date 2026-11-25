@@ -169,7 +169,7 @@
     radius_top_left = 16;
     radius_top_right = 16;
     reserve_space = true;
-    shadow = true;
+    shadow = false;
     show_dots = false;
     show_instance_count = true;
     show_running = true;
@@ -522,7 +522,7 @@
       polkit_position = "center";
       session_placement = "attached";
       session_position = "auto";
-      shadow = true;
+      shadow = false;
       transparency_mode = "solid";
       wallpaper_placement = "attached";
       wallpaper_position = "auto";
@@ -530,7 +530,7 @@
     password_style = "default";
     polkit_agent = true;
     popup_borders = false;
-    popup_shadows = true;
+    popup_shadows = false;
     privacy = {
       cam_filter_regex = "";
       mic_filter_regex = "";
