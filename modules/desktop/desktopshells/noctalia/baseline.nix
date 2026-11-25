@@ -295,14 +295,14 @@
   };
   lockscreen = {
     allow_empty_password = false;
-    blur_intensity = 0.0;
-    blurred_desktop = false;
+    blur_intensity = 0.4;
+    blurred_desktop = true;
     enabled = true;
     fingerprint = true;
     lock_before_suspend = true;
     monitors = [ ];
     tint_color = "#000000";
-    tint_intensity = 1.0;
+    tint_intensity = 0.35;
     transition = [ "fade" ];
     wallpaper = "";
   };
