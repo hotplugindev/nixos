@@ -40,7 +40,6 @@
       dead_zone = { };
       enabled = true;
       end = [
-        "clock"
         "tray"
         "volume"
         "brightness"
