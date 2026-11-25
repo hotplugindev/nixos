@@ -29,7 +29,9 @@
       capsule_thickness = 0.76;
       center = [
         "cpu"
+        "spacer"
         "clock"
+        "spacer"
         "ram"
       ];
       compositor_blur = false;
@@ -38,6 +40,7 @@
       dead_zone = { };
       enabled = true;
       end = [
+        "clock"
         "tray"
         "volume"
         "brightness"
