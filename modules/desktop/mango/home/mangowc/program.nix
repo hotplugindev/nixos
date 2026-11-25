@@ -39,7 +39,7 @@ let
 
     # Elegant drop shadows with depth
     shadows = 1;
-    layer_shadows = 1;
+    layer_shadows = 0;
     shadow_only_floating = 0;
     shadows_size = 16;
     shadows_blur = 20;
