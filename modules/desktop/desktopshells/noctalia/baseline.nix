@@ -28,7 +28,11 @@
       capsule_padding = 6.0;
       capsule_thickness = 0.76;
       center = [
+        "cpu"
+        "spacer"
         "clock"
+        "spacer"
+        "ram"
       ];
       compositor_blur = false;
       concave_edge_corners = true;
@@ -36,12 +40,11 @@
       dead_zone = { };
       enabled = true;
       end = [
-        "network_rx"
-        "network_tx"
         "tray"
         "volume"
         "brightness"
-        "power_rate"
+        "bluetooth"
+        "network"
         "battery"
         "control-center"
       ];
@@ -736,6 +739,7 @@
     clock = {
       format = "{:%H:%M}";
       interactive = true;
+      anchor = true;
     };
     cpu = {
       stat = "cpu_usage";
